@@ -8,9 +8,9 @@ function App() {
       <div className="flex px-[15px] py-[10px] bg-[#1E1E1E] ">
         <div className="">
           <Logo />
-          <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">View</a></li>
+          <ul className='inline'>
+            <li><a href="" className=' p-[10px] font-[400] font-' >Home</a></li>
+            <li><a href="" className=' p-[10px] '>View</a></li>
           </ul>
         </div>
         <div className="">
