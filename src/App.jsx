@@ -1,15 +1,13 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
+import Logo from './assets/logo.svg'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="flex bg-[#1E1E1E] ">
+      <div className="flex px-[15px] py-[10px] bg-[#1E1E1E] ">
         <div className="">
-          <img src="logo.svg" alt="" />
+          <Logo />
           <ul>
             <li><a href="">Home</a></li>
             <li><a href="">View</a></li>
