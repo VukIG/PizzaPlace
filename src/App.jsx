@@ -8,7 +8,7 @@ function App() {
       <Router>
         <div className="font-[Inter] bg-stone-200">
           <Header />
-          <div className="">
+          <div>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/menu" component={Menu} />
