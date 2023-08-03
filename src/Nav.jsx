@@ -5,14 +5,14 @@ function Nav() {
     <div className=" text-white mx-[20px] ">
       <ul className="flex ">
         <li>
-          <Link to="/" className=" p-[10px] font-[400] font-">
+          <a to="/" className=" p-[10px] font-[400] font-">
             Home
-          </Link>
+          </a>
         </li>
         <li>
-          <Link to="/menu" className=" p-[10px] ">
+          <a to="/menu" className=" p-[10px] ">
             View
-          </Link>
+          </a>
         </li>
       </ul>
     </div>
