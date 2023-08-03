@@ -5,12 +5,12 @@ function Nav() {
     <div className=" text-white mx-[20px] ">
       <ul className="flex ">
         <li>
-          <Link to="/src/Home.jsx" className=" p-[10px] font-[400] font-">
+          <Link to="/" className=" p-[10px] font-[400] font-">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/src/Menu.jsx" className=" p-[10px] ">
+          <Link to="/menu" className=" p-[10px] ">
             View
           </Link>
         </li>
