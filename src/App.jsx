@@ -1,45 +1,26 @@
-import { useState } from "react";
-import Logo from "./assets/logo.svg";
+import React from "react";
+import Header from "./Header";
+import Button from "./Button";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div className="flex px-[15px] py-[10px] bg-[#1E1E1E] ">
-        <div className="">
-          <Logo />
-          <ul className="inline">
-            <li>
-              <a href="" className=" p-[10px] font-[400] font-">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="" className=" p-[10px] ">
-                View
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="">
-          <button>
-            <i>ovde ikonica</i> Cart
-          </button>
+      <div className="font-[Inter]">
+        <Header />
+        <div className="flex p-[25px] justify-center items-center gap-[25px]">
+          <div className="flex flex-col break-words">
+            <h1 className="font-[700] text-[48px] leading-[48px]">Freshly baked Pizzas, made with love</h1>
+            <p className="text-[16px]	">
+              Discover a gastronomic delight of Exquisite Pizzas, crafted with the
+              finest ingredients and careful attention to detail
+            </p>
+            <Button />
+          </div>
+          <div className="m-[25px]">
+            <img className="w-[718.5px] h-[868px]" src="../public/pizzaBanner.jpeg" alt="" />
+          </div>
         </div>
       </div>
-      <div className="flex">
-        <div className="flex horizontal">
-          <h1>Freshly baked Pizzas, made with love</h1>
-          <p>
-            Discover a gastronomic delight of Exquisite Pizzas, crafted with the
-            finest ingredients and careful attention to detail
-          </p>
-          <button>Start ordering</button>
-        </div>
-        <div className="">
-          <img src="" alt="" />
-        </div>
-      </div>
+      
     </>
   );
 }
