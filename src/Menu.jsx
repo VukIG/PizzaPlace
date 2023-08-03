@@ -1,8 +1,15 @@
-
+import Item from "./Item";
 function Menu() {
   return (
-    <div>Menu</div>
-  )
+    <div>
+      <h1>Discover menu</h1>
+      <Item />
+      <Item />
+      <Item />
+      <Item />
+      <Item />
+    </div>
+  );
 }
 
-export default Menu
+export default Menu;

@@ -1,4 +1,4 @@
-import Logo from "./assets/logo.svg"
+import Logo from "./assets/logo.svg";
 import Button from "./Button";
 import Nav from "./Nav";
 function Header() {

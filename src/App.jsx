@@ -1,22 +1,20 @@
 import Header from "./Header";
 import Home from "./Home";
 import Menu from "./Menu";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <>
-      <Router>
-        <div className="font-[Inter] bg-stone-200">
-          <Header />
-          <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/menu" component={Menu} />
-            </Switch>
-          </div>
+    <Router>
+      <div className="font-[Inter] bg-stone-200">
+        <Header />
+        <div className="">
+          <Routes>
+            <Route exact path="/" component={<Home />} />
+            <Route exact path="/menu" component={<Menu />} />
+          </Routes>
         </div>
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 }
 
