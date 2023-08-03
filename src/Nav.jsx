@@ -1,18 +1,21 @@
-import { Link } from "react-router-dom";
-
+import {
+  Link,
+  Outlet,
+} from "react-router-dom";
+import Menu from "./Menu";
 function Nav() {
   return (
     <div className=" text-white mx-[20px] ">
       <ul className="flex ">
         <li>
-          <a to="/" className=" p-[10px] font-[400] font-">
+          <Link to="/" className=" p-[10px] font-[400] font-">
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a to="/menu" className=" p-[10px] ">
-            View
-          </a>
+          <Link to="./Menu.jsx" className=" p-[10px] ">
+            Menu
+          </Link>
         </li>
       </ul>
     </div>

@@ -30,7 +30,7 @@ const Root = () =>{
   return (
     <>
       <Header />
-      <div className="">
+      <div>
         <Home />
         <Menu />
       </div>
