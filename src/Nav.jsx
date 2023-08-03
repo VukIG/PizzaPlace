@@ -1,7 +1,4 @@
-import {
-  Link,
-  Outlet,
-} from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Menu from "./Menu";
 function Nav() {
   return (
@@ -13,7 +10,7 @@ function Nav() {
           </Link>
         </li>
         <li>
-          <Link to="./Menu.jsx" className=" p-[10px] ">
+          <Link to="./Menu.jsx" element={<Menu />} className=" p-[10px] ">
             Menu
           </Link>
         </li>

@@ -15,7 +15,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<Home />} />
-        <Route path="/" element={<Menu />} />
+        <Route path="/Menu.jsx" element={<Menu />} />
       </Route>,
     ),
   );
@@ -26,16 +26,15 @@ function App() {
   );
 }
 
-const Root = () =>{
+const Root = () => {
   return (
     <>
       <Header />
       <div>
         <Home />
-        <Menu />
       </div>
     </>
-  )
-}
+  );
+};
 
 export default App;
