@@ -1,5 +1,5 @@
 import Button from "./Button";
-function MenuItem({name, icon}) {
+function MenuItem({ name, icon }) {
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
