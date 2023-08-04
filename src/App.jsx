@@ -1,40 +1,21 @@
-import Header from "./Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Menu from "./Menu";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  Routes,
-  Link,
-  Outlet,
-  RouterProvider,
-} from "react-router-dom";
+import AppLayout from "./ui/AppLayout";
+
 function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<Root />}>
-        <Route index element={<Home />} />
-        <Route path="/Menu.jsx" element={<Menu />} />
-      </Route>,
-    ),
-  );
   return (
-    <div className="font-[Inter] bg-stone-200">
-      <RouterProvider router={router} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="menu" element={<Menu />} />
+        </Route>
+
+        {/* <Route path="*" element={<PageNotFound />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-const Root = () => {
-  return (
-    <>
-      <Header />
-      <div>
-        <Home />
-      </div>
-    </>
-  );
-};
 
 export default App;
