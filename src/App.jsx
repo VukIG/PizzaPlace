@@ -1,22 +1,20 @@
-import Header from "./Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Menu from "./Menu";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AppLayout from "./ui/AppLayout";
+
 function App() {
   return (
-    <>
-      <Router>
-        <div className="font-[Inter] bg-stone-200">
-          <Header />
-          <div className="">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/menu" component={Menu} />
-            </Switch>
-          </div>
-        </div>
-      </Router>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="menu" element={<Menu />} />
+        </Route>
+
+        {/* <Route path="*" element={<PageNotFound />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
