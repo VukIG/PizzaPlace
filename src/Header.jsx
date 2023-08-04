@@ -1,6 +1,7 @@
 import Logo from "./assets/logo.svg";
 import Button from "./Button";
 import Nav from "./Nav";
+import { FaShoppingCart } from 'react-icons/fa';
 
 function Header() {
   return (
@@ -11,7 +12,7 @@ function Header() {
           <Nav />
         </div>
         <div className="">
-          <Button />
+          <Button name="Cart" icon={<FaShoppingCart />} />
         </div>
       </div>
     </>

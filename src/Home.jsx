@@ -13,7 +13,7 @@ function Home() {
             finest ingredients and careful attention to detail
           </p>
           <div className=" px-[15px] py-2.5 bg-orange-400 rounded-[5px] justify-center items-center gap-[5px] inline-flex">
-            <Button />
+            <Button name="Start Ordering" />
           </div>
         </div>
         <div className="m-[25px] gap-[10px]">
