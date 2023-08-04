@@ -1,5 +1,5 @@
 import Button from "./Button";
-function Item() {
+function MenuItem({name, icon}) {
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
@@ -19,11 +19,11 @@ function Item() {
         </div>
 
         <div className="mr-5">
-          <Button />
+          <Button name={name} icon={icon} />
         </div>
       </div>
     </div>
   );
 }
 
-export default Item;
+export default MenuItem;
