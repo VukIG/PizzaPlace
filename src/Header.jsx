@@ -12,7 +12,7 @@ function Header() {
           <Nav />
         </div>
         <div className="">
-          <Button name="Cart" icon={<FaShoppingCart />} />
+          <Button>Cart <FaShoppingCart/></Button>
         </div>
       </div>
     </>

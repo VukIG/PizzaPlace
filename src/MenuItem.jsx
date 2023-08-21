@@ -19,7 +19,7 @@ function MenuItem({ name, icon }) {
         </div>
 
         <div className="mr-5">
-          <Button name={name} icon={icon} />
+          <Button> {name} {icon} </Button>
         </div>
       </div>
     </div>
