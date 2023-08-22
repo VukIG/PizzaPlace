@@ -6,7 +6,7 @@ function MenuItem({ name, icon }) {
         <div className="flex items-center gap-5">
           <img
             className="w-[100px] h-[100px] my-5 ml-5 rounded-lg"
-            src="../public/pizzaBanner.jpeg"
+            src="../src/assets/pizzaBanner.jpeg"
             alt=""
           />
           <div className="flex flex-col justify-start items-start ">

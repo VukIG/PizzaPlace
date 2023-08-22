@@ -19,7 +19,7 @@ function Home() {
         <div className="m-[25px] gap-[10px]">
           <img
             className="w-[718.50px] h-[868px]  "
-            src="../public/pizzaBanner.jpeg"
+            src="../src/assets/pizzaBanner.jpeg"
             alt=""
           />
         </div>
