@@ -19,7 +19,10 @@ function MenuItem({ name, icon }) {
         </div>
 
         <div className="mr-5">
-          <Button> {name}    {icon} </Button>
+          <Button className="flex gap-3"> 
+            {name} 
+            {icon} 
+          </Button>
         </div>
       </div>
     </div>
