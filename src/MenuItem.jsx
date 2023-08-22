@@ -19,9 +19,12 @@ function MenuItem({ name, icon }) {
         </div>
 
         <div className="mr-5">
-          <Button className="flex gap-3"> 
-            {name} 
-            {icon} 
+          <Button> 
+            <div className="flex gap-3 align-middle justify-center items-center">
+              {name} 
+              {icon}   
+            </div>
+            
           </Button>
         </div>
       </div>
