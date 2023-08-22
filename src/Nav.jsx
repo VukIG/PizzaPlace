@@ -10,7 +10,10 @@ function Nav() {
           </Link>
         </li>
         <li>
-          <Link to="menu" className=" p-[10px]">
+          <Link to="menu" 
+           className={({ isActive }) => 
+           (isActive ? "p-2.5" : "p-2.5 bg-orange-400")}
+         >
             Menu
           </Link>
         </li>
