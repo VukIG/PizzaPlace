@@ -11,7 +11,7 @@ function Header() {
           <img src={Logo} alt="" />
           <Nav />
         </div>
-        <div className="">
+        <div>
           <Button>Cart <FaShoppingCart/></Button>
         </div>
       </div>
