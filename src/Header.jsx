@@ -1,4 +1,4 @@
-import Logo from "./assets/logo.svg";
+import Logo from "../src/logo.svg";
 import Button from "./Button";
 import Nav from "./Nav";
 import { FaShoppingCart } from "react-icons/fa";
@@ -12,7 +12,7 @@ function Header() {
           <Nav />
         </div>
         <div className="">
-          <Button name="Cart" icon={<FaShoppingCart />} />
+          <Button>Cart <FaShoppingCart/></Button>
         </div>
       </div>
     </>

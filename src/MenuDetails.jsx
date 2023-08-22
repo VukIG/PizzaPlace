@@ -21,7 +21,7 @@ function MenuDetails() {
         </div>
         <div className="flex mt-10 justify-between items-center">
           <h1 className="text-orange-400 text-xl">$150</h1>
-          <Button name="Add to cardt" icon={<FaPlus />} />
+          <Button>Add to cart <FaPlus/> </Button>
         </div>
       </div>
     </div>

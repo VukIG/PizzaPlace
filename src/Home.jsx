@@ -13,13 +13,13 @@ function Home() {
             finest ingredients and careful attention to detail
           </p>
           <div className=" px-[15px] py-2.5 bg-orange-400 rounded-[5px] justify-center items-center gap-[5px] inline-flex">
-            <Button name="Start Ordering" />
+            <Button> Start ordering </Button>
           </div>
         </div>
         <div className="m-[25px] gap-[10px]">
           <img
             className="w-[718.50px] h-[868px]  "
-            src="../public/pizzaBanner.jpeg"
+            src="../src/assets/pizzaBanner.jpeg"
             alt=""
           />
         </div>
