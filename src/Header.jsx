@@ -6,13 +6,18 @@ import { FaShoppingCart } from "react-icons/fa";
 function Header() {
   return (
     <>
-      <div className="flex px-[15px] py-[10px] bg-stone-700 justify-between items-center">
+      <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">
         <div className="flex justify-start items-center">
           <img src={Logo} alt="" />
           <Nav />
         </div>
         <div>
-          <Button>Cart <FaShoppingCart/></Button>
+          <Button>
+            <div className="flex gap-1 align-middle justify-center items-center">
+            <span>Cart</span>  <FaShoppingCart/>
+            </div>
+          
+          </Button>
         </div>
       </div>
     </>
