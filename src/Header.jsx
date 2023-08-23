@@ -14,7 +14,7 @@ function Header() {
         <div>
           <Button>
             <div className="flex gap-1 align-middle justify-center items-center">
-            Cart <FaShoppingCart/>
+            <span>Cart</span>  <FaShoppingCart/>
             </div>
           
           </Button>
