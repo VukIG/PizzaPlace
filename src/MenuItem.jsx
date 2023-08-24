@@ -1,12 +1,12 @@
-import React from "react";
 import Button from "./Button";
-import { data } from "./mock-data"; // Import the data array
+import mockData  from "./mockData"; 
 
-function MenuItem({ name, icon }) {
+// eslint-disable-next-line react/prop-types
+function MenuItem({ name, icon }) {    
   return (
     <div>
-      {data.map((menuGroup) =>
-        menuGroup.map((item) => (
+      {mockData.foreach((menuGroup) => (
+        menuGroup.foreach((item) => (
           <div
             key={item.id}
             className="rounded-lg flex align-middle items-center bg-white justify-between mb-5"
@@ -34,7 +34,7 @@ function MenuItem({ name, icon }) {
             </div>
           </div>
         ))
-      )}
+      ))}
     </div>
   );
 }
