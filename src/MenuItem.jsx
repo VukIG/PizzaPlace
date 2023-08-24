@@ -1,11 +1,11 @@
 import Button from "./Button";
-import mockData  from "./mockData"; 
+import data  from "./mockData"; 
 
 // eslint-disable-next-line react/prop-types
 function MenuItem({ name, icon }) {    
   return (
     <div>
-      {mockData.foreach((menuGroup) => (
+      {data.foreach((menuGroup) => (
         menuGroup.foreach((item) => (
           <div
             key={item.id}
