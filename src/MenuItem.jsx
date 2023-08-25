@@ -1,6 +1,7 @@
 import Button from "./Button";
 import PropTypes from 'prop-types';
-function MenuItem({ icon, title, desc, img }) {
+import { FaPlus } from "react-icons/fa";
+function MenuItem({ title, desc, img }) {
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
@@ -23,7 +24,7 @@ function MenuItem({ icon, title, desc, img }) {
           <Button> 
             <div className="flex gap-3 align-middle justify-center items-center">
               <span>Add to cart</span>
-              {icon}   
+              <FaPlus/>
             </div>
             
           </Button>
