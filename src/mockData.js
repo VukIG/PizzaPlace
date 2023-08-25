@@ -1,5 +1,4 @@
 const data = [
-    [
       {
         id: 1,
         name: 'Margherita Supreme',
@@ -142,7 +141,6 @@ const data = [
           { id: 26, name: 'Arugula' },
         ],
       },
-    ],
-  ];
+]
 
 export default data;

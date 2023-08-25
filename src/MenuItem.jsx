@@ -1,6 +1,6 @@
 import Button from "./Button";
 import PropTypes from 'prop-types';
-function MenuItem({ name, icon, title, desc, img }) {
+function MenuItem({ icon, title, desc, img }) {
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
@@ -22,7 +22,7 @@ function MenuItem({ name, icon, title, desc, img }) {
         <div className="mr-5">
           <Button> 
             <div className="flex gap-3 align-middle justify-center items-center">
-              {name} 
+              <span>Add to cart</span>
               {icon}   
             </div>
             
