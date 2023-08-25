@@ -1,5 +1,4 @@
 import Button from "./Button";
-import PropTypes from "prop-types";
 import { FaPlus } from "react-icons/fa";
 function MenuItem({ title, desc, img }) {
   return (
@@ -30,13 +29,5 @@ function MenuItem({ title, desc, img }) {
     </div>
   );
 }
-
-MenuItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-};
 
 export default MenuItem;
