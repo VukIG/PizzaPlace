@@ -1,6 +1,15 @@
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
+import { useState,useEffect } from "react";
+import Amount from "./Amount";
 function MenuItem({ title, desc, img }) {
+  const [count,setCount]=useState(0);
+  function changeCount() {
+    setCount(count+1);
+  }
+  useEffect(() => {
+    console.log(count);
+  }, [count]);
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
@@ -18,12 +27,14 @@ function MenuItem({ title, desc, img }) {
         </div>
 
         <div className="mr-5">
-          <Button>
-            <div className="flex gap-3 align-middle justify-center items-center">
-              <span>Add to cart</span>
-              <FaPlus />
-            </div>
-          </Button>
+          { count>0 ? <Amount amount={count} /> : 
+            <Button onClick={changeCount}>
+              <div className="flex gap-3 align-middle justify-center items-center">
+                <span>Add to cart</span>
+                <FaPlus />
+              </div>
+            </Button>
+          }
         </div>
       </div>
     </div>
