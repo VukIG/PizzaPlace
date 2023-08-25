@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
-    color: orange;
-    border-bottom: 1px solid orange;
+.active {
+  color: orange;
+  border-bottom: 1px solid orange;
 }
