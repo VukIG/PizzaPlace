@@ -12,7 +12,7 @@ function Home() {
             Discover a gastronomic delight of Exquisite Pizzas, crafted with the
             finest ingredients and careful attention to detail
           </p>
-            <Button> Start ordering </Button>
+          <Button> Start ordering </Button>
         </div>
         <div className="m-[25px] gap-[10px]">
           <img

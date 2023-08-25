@@ -1,5 +1,5 @@
 import Button from "./Button";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { FaPlus } from "react-icons/fa";
 function MenuItem({ title, desc, img }) {
   return (
@@ -13,20 +13,17 @@ function MenuItem({ title, desc, img }) {
           />
           <div className="flex flex-col justify-start items-start ">
             <h1 className="text-xl font-bold">{title}</h1>
-            <p className="py-3 text-sm italic">
-              {desc}
-            </p>
+            <p className="py-3 text-sm italic">{desc}</p>
             <h1 className="font-bold text-orange-400">$150</h1>
           </div>
         </div>
 
         <div className="mr-5">
-          <Button> 
+          <Button>
             <div className="flex gap-3 align-middle justify-center items-center">
               <span>Add to cart</span>
-              <FaPlus/>
+              <FaPlus />
             </div>
-            
           </Button>
         </div>
       </div>
