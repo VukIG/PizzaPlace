@@ -5,7 +5,7 @@ import Amount from "./Amount";
 function MenuItem({ title, desc, img }) {
   const [count, setCount] = useState(0);
   function changeCount() {
-    setCount( count => count +1);
+    setCount((count) => count + 1);
   }
   return (
     <div>
