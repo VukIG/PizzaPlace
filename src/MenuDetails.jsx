@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import Amount from "./Amount";
 function MenuDetails() {
   const propLocation = useLocation();
-  const propData = location.state?.prop || {}; // Use optional chaining to handle null
+  const propData = propLocation.location.state.menuData;
+  
   useEffect(()=>{
     console.log(propData)
   },[propData])
