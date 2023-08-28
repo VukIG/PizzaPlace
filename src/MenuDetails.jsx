@@ -2,12 +2,15 @@ import { useLocation } from "react-router-dom";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
 import RandomList from "./RandomList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Amount from "./Amount";
 function MenuDetails() {
   const propLocation = useLocation();
-  const propData = propLocation.state.prop;
-  console.log(propData);
+  const propData = location.state?.prop || {}; // Use optional chaining to handle null
+  useEffect(()=>{
+    console.log(propData)
+  },[propData])
+  
   const [count, setCount] = useState(0);
   function changeCount() {
     setCount((count) => count + 1);
