@@ -1,6 +1,6 @@
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Amount from "./Amount";
 function MenuItem({ title, desc, img }) {
   const [count, setCount] = useState(0);
