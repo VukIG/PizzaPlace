@@ -8,7 +8,7 @@ function Amount({ amount, onZero }) {
     setCount(count => count +1);
   }
   function decCount() {
-    count > 1 ? setCount(count - 1) : onZero();
+    count > 1 ? setCount(count => count - 1) : onZero();
   }
   return (
     <div className="flex justify-center align-middle gap-2 items-center">
