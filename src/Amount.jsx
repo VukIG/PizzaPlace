@@ -4,6 +4,7 @@ import Button from "./Button";
 import { useState } from "react";
 function Amount({ amount, onZero }) {
   const [count, setCount] = useState(amount);
+  
   function incCount() {
     setCount(count => count +1);
   }
@@ -12,11 +13,11 @@ function Amount({ amount, onZero }) {
   }
   return (
     <div className="flex justify-center align-middle gap-2 items-center">
-      <Button onClick={incCount}>
+      <Button className="rounded-full w-12 h-12 " onClick={incCount}>
         <PiPlusBold />
       </Button>
       <span>{count}</span>
-      <Button onClick={decCount}>
+      <Button className="rounded-full w-12 h-12 " onClick={decCount}>
         <AiOutlineMinus />
       </Button>
     </div>
