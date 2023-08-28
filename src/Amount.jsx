@@ -13,12 +13,12 @@ function Amount({ amount, onZero }) {
   }
   return (
     <div className="flex justify-center align-middle gap-2 items-center">
-      <Button className="rounded-full w-12 h-12 " onClick={incCount}>
-        <PiPlusBold />
-      </Button>
-      <span>{count}</span>
       <Button className="rounded-full w-12 h-12 " onClick={decCount}>
         <AiOutlineMinus />
+      </Button>
+      <span>{count}</span>
+      <Button className="rounded-full w-12 h-12 " onClick={incCount}>
+        <PiPlusBold />
       </Button>
     </div>
   );
