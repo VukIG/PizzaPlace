@@ -12,7 +12,7 @@ function Home() {
             Discover a gastronomic delight of Exquisite Pizzas, crafted with the
             finest ingredients and careful attention to detail
           </p>
-          <Link to="./menu">
+          <Link to="/menu">
             <Button> Start ordering </Button>
           </Link>
         </div>
