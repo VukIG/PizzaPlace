@@ -3,7 +3,7 @@ function Button({ children, onClick }) {
     <button
       onClick={onClick}
       className="bg-orange-400
-    text-white py-2 px-3 flex rounded items-center
+    text-white py-2 px-3 rounded-full flex rounded items-center
     hover:bg-orange-500 duration-200
     "
     >

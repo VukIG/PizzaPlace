@@ -5,11 +5,8 @@ import Amount from "./Amount";
 function MenuItem({ title, desc, img }) {
   const [count, setCount] = useState(0);
   function changeCount() {
-    setCount(count + 1);
+    setCount(prevCount=> prevCount +1);
   }
-  useEffect(() => {
-    console.log(count);
-  }, [count]);
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
