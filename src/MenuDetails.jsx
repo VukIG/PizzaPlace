@@ -16,7 +16,7 @@ function MenuDetails() {
     <div className="w-full bg-slate-200 p-6">
       <div className="flex rounded gap-12 bg-white justify-center items-center">
         <img
-          className="rounded m-5 h-80 object-cover rounded w-full"
+          className="rounded m-5 h-80 object-cover w-full"
           src="../src/assets/pizzaBanner.jpeg"
           alt=""
         />
