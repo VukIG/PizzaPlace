@@ -6,13 +6,16 @@ function Menu() {
     <div className="w-full flex flex-col justify-start h-full bg-slate-200 p-5 mb-5">
       <h1 className="text-4xl mb-10 font-bold">Discover menu</h1>
       {data.map((element) => {
-        const prop ={
+        const prop = {
           img: element.img,
           title: element.title,
           desc: element.description,
         };
         return (
-          <Link key={element.id} prop={prop} to="/details">
+          <Link key={element.id} to={{
+            pathname: "/details",
+            state: { prop }
+          }}>
             <MenuItem
               img={element.imageUrl}
               title={element.name}

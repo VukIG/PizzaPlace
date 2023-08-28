@@ -2,11 +2,11 @@ import { useLocation } from "react-router-dom";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
 import RandomList from "./RandomList";
-import { useState } from "react"; 
+import { useState } from "react";
 import Amount from "./Amount";
-function MenuDetails(props) {
-  const propLocation=useLocation();
-  const propData=propLocation.menu;
+function MenuDetails() {
+  const propLocation = useLocation();
+  const propData = propLocation.state.prop;
   console.log(propData);
   const [count, setCount] = useState(0);
   function changeCount() {
@@ -15,10 +15,10 @@ function MenuDetails(props) {
   return (
     <div className="w-full bg-slate-200 p-6">
       <div className="flex rounded gap-12 bg-white justify-center items-center">
-        <img 
-          className="rounded m-5 h-80 object-cover rounded w-full" 
-          src="../src/assets/pizzaBanner.jpeg" 
-          alt="" 
+        <img
+          className="rounded m-5 h-80 object-cover rounded w-full"
+          src="../src/assets/pizzaBanner.jpeg"
+          alt=""
         />
         <div className="flex flex-col justify-center w-full ">
           <div className="flex flex-col justify-start ">
