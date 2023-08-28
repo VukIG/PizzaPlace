@@ -1,5 +1,5 @@
 import Button from "./Button";
-
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
@@ -12,7 +12,9 @@ function Home() {
             Discover a gastronomic delight of Exquisite Pizzas, crafted with the
             finest ingredients and careful attention to detail
           </p>
-          <Button> Start ordering </Button>
+          <Link to="/menu">
+            <Button> Start ordering </Button>
+          </Link>
         </div>
         <div className="m-[25px] gap-[10px]">
           <img

@@ -1,7 +1,12 @@
 import Button from "./Button";
-import PropTypes from "prop-types";
 import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
+import Amount from "./Amount";
 function MenuItem({ title, desc, img }) {
+  const [count, setCount] = useState(0);
+  function changeCount() {
+    setCount((count) => count + 1);
+  }
   return (
     <div>
       <div className=" rounded-lg flex align-middle items-center bg-white justify-between mb-5">
@@ -19,24 +24,25 @@ function MenuItem({ title, desc, img }) {
         </div>
 
         <div className="mr-5">
-          <Button>
-            <div className="flex gap-3 align-middle justify-center items-center">
-              <span>Add to cart</span>
-              <FaPlus />
-            </div>
-          </Button>
+          {count > 0 ? (
+            <Amount
+              amount={count}
+              onZero={() => {
+                setCount(0);
+              }}
+            />
+          ) : (
+            <Button onClick={changeCount}>
+              <div className="flex gap-3 align-middle justify-center items-center">
+                <span>Add to cart</span>
+                <FaPlus />
+              </div>
+            </Button>
+          )}
         </div>
       </div>
     </div>
   );
 }
-
-MenuItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
-  title: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-};
 
 export default MenuItem;
