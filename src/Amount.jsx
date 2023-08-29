@@ -10,7 +10,6 @@ function Amount({ amount, onZero }) {
     setCount((count) => count + 1);
   }
   function decCount(e) {
-    e.stopPropagation();
     e.preventDefault();
     count > 1 ? setCount((count) => count - 1) : onZero();
   }

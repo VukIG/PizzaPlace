@@ -3,7 +3,7 @@ import data from "./mockData";
 
 function RandomList() {
   const randomItems = [];
-  
+
   function shuffleArray(data) {
     for (let i = data.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -29,4 +29,3 @@ function RandomList() {
 }
 
 export default RandomList;
-

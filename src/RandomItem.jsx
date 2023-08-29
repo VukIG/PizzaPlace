@@ -1,15 +1,6 @@
-import Button from "./Button";
-import { FaPlus } from "react-icons/fa";
-import { useState } from "react";
-import Amount from "./Amount";
+import AmountButton from "./AmountButton";
 
 function RandomItem({ data }) {
-  const [count, setCount] = useState(0);
-
-  function changeCount() {
-    setCount((count) => count + 1);
-  }
-
   const { name, description, price, imageUrl } = data; // Destructure the data object
 
   return (
@@ -22,21 +13,7 @@ function RandomItem({ data }) {
       <div className="flex w-full justify-between items-center">
         <p className="text-orange-400 text-xl font-bold">${price}</p>
         <div>
-          {count > 0 ? (
-            <Amount
-              amount={count}
-              onZero={() => {
-                setCount(0);
-              }}
-            />
-          ) : (
-            <Button onClick={changeCount}>
-              <div className="flex gap-3 align-middle justify-center items-center">
-                <span>Add to cart</span>
-                <FaPlus />
-              </div>
-            </Button>
-          )}
+          <AmountButton />
         </div>
       </div>
     </div>
