@@ -16,9 +16,9 @@ function MenuDetails() {
   function changeCount() {
     setCount((count) => count + 1);
   }
-  const RandomListRender = useMemo(()=>{
-    return <RandomList />
-  },[])
+  const RandomListRender = useMemo(() => {
+    return <RandomList />;
+  }, []);
   return (
     <div className="w-full bg-slate-200 p-6">
       <div className="flex rounded gap-12 bg-white justify-center items-center">
@@ -42,7 +42,7 @@ function MenuDetails() {
           </div>
           <div className="flex mt-10 justify-between w-full items-center">
             <h1 className="text-orange-400 text-xl font-bold">
-              {MenuItem.price}
+              ${menuItem.price}
             </h1>
             <div className="mr-5">
               {count > 0 ? (
@@ -65,9 +65,7 @@ function MenuDetails() {
         </div>
       </div>
       <div className="py-6 text-4xl font-bold ">You may also like</div>
-      <div className="flex">
-        {RandomListRender}
-      </div>
+      <div className="flex">{RandomListRender}</div>
     </div>
   );
 }
