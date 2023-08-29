@@ -1,4 +1,4 @@
-import AmountButton from "./AmountButton";
+import AmountButton from './AmountButton';
 
 function RandomItem({ data }) {
   const { name, description, price, imageUrl } = data; // Destructure the data object

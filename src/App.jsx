@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Home";
-import Menu from "./Menu";
-import AppLayout from "./ui/AppLayout";
-import MenuDetails from "./MenuDetails";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import Menu from './Menu';
+import AppLayout from './ui/AppLayout';
+import MenuDetails from './MenuDetails';
 function App() {
   return (
     <BrowserRouter>

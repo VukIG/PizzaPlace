@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import AmountButton from "./AmountButton";
+import { Link } from 'react-router-dom';
+import AmountButton from './AmountButton';
+
 function MenuItem({ title, desc, img, price, id }) {
   return (
     <div>

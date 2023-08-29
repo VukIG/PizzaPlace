@@ -1,7 +1,7 @@
-import { PiPlusBold } from "react-icons/pi";
-import { AiOutlineMinus } from "react-icons/ai";
-import Button from "./Button";
-import { useState } from "react";
+import { PiPlusBold } from 'react-icons/pi';
+import { AiOutlineMinus } from 'react-icons/ai';
+import Button from './Button';
+import { useState } from 'react';
 function Amount({ amount, onZero }) {
   const [count, setCount] = useState(amount);
 

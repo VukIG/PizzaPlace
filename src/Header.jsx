@@ -1,7 +1,7 @@
-import Logo from "../src/logo.svg";
-import Button from "./Button";
-import Nav from "./Nav";
-import { FaShoppingCart } from "react-icons/fa";
+import Logo from '../src/logo.svg';
+import Button from './Button';
+import Nav from './Nav';
+import { FaShoppingCart } from 'react-icons/fa';
 
 function Header() {
   return (
