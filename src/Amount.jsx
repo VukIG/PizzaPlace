@@ -5,10 +5,13 @@ import { useState } from "react";
 function Amount({ amount, onZero }) {
   const [count, setCount] = useState(amount);
 
-  function incCount() {
+  function incCount(e) {
+    e.preventDefault();
     setCount((count) => count + 1);
   }
-  function decCount() {
+  function decCount(e) {
+    e.stopPropagation();
+    e.preventDefault();
     count > 1 ? setCount((count) => count - 1) : onZero();
   }
   return (
