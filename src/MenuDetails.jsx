@@ -1,7 +1,7 @@
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
 import RandomList from "./RandomList";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Amount from "./Amount";
 import { useParams } from "react-router-dom";
 import data from "./mockData";
@@ -16,6 +16,9 @@ function MenuDetails() {
   function changeCount() {
     setCount((count) => count + 1);
   }
+  const RandomListRender = useMemo(()=>{
+    return <RandomList />
+  },[])
   return (
     <div className="w-full bg-slate-200 p-6">
       <div className="flex rounded gap-12 bg-white justify-center items-center">
@@ -63,7 +66,7 @@ function MenuDetails() {
       </div>
       <div className="py-6 text-4xl font-bold ">You may also like</div>
       <div className="flex">
-        <RandomList />
+        {RandomListRender}
       </div>
     </div>
   );
