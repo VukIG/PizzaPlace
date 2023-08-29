@@ -5,9 +5,12 @@ import { useState } from "react";
 import Amount from "./Amount";
 import { useParams } from "react-router-dom";
 import data from "./mockData";
+import MenuItem from "./MenuItem";
+
 function MenuDetails() {
   const { id } = useParams(); // Get the menu item ID from the URL parameter
   const menuItem = data.find((item) => item.id === parseInt(id));
+  let toppings=menuItem.toppings;
   console.log(menuItem)
   const [count, setCount] = useState(0);
   function changeCount() {
@@ -18,25 +21,28 @@ function MenuDetails() {
       <div className="flex rounded gap-12 bg-white justify-center items-center">
         <img
           className="rounded m-5 h-80 object-cover w-full"
-          src="../src/assets/pizzaBanner.jpeg"
+          src={menuItem.imageUrl}
           alt=""
         />
         <div className="flex flex-col justify-center w-full ">
           <div className="flex flex-col justify-start ">
-            <h1 className="text-4xl font-bold pb-3">Vegan Veggie</h1>
-            <p>Daiya vegan mozzarella, paired with fresh veggies</p>
+            <h1 className="text-4xl font-bold pb-3">{menuItem.name}</h1>
+            <p>{menuItem.description}</p>
             <div className="mt-7">
               <h1 className="font-bold">Topings:</h1>
               <ul className="italic list-disc	ml-10">
-                <li>Mozzarela</li>
-                <li>Tomatto</li>
-                <li>Onion</li>
-                <li>Mushrooms</li>
+                {
+                  toppings.map((topping)=>{
+                    return(
+                      <li key={topping.id}>{topping.name}</li>
+                    )
+                  })
+                }
               </ul>
             </div>
           </div>
           <div className="flex mt-10 justify-between w-full items-center">
-            <h1 className="text-orange-400 text-xl font-bold">$150</h1>
+            <h1 className="text-orange-400 text-xl font-bold">{MenuItem.price}</h1>
             <div className="mr-5">
               {count > 0 ? (
                 <Amount
