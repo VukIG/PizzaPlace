@@ -5,7 +5,6 @@ import MenuDetailsMain from "./MenuDetailsMain";
 function MenuDetails() {
   const { id } = useParams(); // Get the menu item ID from the URL parameter
   const menuItem = data.find((item) => item.id === parseInt(id));
-  console.log();
   return (
     <div className="w-full bg-slate-200 p-6">
       <MenuDetailsMain data={menuItem} />
