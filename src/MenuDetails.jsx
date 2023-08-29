@@ -1,17 +1,14 @@
-import { useLocation } from "react-router-dom";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
 import RandomList from "./RandomList";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Amount from "./Amount";
+import { useParams } from "react-router-dom";
+import data from "./mockData";
 function MenuDetails() {
-  const propLocation = useLocation();
-  const propData = propLocation.location.state.menuData;
-  
-  useEffect(()=>{
-    console.log(propData)
-  },[propData])
-  
+  const { id } = useParams(); // Get the menu item ID from the URL parameter
+  const menuItem = data.find((item) => item.id === parseInt(id));
+  console.log(menuItem)
   const [count, setCount] = useState(0);
   function changeCount() {
     setCount((count) => count + 1);
