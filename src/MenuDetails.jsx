@@ -1,30 +1,17 @@
-import Button from "./Button";
-import { FaPlus } from "react-icons/fa";
+import { useParams } from 'react-router-dom';
+import data from './mockData';
+import RandomList from './RandomList';
+import MenuDetailsMain from './MenuDetailsMain';
 
 function MenuDetails() {
+  const { id } = useParams(); // Get the menu item ID from the URL parameter
+  const menuItem = data.find((item) => item.id === parseInt(id));
   return (
-    <div className="flex rounded gap-12 justify-around items-center">
-      <img className="rounded m-5" src="../public/pizzaBanner.jpeg" alt="" />
-      <div className="flex flex-col justify-center ">
-        <div className="flex flex-col justify-start">
-          <h1 className="text-4xl">Vegan Veggie</h1>
-          <p>Daiya vegan mozzarella, paired with fresh veggies</p>
-          <div className="mt-6">
-            <h1>Topings:</h1>
-            <ul>
-              <li>Mozzarela</li>
-              <li>Tomatto</li>
-              <li>Onion</li>
-              <li>Mushrooms</li>
-            </ul>
-          </div>
-        </div>
-        <div className="flex mt-10 justify-between items-center">
-          <h1 className="text-orange-400 text-xl">$150</h1>
-          <Button>
-            Add to cart <FaPlus />{" "}
-          </Button>
-        </div>
+    <div className="w-full bg-slate-200 p-6">
+      <MenuDetailsMain data={menuItem} />
+      <div className="py-6 text-4xl font-bold ">You may also like</div>
+      <div className="flex">
+        <RandomList />
       </div>
     </div>
   );

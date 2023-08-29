@@ -1,14 +1,16 @@
-import { PiPlusBold } from "react-icons/pi";
-import { AiOutlineMinus } from "react-icons/ai";
-import Button from "./Button";
-import { useState } from "react";
+import { PiPlusBold } from 'react-icons/pi';
+import { AiOutlineMinus } from 'react-icons/ai';
+import Button from './Button';
+import { useState } from 'react';
 function Amount({ amount, onZero }) {
   const [count, setCount] = useState(amount);
 
-  function incCount() {
+  function incCount(e) {
+    e.preventDefault();
     setCount((count) => count + 1);
   }
-  function decCount() {
+  function decCount(e) {
+    e.preventDefault();
     count > 1 ? setCount((count) => count - 1) : onZero();
   }
   return (
