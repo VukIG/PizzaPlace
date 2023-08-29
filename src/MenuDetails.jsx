@@ -10,8 +10,8 @@ import MenuItem from "./MenuItem";
 function MenuDetails() {
   const { id } = useParams(); // Get the menu item ID from the URL parameter
   const menuItem = data.find((item) => item.id === parseInt(id));
-  let toppings=menuItem.toppings;
-  console.log(menuItem)
+  let toppings = menuItem.toppings;
+  console.log(menuItem);
   const [count, setCount] = useState(0);
   function changeCount() {
     setCount((count) => count + 1);
@@ -31,18 +31,16 @@ function MenuDetails() {
             <div className="mt-7">
               <h1 className="font-bold">Topings:</h1>
               <ul className="italic list-disc	ml-10">
-                {
-                  toppings.map((topping)=>{
-                    return(
-                      <li key={topping.id}>{topping.name}</li>
-                    )
-                  })
-                }
+                {toppings.map((topping) => {
+                  return <li key={topping.id}>{topping.name}</li>;
+                })}
               </ul>
             </div>
           </div>
           <div className="flex mt-10 justify-between w-full items-center">
-            <h1 className="text-orange-400 text-xl font-bold">{MenuItem.price}</h1>
+            <h1 className="text-orange-400 text-xl font-bold">
+              {MenuItem.price}
+            </h1>
             <div className="mr-5">
               {count > 0 ? (
                 <Amount

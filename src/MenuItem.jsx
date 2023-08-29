@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import { useState } from "react";
 import Amount from "./Amount";
 import { Link } from "react-router-dom";
-function MenuItem({ title, desc, img, id }) {
+function MenuItem({ title, desc, img, price, id }) {
   const [count, setCount] = useState(0);
   function changeCount() {
     setCount((count) => count + 1);
@@ -21,7 +21,7 @@ function MenuItem({ title, desc, img, id }) {
             <div className="flex flex-col justify-start items-start ">
               <h1 className="text-xl font-bold">{title}</h1>
               <p className="py-3 text-sm italic">{desc}</p>
-              <h1 className="font-bold text-orange-400">$150</h1>
+              <h1 className="font-bold text-orange-400">${price}</h1>
             </div>
           </div>
 
@@ -43,9 +43,8 @@ function MenuItem({ title, desc, img, id }) {
             )}
           </div>
         </div>
-      </div>  
+      </div>
     </Link>
-    
   );
 }
 

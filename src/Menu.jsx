@@ -6,13 +6,14 @@ function Menu() {
       <h1 className="text-4xl mb-10 font-bold">Discover menu</h1>
       {data.map((element) => {
         return (
-            <MenuItem
-              key={element.id}
-              img={element.imageUrl}
-              title={element.name}
-              desc={element.description}
-              id={element.id}
-            />
+          <MenuItem
+            key={element.id}
+            img={element.imageUrl}
+            title={element.name}
+            desc={element.description}
+            price={element.price}
+            id={element.id}
+          />
         );
       })}
     </div>
