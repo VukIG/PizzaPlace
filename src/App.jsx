@@ -3,6 +3,8 @@ import Home from './Home';
 import Menu from './Menu';
 import AppLayout from './ui/AppLayout';
 import MenuDetails from './MenuDetails';
+import CardPage from './CardPage';
+
 function App() {
   return (
     <BrowserRouter>
@@ -11,9 +13,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="menu" element={<Menu />} />
           <Route path="/menu/details/:id" element={<MenuDetails />} />
+          <Route path="/menu/card" element={<CardPage />} />
         </Route>
-
-        {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
     </BrowserRouter>
   );

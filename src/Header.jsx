@@ -2,6 +2,7 @@ import Logo from '../src/logo.svg';
 import Button from './Button';
 import Nav from './Nav';
 import { FaShoppingCart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -12,11 +13,13 @@ function Header() {
           <Nav />
         </div>
         <div>
-          <Button>
-            <div className="flex gap-1 align-middle justify-center items-center">
-              <span>Cart</span> <FaShoppingCart />
-            </div>
-          </Button>
+          <Link to="/menu/card">
+            <Button>
+              <div className="flex gap-1 align-middle justify-center items-center">
+                <span>Cart</span> <FaShoppingCart />
+              </div>
+            </Button>
+          </Link>
         </div>
       </div>
     </>
