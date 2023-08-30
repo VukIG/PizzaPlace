@@ -2,6 +2,28 @@ import { Link } from 'react-router-dom';
 import AmountButton from './AmountButton';
 
 function MenuItem({ title, desc, img, price, id }) {
+  async function sendData(data) {
+    console.log(data);
+    const item={
+      "title": title,
+      "price": price,
+      "count": data,
+    }
+    fetch('http://localhost:3000/items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
+      .then((response) => response.json())
+      .then((item) => {
+        console.log('Item added:', item);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
   return (
     <div>
       <Link to={`/menu/details/${id}`}>
@@ -18,7 +40,7 @@ function MenuItem({ title, desc, img, price, id }) {
               <h1 className="font-bold text-orange-400">${price}</h1>
             </div>
           </div>
-          <AmountButton />
+          <AmountButton dataProp={sendData} />
         </div>
       </Link>
     </div>

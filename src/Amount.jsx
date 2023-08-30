@@ -2,7 +2,6 @@ import { PiPlusBold } from 'react-icons/pi';
 import { AiOutlineMinus } from 'react-icons/ai';
 import Button from './Button';
 import { useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 function Amount({ amount, onZero, className="" }) {
   const [count, setCount] = useState(amount);

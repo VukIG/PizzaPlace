@@ -3,7 +3,7 @@ import Home from './Home';
 import Menu from './Menu';
 import AppLayout from './ui/AppLayout';
 import MenuDetails from './MenuDetails';
-import CardPage from './CardPage';
+import CartPage from './CartPage';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="menu" element={<Menu />} />
           <Route path="/menu/details/:id" element={<MenuDetails />} />
-          <Route path="/menu/card" element={<CardPage />} />
+          <Route path="/menu/card" element={<CartPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

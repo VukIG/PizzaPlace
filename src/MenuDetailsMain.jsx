@@ -1,8 +1,29 @@
 import AmountButton from './AmountButton';
-
+import db from '../db.json'
 function MenuDetailsMain({ data }) {
-  const { name, description, price, imageUrl, toppings } = data; // Destructure the data object
-
+  const { name, description, price, imageUrl, toppings } = data;
+  function sendData(data) {
+    console.log(data);
+    const item={
+      "title": name,
+      "price": price,
+      "count": data,
+    }
+    fetch('http://localhost:3000/items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    })
+      .then((response) => response.json())
+      .then((item) => {
+        console.log('Item added:', item);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
   return (
     <div className="flex rounded gap-12 bg-white justify-center items-center">
       <img
@@ -25,7 +46,7 @@ function MenuDetailsMain({ data }) {
         </div>
         <div className="flex mt-10 justify-between w-full items-center">
           <h1 className="text-orange-400 text-xl font-bold">${price}</h1>
-          <AmountButton />
+          <AmountButton dataProp={sendData} />
         </div>
       </div>
     </div>
