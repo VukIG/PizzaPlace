@@ -1,22 +1,20 @@
-import { useState,useEffect } from 'react';
-import Amount from './Amount';
-import Button from './Button';
-import { FaPlus } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import Amount from "./Amount";
+import Button from "./Button";
+import { FaPlus } from "react-icons/fa";
 
-function AmountButton({dataProp}) {
-  console.log(typeof dataProp); // Check the type of dataProp
+function AmountButton({ dataProp }) {
   const [count, setCount] = useState(0);
   const [data, setData] = useState(count);
 
   function changeCount(e) {
     e.preventDefault();
     setCount((count) => count + 1);
-    setData(count); 
-
+    setData(count);
   }
-  useEffect(()=>{
+  useEffect(() => {
     dataProp(count);
-  },[count, dataProp])
+  }, [count, dataProp]);
   return (
     <div className="mr-5">
       {count > 0 ? (

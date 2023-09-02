@@ -1,18 +1,35 @@
-import Amount from './Amount';
-import Button from './Button';
+import { useEffect, useState } from "react";
+import Amount from "./Amount";
+import Button from "./Button";
 
-function CartItem({item}) {
-  const { name, price, amount } = items; 
+function CartItem({ item, amount, onZero, onChange }) {
+  const { title, price } = item;
+  const [count, setCount] = useState(amount);
+
+  useEffect(() => {
+    onChange(count);
+  }, [count]);
+
   return (
     <div className="flex justify-between py-5 border-b border-black items-center">
-            <div className="flex justify-around gap-3 items-baseline ">
-                <h1 className='text-3xl'>{amount}</h1><span>X</span><h1 className='text-3xl'>{name}</h1>
-            </div>
-            <div className="flex justify-around gap-3 items-center">
-                <h1 className='font-bold text-3xl'>{price*amount}</h1> <Amount className="h-12" /> <Button className='h-12'>Remove</Button>
-            </div>
-        </div>
-  )
+      <div className="flex justify-around gap-3 items-baseline">
+        <h1 className="text-3xl">{count}</h1>
+        <span>X</span>
+        <h1 className="text-3xl">{title}</h1>
+      </div>
+      <div className="flex justify-around gap-3 items-center">
+        <h1 className="font-bold text-3xl">${price * count}</h1>
+        <Amount
+          amount={count}
+          onZero={onZero}
+          onChange={(newCount) => setCount(newCount)}
+        />
+        <Button className="h-12" onClick={onZero}>
+          Remove
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-export default CartItem
+export default CartItem;

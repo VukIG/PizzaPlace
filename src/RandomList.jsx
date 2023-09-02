@@ -1,5 +1,5 @@
-import RandomItem from './RandomItem';
-import data from './mockData';
+import RandomItem from "./RandomItem";
+import data from "./mockData";
 
 function shuffleArray(data) {
   for (let i = data.length - 1; i > 0; i--) {
@@ -13,15 +13,15 @@ function RandomList() {
   function threeHeaders() {
     shuffleArray(data);
     for (let i = 0; i < 3; i++) {
-      randomItems.push(data[i]); // Push the object to randomItems
+      randomItems.push(data[i]);
     }
     return randomItems;
   }
 
   return (
     <div className="flex w-full justify-around gap-7 align-middle items-center">
-      {threeHeaders().map((item, index) => (
-        <RandomItem key={index} data={item} />
+      {threeHeaders().map((item) => (
+        <RandomItem key={item.id} data={item} />
       ))}
     </div>
   );
