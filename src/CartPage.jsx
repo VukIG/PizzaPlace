@@ -7,19 +7,19 @@ function CardPage() {
     {
       title: "Margherita Supreme",
       price: 12.99,
-      count: 0,
+      count: 1,
       id: 1,
     },
     {
       title: "Spicy Veggie Fiesta",
       price: 14.99,
-      count: 0,
+      count: 1,
       id: 2,
     },
     {
       title: "Margherita Supreme",
       price: 12.99,
-      count: 0,
+      count: 1,
       id: 3,
     },
   ];
