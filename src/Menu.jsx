@@ -8,11 +8,7 @@ function Menu() {
         return (
           <MenuItem
             key={element.id}
-            img={element.imageUrl}
-            title={element.name}
-            desc={element.description}
-            price={element.price}
-            id={element.id}
+            data={element}
           />
         );
       })}
