@@ -5,7 +5,6 @@ import Button from "./Button";
 function CartItem({ item, amount, onZero, onChange }) {
   const { title, price } = item;
   const [count, setCount] = useState(amount);
-
   useEffect(() => {
     onChange(count);
   }, [count]);
@@ -18,7 +17,7 @@ function CartItem({ item, amount, onZero, onChange }) {
         <h1 className="text-3xl">{title}</h1>
       </div>
       <div className="flex justify-around gap-3 items-center">
-        <h1 className="font-bold text-3xl">${price * count}</h1>
+        <h1 className="font-bold text-3xl">${(price * count).toFixed(2)}</h1>
         <Amount
           amount={count}
           onChange={(newCount) => {

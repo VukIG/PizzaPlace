@@ -12,7 +12,7 @@ function CartItems({ items, onChange }) {
     list.forEach((item) => {
       totalPrice += item.price * item.count;
     });
-    return <span>{totalPrice}</span>;
+    return <span>{totalPrice.toFixed(2)}</span>;
   }
 
   function removeItem(id) {
