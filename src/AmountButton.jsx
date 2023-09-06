@@ -3,9 +3,8 @@ import Amount from "./Amount";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
 
-function AmountButton() {
+function AmountButton({ name, price }) {
   const [count, setCount] = useState(0);
-
   function changeCount(e) {
     e.preventDefault();
     setCount((count) => count + 1);
@@ -15,6 +14,8 @@ function AmountButton() {
       {count > 0 ? (
         <Amount
           amount={count}
+          name={name}
+          price={price}
           onChange={(count) => {
             if (count == 0) {
               setCount(0);

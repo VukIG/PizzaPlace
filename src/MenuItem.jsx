@@ -19,7 +19,7 @@ function MenuItem({ data }) {
               <h1 className="font-bold text-orange-400">${price}</h1>
             </div>
           </div>
-          <AmountButton />
+          <AmountButton name={name} price={price} />
         </div>
       </Link>
     </div>
