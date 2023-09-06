@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import Amount from './Amount';
-import Button from './Button';
-import { FaPlus } from 'react-icons/fa';
+import { useState } from "react";
+import Amount from "./Amount";
+import Button from "./Button";
+import { FaPlus } from "react-icons/fa";
 
 function AmountButton() {
   const [count, setCount] = useState(0);
+
   function changeCount(e) {
     e.preventDefault();
     setCount((count) => count + 1);
@@ -14,8 +15,10 @@ function AmountButton() {
       {count > 0 ? (
         <Amount
           amount={count}
-          onZero={() => {
-            setCount(0);
+          onChange={(count) => {
+            if (count == 0) {
+              setCount(0);
+            }
           }}
         />
       ) : (

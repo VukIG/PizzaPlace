@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
-import data from './mockData';
-import RandomList from './RandomList';
-import MenuDetailsMain from './MenuDetailsMain';
+import { useParams } from "react-router-dom";
+import data from "./mockData";
+import RandomList from "./RandomList";
+import MenuDetailsMain from "./MenuDetailsMain";
 
 function MenuDetails() {
   const { id } = useParams(); // Get the menu item ID from the URL parameter

@@ -1,4 +1,4 @@
-import AmountButton from './AmountButton';
+import AmountButton from "./AmountButton";
 
 function MenuDetailsMain({ data }) {
   const { name, description, price, imageUrl, toppings } = data; // Destructure the data object
