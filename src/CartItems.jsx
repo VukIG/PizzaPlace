@@ -5,13 +5,9 @@ import CartItem from "./CartItem";
 function CartItems({ items, onChange }) {
   const [list, setList] = useState(items);
   function calculateTotal() {
-    let totalPrice = 0;
-    for (let i = 0; i < list.length; i++) {
-      totalPrice += list[i].price * list[i].count;
-    }
-    list.forEach((item) => {
-      totalPrice += item.price * item.count;
-    });
+    let totalPrice = list.reduce((total, item) => {
+      return total + item.price * item.count;
+    }, 0);
     return totalPrice.toFixed(2);
   }
 
