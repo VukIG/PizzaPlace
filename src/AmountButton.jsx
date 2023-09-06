@@ -1,4 +1,4 @@
-import { useState,  } from "react";
+import { useState } from "react";
 import Amount from "./Amount";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
@@ -15,8 +15,8 @@ function AmountButton() {
       {count > 0 ? (
         <Amount
           amount={count}
-          onChange={(count)=>{
-            if (count==0) {
+          onChange={(count) => {
+            if (count == 0) {
               setCount(0);
             }
           }}

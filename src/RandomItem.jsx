@@ -1,6 +1,6 @@
 import AmountButton from "./AmountButton";
 function RandomItem({ data }) {
-  const { name, description, price, imageUrl } = data; 
+  const { name, description, price, imageUrl } = data;
   return (
     <div className="flex gap-5 bg-white flex-col p-5 w-full rounded">
       <img className="w-full object-cover rounded h-72" src={imageUrl} alt="" />
