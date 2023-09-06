@@ -3,7 +3,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import Button from "./Button";
 import { useState } from "react";
 
-function Amount({ amount, onZero, onChange, className = "" }) {
+function Amount({ amount, onChange, className = "" }) {
   const [count, setCount] = useState(amount);
 
   function incCount(e) {
@@ -14,10 +14,8 @@ function Amount({ amount, onZero, onChange, className = "" }) {
 
   function decCount(e) {
     e.preventDefault();
-    if (typeof onZero === "function") {
-      count > 1 ? setCount((count) => count - 1) : onZero();
-      onChange(count - 1);
-    }
+    setCount((count) => count - 1);
+    onChange(count - 1);
   }
 
   return (

@@ -1,22 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
 
 function CartItems({ items, onChange }) {
   const [list, setList] = useState(items);
-  const [total, setTotal] = useState(0);
-
   function calculateTotal() {
     let totalPrice = 0;
+    for (let i = 0; i < list.length; i++) {
+      totalPrice += list[i].price * list[i].count;
+    }
     list.forEach((item) => {
       totalPrice += item.price * item.count;
     });
-    setTotal(totalPrice);
+    return (<span>{totalPrice}</span>)
   }
-
-  useEffect(() => {
-    calculateTotal();
-  }, [list]);
 
   function removeItem(id) {
     setList((prevList) => prevList.filter((item) => item.id !== id));
@@ -58,7 +55,7 @@ function CartItems({ items, onChange }) {
         </div>
         <div className="flex font-bold text-3xl gap-2">
           <h1>TOTAL:</h1>
-          <h1>${total}</h1>
+          <h1>${calculateTotal()}</h1>
         </div>
       </div>
     </div>

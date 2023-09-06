@@ -10,14 +10,15 @@ function AmountButton() {
     e.preventDefault();
     setCount((count) => count + 1);
   }
- 
   return (
     <div className="mr-5">
       {count > 0 ? (
         <Amount
           amount={count}
-          onZero={() => {
-            setCount(0);
+          onChange={(count)=>{
+            if (count==0) {
+              setCount(0);
+            }
           }}
         />
       ) : (
