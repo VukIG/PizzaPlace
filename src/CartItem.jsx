@@ -21,8 +21,10 @@ function CartItem({ item, amount, onZero, onChange }) {
         <h1 className="font-bold text-3xl">${price * count}</h1>
         <Amount
           amount={count}
-          onZero={onZero}
-          onChange={(newCount) => setCount(newCount)}
+          onChange={(newCount)=>{
+            setCount(newCount)  
+            }
+          }
         />
         <Button className="h-12" onClick={onZero}>
           Remove

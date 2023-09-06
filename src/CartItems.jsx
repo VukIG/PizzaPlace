@@ -16,6 +16,9 @@ function CartItems({ items, onChange }) {
   }
 
   function removeItem(id) {
+    if (list.length==1) {
+      onChange();
+    }
     setList((prevList) => prevList.filter((item) => item.id !== id));
   }
 
@@ -38,6 +41,9 @@ function CartItems({ items, onChange }) {
             removeItem(item.id);
           }}
           onChange={(newCount) => {
+            if (newCount==0) {
+              removeItem(item.id);
+            }
             setCount(item.id, newCount);
           }}
         />
