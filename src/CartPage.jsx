@@ -1,6 +1,6 @@
 import CartItems from "./CartItems";
 import EmptyCart from "./EmptyCart";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 function CardPage() {
   //za sada koristim samo objekat items, prilikom izrade cart logic tiketa logika ce biti promenjena
   const listOfItems = [
