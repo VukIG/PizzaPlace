@@ -24,9 +24,16 @@ function MenuDetailsMain({ data }) {
         </div>
         <div className="flex mt-10 justify-between w-full items-center">
           <h1 className="text-orange-400 text-xl font-bold">${price}</h1>
-          {
-            itemInCart ? <AmountButton name={name} price={price} amount={itemInCart.count}  id={id} /> : <AmountButton name={name} price={price} amount={0}  id={id} />
-          }
+          {itemInCart ? (
+            <AmountButton
+              name={name}
+              price={price}
+              amount={itemInCart.count}
+              id={id}
+            />
+          ) : (
+            <AmountButton name={name} price={price} amount={0} id={id} />
+          )}
         </div>
       </div>
     </div>
