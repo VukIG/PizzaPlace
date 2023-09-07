@@ -2,13 +2,28 @@ import { useState } from "react";
 import Amount from "./Amount";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
+import { useCart } from "./Context";
 
-function AmountButton({ name, price }) {
-  const [count, setCount] = useState(0);
+function AmountButton({ name, price, amount, id }) {
+  const { cartItems, updateCartItems } = useCart();
+  const [count, setCount] = useState(amount);
+
   function changeCount(e) {
     e.preventDefault();
     setCount((count) => count + 1);
   }
+
+  function handleCountChange(newCount) {
+    if (newCount === 0) {
+      const updatedCartItems = cartItems.filter((item) => item.name !== name);
+      updateCartItems(updatedCartItems);
+    } else {
+      setCount(newCount);
+    }
+  }
+  
+  console.log(count);
+
   return (
     <div className="mr-5">
       {count > 0 ? (
@@ -16,11 +31,8 @@ function AmountButton({ name, price }) {
           amount={count}
           name={name}
           price={price}
-          onChange={(count) => {
-            if (count == 0) {
-              setCount(0);
-            }
-          }}
+          id={id}
+          onChange={handleCountChange}
         />
       ) : (
         <Button onClick={changeCount}>

@@ -1,56 +1,57 @@
+import { useState, useEffect } from "react";
 import { PiPlusBold } from "react-icons/pi";
 import { AiOutlineMinus } from "react-icons/ai";
+import { useCart } from "./Context";
 import Button from "./Button";
-import { useState, useEffect } from "react";
-import { json } from "react-router-dom";
 
-function Amount({ amount, name, price, onChange, className = "" }) {
+function Amount({ amount, name, price, onChange, id, className = "" }) {
   const [count, setCount] = useState(amount);
-  let storageItems = JSON.parse(localStorage.getItem("items")) || [];
-  function addProduct() {
-    if (storageItems != null) {
-      let product = storageItems.find((item) => item.name === name);
-      if (product) {
-        product.count = count;
-      } else {
-        const newItem = {
-          name: name,
-          price: price,
-          count: count,
-        };
-        storageItems.push(newItem);
-      }
-      localStorage.setItem("items", JSON.stringify(storageItems));
-    }
+  const { cartItems, updateCartItems } = useCart();
+  function updateLocalStorage(newItems) {
+    updateCartItems(newItems);
   }
-  function removeProduct() {
-    let newItemList = storageItems.filter((item) => item.count !== 0);
-    storageItems = newItemList;
-    localStorage.setItem("items", JSON.stringify(newItemList));
-  }
+  
+
   useEffect(() => {
-    count < 1 ? removeProduct() : addProduct();
+    const index = cartItems.findIndex((item) => item.name === name);
+  
+    if (count === 0) {
+      if (index !== -1) {
+        cartItems.splice(index, 1);
+      }
+    } else {
+      if (index !== -1) {
+        cartItems[index].count = count;
+      } 
+      else  {
+        cartItems.push({ name, count, price, id });
+      }
+    }
+  
+    updateLocalStorage([...cartItems]);
   }, [count]);
 
   function incCount(e) {
     e.preventDefault();
-    setCount((count) => count + 1);
-    onChange(count + 1);
+    setCount(count + 1);
+    onChange((count)=> count+1)
   }
 
   function decCount(e) {
     e.preventDefault();
-    setCount((count) => count - 1);
-    onChange(count - 1);
+    if (count > 0) {
+      setCount(count - 1);
+    }
+    onChange((count)=> count-1);
   }
 
   return (
-    <div className="flex justify-center align-middle gap-2 items-center">
-      <Button className="rounded-full w-12 h-12 " onClick={decCount}>
+    <div className={`flex justify-center align-middle gap-2 items-center ${className}`}>
+      <Button className="rounded-full w-12 h-12" onClick={decCount}>
         <AiOutlineMinus />
       </Button>
       <span>{count}</span>
-      <Button className="rounded-full w-12 h-12 " onClick={incCount}>
+      <Button className="rounded-full w-12 h-12" onClick={incCount}>
         <PiPlusBold />
       </Button>
     </div>

@@ -1,4 +1,5 @@
 import AmountButton from "./AmountButton";
+
 function RandomItem({ data }) {
   const { name, description, price, imageUrl } = data;
   return (
@@ -11,7 +12,7 @@ function RandomItem({ data }) {
       <div className="flex w-full justify-between items-center">
         <p className="text-orange-400 text-xl font-bold">${price}</p>
         <div>
-          <AmountButton />
+        <AmountButton name={name} price={price} />
         </div>
       </div>
     </div>
