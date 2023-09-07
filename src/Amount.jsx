@@ -14,7 +14,6 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
 
   useEffect(() => {
     const index = cartItems.findIndex((item) => item.name === name);
-  
     if (count === 0) {
       if (index !== -1) {
         cartItems.splice(index, 1);
@@ -23,7 +22,8 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
       if (index !== -1) {
         cartItems[index].count = count;
       } 
-      else  {
+
+      else if( name!=undefined)  {
         cartItems.push({ name, count, price, id });
       }
     }

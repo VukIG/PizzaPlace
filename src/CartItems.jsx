@@ -11,21 +11,21 @@ function CartItems({ items, onChange }) {
     return totalPrice.toFixed(2);
   }
 
-  function removeItem(id) {
+  function removeItem(name) {
     if (list.length == 1) {
       onChange();
     }
-    setList((prevList) => prevList.filter((item) => item.id !== id));
+    setList((prevList) => prevList.filter((item) => item.name !== name));
   }
 
-  function setCount(id, newCount) {
+  function setCount(name, newCount) {
     setList((prevList) =>
       prevList.map((item) =>
-        item.id === id ? { ...item, count: newCount } : item,
+        item.name === name ? { ...item, count: newCount } : item,
       ),
     );
   }
-
+  console.log(list);
   return (
     <div className="w-full h-[80vh]">
       {list.map((item) => (
@@ -34,13 +34,13 @@ function CartItems({ items, onChange }) {
           item={item}
           amount={item.count}
           onZero={() => {
-            removeItem(item.id);
+            removeItem(item.name);
           }}
           onChange={(newCount) => {
             if (newCount == 0) {
-              removeItem(item.id);
+              removeItem(item.name);
             }
-            setCount(item.id, newCount);
+            setCount(item.name, newCount);
           }}
         />
       ))}

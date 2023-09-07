@@ -3,7 +3,7 @@ import Amount from "./Amount";
 import Button from "./Button";
 
 function CartItem({ item, amount, onZero, onChange }) {
-  const { title, price } = item;
+  const { name, price } = item;
   const [count, setCount] = useState(amount);
   useEffect(() => {
     onChange(count);
@@ -14,7 +14,7 @@ function CartItem({ item, amount, onZero, onChange }) {
       <div className="flex justify-around gap-3 items-baseline">
         <h1 className="text-3xl">{count}</h1>
         <span>X</span>
-        <h1 className="text-3xl">{title}</h1>
+        <h1 className="text-3xl">{name}</h1>
       </div>
       <div className="flex justify-around gap-3 items-center">
         <h1 className="font-bold text-3xl">${(price * count).toFixed(2)}</h1>
