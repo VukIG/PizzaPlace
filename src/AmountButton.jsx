@@ -21,8 +21,6 @@ function AmountButton({ name, price, amount, id }) {
       setCount(newCount);
     }
   }
-  
-  console.log(count);
 
   return (
     <div className="mr-5">

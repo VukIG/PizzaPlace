@@ -10,7 +10,6 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
   function updateLocalStorage(newItems) {
     updateCartItems(newItems);
   }
-  
 
   useEffect(() => {
     const index = cartItems.findIndex((item) => item.name === name);
@@ -21,20 +20,18 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
     } else {
       if (index !== -1) {
         cartItems[index].count = count;
-      } 
-
-      else if( name!=undefined)  {
+      } else if (name != undefined) {
         cartItems.push({ name, count, price, id });
       }
     }
-  
+
     updateLocalStorage([...cartItems]);
   }, [count]);
 
   function incCount(e) {
     e.preventDefault();
     setCount(count + 1);
-    onChange((count)=> count+1)
+    onChange((count) => count + 1);
   }
 
   function decCount(e) {
@@ -42,11 +39,13 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
     if (count > 0) {
       setCount(count - 1);
     }
-    onChange((count)=> count-1);
+    onChange((count) => count - 1);
   }
 
   return (
-    <div className={`flex justify-center align-middle gap-2 items-center ${className}`}>
+    <div
+      className={`flex justify-center align-middle gap-2 items-center ${className}`}
+    >
       <Button className="rounded-full w-12 h-12" onClick={decCount}>
         <AiOutlineMinus />
       </Button>

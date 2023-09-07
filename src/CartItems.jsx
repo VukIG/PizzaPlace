@@ -25,7 +25,6 @@ function CartItems({ items, onChange }) {
       ),
     );
   }
-  console.log(list);
   return (
     <div className="w-full h-[80vh]">
       {list.map((item) => (

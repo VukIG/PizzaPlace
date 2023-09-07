@@ -1,16 +1,12 @@
 import { Link } from "react-router-dom";
 import AmountButton from "./AmountButton";
 import { useCart } from "./Context";
-import {useState,useEffect} from "react";
 
 function MenuItem({ data }) {
   const { name, description, imageUrl, price, id } = data;
-  const { cartItems } = useCart();  
-  const[count,setCount]=useState(0);
-  useEffect(() => {
-    const itemInCart = cartItems.find(item => item.name === name);
-    setCount(itemInCart ? setCount(itemInCart.count) : setCount(0));
-  }, [cartItems, name]);
+  const { cartItems } = useCart();
+  const itemInCart = cartItems.find((item) => item.name === name);
+  console.log(itemInCart)
   return (
     <div>
       <Link to={`/menu/details/${id}`}>
@@ -27,7 +23,10 @@ function MenuItem({ data }) {
               <h1 className="font-bold text-orange-400">${price}</h1>
             </div>
           </div>
-          <AmountButton name={name} price={price} amount={count} />
+          {
+            itemInCart ? <AmountButton name={name} price={price} amount={itemInCart.count}  id={id} /> : <AmountButton name={name} price={price} amount={0}  id={id} />
+          }
+          
         </div>
       </Link>
     </div>
