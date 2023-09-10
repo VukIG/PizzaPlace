@@ -4,7 +4,7 @@ import { useCart } from "./Context";
 function MenuDetailsMain({ data }) {
   const { cartItems } = useCart();
   const { name, description, id, price, imageUrl, toppings } = data;
-  const itemInCart = cartItems.find((item) => item.name === name);
+  const itemInCart = cartItems.find((item) => item.id === id);
 
   return (
     <div className="flex rounded gap-12 bg-white justify-center items-center">

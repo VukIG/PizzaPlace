@@ -4,7 +4,7 @@ import { useCart } from "./Context";
 function RandomItem({ data }) {
   const { cartItems } = useCart();
   const { name, description, id, price, imageUrl } = data;
-  const itemInCart = cartItems.find((item) => item.name === name);
+  const itemInCart = cartItems.find((item) => item.id === id);
   return (
     <div className="flex gap-5 bg-white flex-col p-5 w-full rounded">
       <img className="w-full object-cover rounded h-72" src={imageUrl} alt="" />

@@ -15,7 +15,7 @@ function AmountButton({ name, price, amount, id }) {
 
   function handleCountChange(newCount) {
     if (newCount === 0) {
-      const updatedCartItems = cartItems.filter((item) => item.name !== name);
+      const updatedCartItems = cartItems.filter((item) => item.id !== id);
       updateCartItems(updatedCartItems);
     } else {
       setCount(newCount);

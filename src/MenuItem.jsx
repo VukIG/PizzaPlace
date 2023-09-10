@@ -5,8 +5,7 @@ import { useCart } from "./Context";
 function MenuItem({ data }) {
   const { name, description, imageUrl, price, id } = data;
   const { cartItems } = useCart();
-  const itemInCart = cartItems.find((item) => item.name === name);
-  console.log(itemInCart);
+  const itemInCart = cartItems.find((item) => item.id === id);
   return (
     <div>
       <Link to={`/menu/details/${id}`}>

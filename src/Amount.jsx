@@ -12,7 +12,7 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
   }
 
   useEffect(() => {
-    const index = cartItems.findIndex((item) => item.name === name);
+    const index = cartItems.findIndex((item) => item.id === id);
     if (count === 0) {
       if (index !== -1) {
         cartItems.splice(index, 1);
@@ -31,15 +31,13 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
   function incCount(e) {
     e.preventDefault();
     setCount(count + 1);
-    onChange((count) => count + 1);
+    onChange((count) => count+1);
   }
 
   function decCount(e) {
     e.preventDefault();
-    if (count > 0) {
-      setCount(count - 1);
-    }
-    onChange((count) => count - 1);
+    setCount(count - 1);
+    onChange((count) => count-1);
   }
 
   return (
