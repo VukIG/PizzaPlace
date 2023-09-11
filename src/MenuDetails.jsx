@@ -4,7 +4,7 @@ import RandomList from "./RandomList";
 import MenuDetailsMain from "./MenuDetailsMain";
 
 function MenuDetails() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const menuItem = data.find((item) => item.id === parseInt(id));
   return (
     <div className="w-full bg-slate-200 p-6">

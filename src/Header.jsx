@@ -9,13 +9,13 @@ import { useEffect } from "react";
 function Header() {
   const { cartItems } = useCart();
   let number = numberOfItems();
-  useEffect(()=>{
+  useEffect(() => {
     numberOfItems();
-  },[cartItems])
+  }, [cartItems]);
   function numberOfItems() {
-    const totalNum = cartItems.reduce((sum, item)=>{
-      return sum + item.count
-    },0);
+    const totalNum = cartItems.reduce((sum, item) => {
+      return sum + item.count;
+    }, 0);
     return totalNum;
   }
   return (
@@ -27,11 +27,11 @@ function Header() {
         </div>
         <div>
           <div className="flex gap-3 justify-center items-center align-middle">
-            { number ? <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
-              <div className="relative top-[-60%]">
-                {numberOfItems()}
+            {number ? (
+              <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
+                <div className="relative top-[-60%]">{numberOfItems()}</div>
               </div>
-            </div> : (
+            ) : (
               <div className=""></div>
             )}
             <Link to="/menu/card">

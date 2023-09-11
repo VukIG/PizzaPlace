@@ -27,13 +27,15 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
   function incCount(e) {
     e.preventDefault();
     setCount(count + 1);
-    onChange((count) => count+1);
   }
 
   function decCount(e) {
     e.preventDefault();
-    setCount(count - 1);
-    onChange((count) => count-1);
+    if (count > 1) {
+      setCount(count - 1);
+    } else {
+      onChange();
+    }
   }
 
   return (

@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
   );
 
   const updateCartItems = (newCartItems) => {
-    const updatedItems = newCartItems || []; // Ensure it's an array, even if newCartItems is undefined
+    const updatedItems = newCartItems || [];
     setCartItems(updatedItems);
     localStorage.setItem("items", JSON.stringify(updatedItems));
   };
