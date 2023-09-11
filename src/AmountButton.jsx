@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Amount from "./Amount";
 import Button from "./Button";
 import { FaPlus } from "react-icons/fa";
@@ -12,15 +12,16 @@ function AmountButton({ name, price, amount, id }) {
     e.preventDefault();
     setCount((count) => count + 1);
   }
-
-  function handleCountChange(newCount) {
-    if (newCount === 0) {
+  useEffect(()=>{
+    console.log(count);
+    if (count === 0) {
       const updatedCartItems = cartItems.filter((item) => item.id !== id);
       updateCartItems(updatedCartItems);
     } else {
-      setCount(newCount);
+      setCount(count);
     }
-  }
+  },[count])
+  
 
   return (
     <div className="mr-5">
@@ -30,7 +31,6 @@ function AmountButton({ name, price, amount, id }) {
           name={name}
           price={price}
           id={id}
-          onChange={handleCountChange}
         />
       ) : (
         <Button onClick={changeCount}>

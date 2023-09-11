@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 function Header() {
   const { cartItems } = useCart();
+  let number = numberOfItems();
   useEffect(()=>{
     numberOfItems();
   },[cartItems])
@@ -26,11 +27,13 @@ function Header() {
         </div>
         <div>
           <div className="flex gap-3 justify-center items-center align-middle">
-            <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
+            { number ? <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
               <div className="relative top-[-60%]">
                 {numberOfItems()}
               </div>
-            </div>
+            </div> : (
+              <div className=""></div>
+            )}
             <Link to="/menu/card">
               <Button>
                 <div className="flex gap-1 align-middle justify-center items-center">

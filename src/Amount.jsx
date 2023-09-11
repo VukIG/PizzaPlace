@@ -7,9 +7,6 @@ import Button from "./Button";
 function Amount({ amount, name, price, onChange, id, className = "" }) {
   const [count, setCount] = useState(amount);
   const { cartItems, updateCartItems } = useCart();
-  function updateLocalStorage(newItems) {
-    updateCartItems(newItems);
-  }
 
   useEffect(() => {
     const index = cartItems.findIndex((item) => item.id === id);
@@ -24,8 +21,7 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
         cartItems.push({ name, count, price, id });
       }
     }
-
-    updateLocalStorage([...cartItems]);
+    updateCartItems([...cartItems]);
   }, [count]);
 
   function incCount(e) {
