@@ -4,7 +4,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { useCart } from "./Context";
 import Button from "./Button";
 
-function Amount({ amount, name, price, onChange, id, className = "" }) {
+function Amount({ amount, name, price, onChange, onRemove, id, className = "" }) {
   const [count, setCount] = useState(amount);
   const { cartItems, updateCartItems } = useCart();
 
@@ -27,14 +27,17 @@ function Amount({ amount, name, price, onChange, id, className = "" }) {
   function incCount(e) {
     e.preventDefault();
     setCount(count + 1);
+    onChange((count)=> count+1 );
   }
 
   function decCount(e) {
     e.preventDefault();
     if (count > 1) {
       setCount(count - 1);
+      onChange((count)=> count-1 );
+
     } else {
-      onChange();
+      onRemove();
     }
   }
 

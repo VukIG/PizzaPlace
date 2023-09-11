@@ -11,7 +11,7 @@ function MenuDetails() {
       <MenuDetailsMain data={menuItem} />
       <div className="py-6 text-4xl font-bold ">You may also like</div>
       <div className="flex">
-        <RandomList />
+        <RandomList id={id} />
       </div>
     </div>
   );

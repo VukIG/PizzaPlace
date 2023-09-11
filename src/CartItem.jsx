@@ -6,6 +6,7 @@ function CartItem({ item, amount, onZero, onChange }) {
   const { name, price } = item;
   const [count, setCount] = useState(amount);
   useEffect(() => {
+    console.log(count);
     onChange(count);
   }, [count]);
 

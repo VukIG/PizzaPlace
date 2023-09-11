@@ -26,7 +26,7 @@ function AmountButton({ name, price, amount, id }) {
           name={name}
           price={price}
           id={id}
-          onChange={() => {
+          onRemove={() => {
             removeItem(id);
           }}
         />

@@ -1,21 +1,25 @@
 import RandomItem from "./RandomItem";
 import data from "./mockData";
 
-function shuffleArray(data) {
-  for (let i = data.length - 1; i > 0; i--) {
+function shuffleArray(data, id) {
+  let newData = data.filter((item) => item.id != id);
+  for (let i = newData.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [data[i], data[j]] = [data[j], data[i]];
+    [newData[i], newData[j]] = [newData[j], newData[i]];
   }
+  return newData;
 }
-function RandomList() {
-  const randomItems = [];
+function RandomList(id) {
 
   function threeHeaders() {
-    shuffleArray(data);
+    const randomList = shuffleArray(data,id);
+    let randomItems=[];
     for (let i = 0; i < 3; i++) {
-      randomItems.push(data[i]);
+      randomItems.push(randomList[i]);
     }
+    console.log(randomItems);
     return randomItems;
+    
   }
 
   return (
