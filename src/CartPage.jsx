@@ -1,8 +1,8 @@
-import CartItems from "./CartItems";
-import EmptyCart from "./EmptyCart";
-import { useCart } from "./Context";
+import CartItems from './CartItems';
+import EmptyCart from './EmptyCart';
+import { useCart } from './CartContext';
 function CardPage() {
-  const { cartItems, updateCartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
 
   return (
     <div className="p-5 h-screen">
@@ -13,7 +13,7 @@ function CardPage() {
         <CartItems
           items={cartItems}
           onChange={() => {
-            updateCartItems([]);
+            clearCart();
           }}
         />
       ) : (

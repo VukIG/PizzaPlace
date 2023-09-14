@@ -1,21 +1,16 @@
-import { useState } from "react";
-import Amount from "./Amount";
-import Button from "./Button";
-import { FaPlus } from "react-icons/fa";
-import { useCart } from "./Context";
+import { useState } from 'react';
+import Amount from './Amount';
+import Button from './Button';
+import { FaPlus } from 'react-icons/fa';
+import { useCart } from './CartContext';
 
 function AmountButton({ name, price, amount, id }) {
-  const { cartItems, updateCartItems } = useCart();
+  const { removeItem } = useCart();
   const [count, setCount] = useState(amount);
 
   function changeCount(e) {
     e.preventDefault();
     setCount((count) => count + 1);
-  }
-  function removeItem() {
-    setCount(0);
-    const updatedCartItems = cartItems.filter((item) => item.id !== id);
-    updateCartItems(updatedCartItems);
   }
 
   return (
@@ -27,6 +22,7 @@ function AmountButton({ name, price, amount, id }) {
           price={price}
           id={id}
           onRemove={() => {
+            setCount(0);
             removeItem(id);
           }}
         />

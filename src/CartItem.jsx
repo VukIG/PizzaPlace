@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import Amount from "./Amount";
-import Button from "./Button";
+import { useEffect, useState } from 'react';
+import Amount from './Amount';
+import Button from './Button';
+import { useCart } from './CartContext';
 
 function CartItem({ item, amount, onZero, onChange }) {
-  const { name, price } = item;
+  const { name, price, id } = item;
   const [count, setCount] = useState(amount);
+  const { removeItem } = useCart();
+
   useEffect(() => {
     console.log(count);
     onChange(count);
@@ -23,6 +26,10 @@ function CartItem({ item, amount, onZero, onChange }) {
           amount={count}
           onChange={(newCount) => {
             setCount(newCount);
+          }}
+          onRemove={() => {
+            setCount(0);
+            removeItem(id);
           }}
         />
         <Button className="h-12" onClick={onZero}>

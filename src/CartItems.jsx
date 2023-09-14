@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Button from "./Button";
-import CartItem from "./CartItem";
+import { useState } from 'react';
+import Button from './Button';
+import CartItem from './CartItem';
 
 function CartItems({ items, onChange }) {
   const [list, setList] = useState(items);
@@ -19,11 +19,7 @@ function CartItems({ items, onChange }) {
   }
 
   function setCount(name, newCount) {
-    setList((prevList) =>
-      prevList.map((item) =>
-        item.name === name ? { ...item, count: newCount } : item,
-      ),
-    );
+    setList((prevList) => prevList.map((item) => (item.name === name ? { ...item, count: newCount } : item)));
   }
   return (
     <div className="w-full h-[80vh]">
@@ -47,10 +43,7 @@ function CartItems({ items, onChange }) {
       <div className="flex justify-between items-center mt-5">
         <div className="flex gap-3">
           <Button>Finish ordering</Button>
-          <Button
-            className="bg-white border hover:text-white border-orange-400 text-orange-400"
-            onClick={onChange}
-          >
+          <Button className="bg-white border hover:text-white border-orange-400 text-orange-400" onClick={onChange}>
             Clear cart
           </Button>
         </div>

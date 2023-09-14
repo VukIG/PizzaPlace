@@ -1,5 +1,5 @@
-import MenuItem from "./MenuItem";
-import data from "./mockData";
+import MenuItem from './MenuItem';
+import data from './mockData';
 function Menu() {
   return (
     <div className="w-full flex flex-col justify-start h-full bg-slate-200 p-5 mb-5">

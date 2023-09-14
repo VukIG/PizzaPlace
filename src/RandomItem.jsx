@@ -1,5 +1,5 @@
-import AmountButton from "./AmountButton";
-import { useCart } from "./Context";
+import AmountButton from './AmountButton';
+import { useCart } from './CartContext';
 
 function RandomItem({ data }) {
   const { cartItems } = useCart();
@@ -16,12 +16,7 @@ function RandomItem({ data }) {
         <p className="text-orange-400 text-xl font-bold">${price}</p>
         <div>
           {itemInCart ? (
-            <AmountButton
-              name={name}
-              price={price}
-              amount={itemInCart.count}
-              id={id}
-            />
+            <AmountButton name={name} price={price} amount={itemInCart.count} id={id} />
           ) : (
             <AmountButton name={name} price={price} amount={0} id={id} />
           )}

@@ -1,5 +1,5 @@
-import { twMerge } from "tailwind-merge";
-function Button({ children, onClick, className = "" }) {
+import { twMerge } from 'tailwind-merge';
+function Button({ children, onClick, className = '' }) {
   return (
     <button
       onClick={onClick}
@@ -8,7 +8,7 @@ function Button({ children, onClick, className = "" }) {
         text-white py-3 px-4 rounded flex items-center
         hover:bg-orange-500 duration-200
         `,
-        className,
+        className
       )}
     >
       {children}
