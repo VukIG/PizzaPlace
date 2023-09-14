@@ -16,7 +16,6 @@ function RandomList(id) {
     for (let i = 0; i < 3; i++) {
       randomItems.push(randomList[i]);
     }
-    console.log(randomItems);
     return randomItems;
   }
 

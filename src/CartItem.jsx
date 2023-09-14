@@ -1,17 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Amount from './Amount';
 import Button from './Button';
 import { useCart } from './CartContext';
 
-function CartItem({ item, amount, onZero, onChange }) {
+function CartItem({ item, amount, onZero }) {
   const { name, price, id } = item;
   const [count, setCount] = useState(amount);
   const { removeItem } = useCart();
-
-  useEffect(() => {
-    console.log(count);
-    onChange(count);
-  }, [count]);
 
   return (
     <div className="flex justify-between py-5 border-b border-black items-center">
@@ -24,9 +19,6 @@ function CartItem({ item, amount, onZero, onChange }) {
         <h1 className="font-bold text-3xl">${(price * count).toFixed(2)}</h1>
         <Amount
           amount={count}
-          onChange={(newCount) => {
-            setCount(newCount);
-          }}
           onRemove={() => {
             setCount(0);
             removeItem(id);

@@ -4,7 +4,7 @@ import { AiOutlineMinus } from 'react-icons/ai';
 import { useCart } from './CartContext';
 import Button from './Button';
 
-function Amount({ amount, onChange, onRemove, id, className = '' }) {
+function Amount({ amount, onRemove, id, className = '' }) {
   const [count, setCount] = useState(amount);
   const { addOrRemoveItem } = useCart();
   useEffect(() => {
@@ -13,7 +13,6 @@ function Amount({ amount, onChange, onRemove, id, className = '' }) {
   function incCount(e) {
     e.preventDefault();
     setCount(count + 1);
-    onChange((count) => count + 1);
     addOrRemoveItem(id, count);
   }
 
@@ -21,7 +20,6 @@ function Amount({ amount, onChange, onRemove, id, className = '' }) {
     e.preventDefault();
     if (count > 1) {
       setCount(count - 1);
-      onChange((count) => count - 1);
     } else {
       onRemove();
     }
