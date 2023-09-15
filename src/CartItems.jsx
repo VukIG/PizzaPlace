@@ -1,43 +1,14 @@
-import { useState } from 'react';
 import Button from './Button';
 import CartItem from './CartItem';
+import { useCart } from './CartContext';
 
-function CartItems({ items, onChange }) {
-  const [list, setList] = useState(items);
-  function calculateTotal() {
-    let totalPrice = list.reduce((total, item) => {
-      return total + item.price * item.count;
-    }, 0);
-    return totalPrice.toFixed(2);
-  }
+function CartItems({ onChange }) {
+  const { cartItems, calculateTotal } = useCart();
 
-  function removeItem(name) {
-    if (list.length == 1) {
-      onChange();
-    }
-    setList((prevList) => prevList.filter((item) => item.name !== name));
-  }
-
-  function setCount(name, newCount) {
-    setList((prevList) => prevList.map((item) => (item.name === name ? { ...item, count: newCount } : item)));
-  }
   return (
     <div className="w-full h-[80vh]">
-      {list.map((item) => (
-        <CartItem
-          key={item.id}
-          item={item}
-          amount={item.count}
-          onZero={() => {
-            removeItem(item.name);
-          }}
-          onChange={(newCount) => {
-            if (newCount == 0) {
-              removeItem(item.name);
-            }
-            setCount(item.name, newCount);
-          }}
-        />
+      {cartItems.map((item) => (
+        <CartItem key={item.id} item={item} />
       ))}
 
       <div className="flex justify-between items-center mt-5">

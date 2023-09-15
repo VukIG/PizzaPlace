@@ -17,13 +17,16 @@ export const CartProvider = ({ children }) => {
     }, 0);
     return totalNum;
   }
+
   function removeItem(id) {
     const updatedCartItems = cartItems.filter((item) => item.id !== id);
     updateCartItems(updatedCartItems);
   }
+
   function clearCart() {
     setCartItems([]);
   }
+
   function addOrRemoveItem(id, count) {
     const index = cartItems.findIndex((item) => item.id === id);
     const item = data.find((item) => {
@@ -39,15 +42,41 @@ export const CartProvider = ({ children }) => {
     }
     updateCartItems([...cartItems]);
   }
+
   function grabItemInfo(id) {
     const item = data.find((item) => {
       return item.id === id;
     });
     return item;
   }
+
+  function setCount(id, newCount) {
+    setCartItems((prevList) => prevList.map((item) => (item.id === id ? { ...item, count: newCount } : item)));
+  }
+
+  function removeItem(id) {
+    setCartItems((prevList) => prevList.filter((item) => item.id !== id));
+  }
+
+  function calculateTotal() {
+    let totalPrice = cartItems.reduce((total, item) => {
+      return total + item.price * item.count;
+    }, 0);
+    return totalPrice.toFixed(2);
+  }
   return (
     <CartContext.Provider
-      value={{ cartItems, updateCartItems, numberOfItems, clearCart, removeItem, addOrRemoveItem, grabItemInfo }}
+      value={{
+        cartItems,
+        updateCartItems,
+        numberOfItems,
+        clearCart,
+        removeItem,
+        addOrRemoveItem,
+        grabItemInfo,
+        setCount,
+        calculateTotal,
+      }}
     >
       {children}
     </CartContext.Provider>

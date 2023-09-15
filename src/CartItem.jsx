@@ -3,8 +3,9 @@ import Amount from './Amount';
 import Button from './Button';
 import { useCart } from './CartContext';
 
-function CartItem({ item, amount, onZero }) {
-  const { name, price, id } = item;
+function CartItem({ item }) {
+  const { name, price, id, amount } = item;
+  console.log(item);
   const [count, setCount] = useState(amount);
   const { removeItem } = useCart();
 
@@ -19,12 +20,18 @@ function CartItem({ item, amount, onZero }) {
         <h1 className="font-bold text-3xl">${(price * count).toFixed(2)}</h1>
         <Amount
           amount={count}
+          id={id}
           onRemove={() => {
             setCount(0);
             removeItem(id);
           }}
         />
-        <Button className="h-12" onClick={onZero}>
+        <Button
+          className="h-12"
+          onClick={() => {
+            removeItem(id);
+          }}
+        >
           Remove
         </Button>
       </div>
