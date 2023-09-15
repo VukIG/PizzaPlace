@@ -22,7 +22,7 @@ function CartItem({ item }) {
           amount={count}
           id={id}
           onRemove={() => {
-            setCount(0);
+            setCount(id,0);
             removeItem(id);
           }}
         />

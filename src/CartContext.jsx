@@ -28,6 +28,7 @@ export const CartProvider = ({ children }) => {
   }
 
   function addOrRemoveItem(id, count) {
+    console.log(count);
     const index = cartItems.findIndex((item) => item.id === id);
     const item = data.find((item) => {
       return item.id === id;

@@ -5,25 +5,27 @@ import { useCart } from './CartContext';
 import Button from './Button';
 
 function Amount({ amount, id, className = '' }) {
-  const [count, setCount] = useState(amount);
-  const { addOrRemoveItem, removeItem } = useCart();
+  const { addOrRemoveItem, removeItem, setCount } = useCart();
   useEffect(() => {
-    addOrRemoveItem(id, count);
-  }, [count]);
+    addOrRemoveItem(id, amount);
+  }, [amount]);
   function incCount(e) {
     e.preventDefault();
-    setCount(count + 1);
-    addOrRemoveItem(id, count);
+    let newAmount=amount+1;
+    setCount(id,newAmount);
+    addOrRemoveItem(id, amount);
   }
 
   function decCount(e) {
     e.preventDefault();
-    if (count > 1) {
-      setCount(count - 1);
+    if (amount > 1) {
+      let newAmount=amount-1
+      setCount(id,newAmount);
     } else {
-      setCount(0);
+      setCount(id,0);
       removeItem(id);
     }
+    addOrRemoveItem(id,amount)
   }
 
   return (
@@ -31,8 +33,10 @@ function Amount({ amount, id, className = '' }) {
       <Button className="rounded-full w-12 h-12" onClick={decCount}>
         <AiOutlineMinus />
       </Button>
-      <span>{count}</span>
-      <Button className="rounded-full w-12 h-12" onClick={incCount}>
+      <span>{amount}</span>
+      <Button className="rounded-full w-12 h-12" onClick={
+        incCount
+      }>
         <PiPlusBold />
       </Button>
     </div>
