@@ -1,10 +1,7 @@
 import AmountButton from './AmountButton';
-import { useCart } from './CartContext';
 
 function MenuDetailsMain({ data }) {
-  const { cartItems } = useCart();
   const { name, description, id, price, imageUrl, toppings } = data;
-  const itemInCart = cartItems.find((item) => item.id === id);
 
   return (
     <div className="flex rounded gap-12 bg-white justify-center items-center">
@@ -24,11 +21,7 @@ function MenuDetailsMain({ data }) {
         </div>
         <div className="flex mt-10 justify-between w-full items-center">
           <h1 className="text-orange-400 text-xl font-bold">${price}</h1>
-          {itemInCart ? (
-            <AmountButton name={name} price={price} amount={itemInCart.count} id={id} />
-          ) : (
-            <AmountButton name={name} price={price} amount={0} id={id} />
-          )}
+          <AmountButton id={id} />
         </div>
       </div>
     </div>
