@@ -39,8 +39,16 @@ export const CartProvider = ({ children }) => {
     }
     updateCartItems([...cartItems]);
   }
+  function grabItemInfo(id) {
+    const item = data.find((item) => {
+      return item.id === id;
+    });
+    return item;
+  }
   return (
-    <CartContext.Provider value={{ cartItems, updateCartItems, numberOfItems, clearCart, removeItem, addOrRemoveItem }}>
+    <CartContext.Provider
+      value={{ cartItems, updateCartItems, numberOfItems, clearCart, removeItem, addOrRemoveItem, grabItemInfo }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -4,9 +4,14 @@ import Button from './Button';
 import { FaPlus } from 'react-icons/fa';
 import { useCart } from './CartContext';
 
-function AmountButton({ name, price, amount, id }) {
-  const { removeItem } = useCart();
-  const [count, setCount] = useState(amount);
+function AmountButton({ id }) {
+  const { removeItem, grabItemInfo, cartItems } = useCart();
+  const itemInfo = grabItemInfo(id);
+  const { name, price } = itemInfo || {};
+
+  const itemInCart = cartItems.find((item) => item.id === id);
+  const amount = itemInCart ? itemInCart.count : 0;
+  const [count, setCount] = useState(amount || 0);
 
   function changeCount(e) {
     e.preventDefault();
