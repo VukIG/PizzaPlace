@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Amount from './Amount';
 import Button from './Button';
 import { FaPlus } from 'react-icons/fa';
 import { useCart } from './CartContext';
 
 function AmountButton({ id }) {
-  const { removeItem, grabItemInfo, cartItems } = useCart();
+  const { removeItem, grabItemInfo, cartItems, onIncrement, onDecrement } = useCart();
   const itemInfo = grabItemInfo(id);
   const { name, price } = itemInfo || {};
-
   const itemInCart = cartItems.find((item) => item.id === id);
   const amount = itemInCart ? itemInCart.count : 0;
   const [count, setCount] = useState(amount || 0);
+
+  function incCount(e) {
+    e.preventDefault(); 
+    onIncrement(id,count);  
+  }
+
+  function decCount(e) {
+    e.preventDefault();
+    onDecrement(id,count);
+  }
+
 
   function changeCount(e) {
     e.preventDefault();
@@ -26,10 +36,9 @@ function AmountButton({ id }) {
           name={name}
           price={price}
           id={id}
-          onRemove={() => {
-            setCount(0);
-            removeItem(id);
-          }}
+          onIncrement={incCount}
+          onDecrement={decCount}
+
         />
       ) : (
         <Button onClick={changeCount}>
