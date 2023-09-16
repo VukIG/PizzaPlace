@@ -26,23 +26,24 @@ export const CartProvider = ({ children }) => {
   function clearCart() {
     setCartItems([]);
   }
-  function incCount(id,count) {
-    item = grabItemInfo(id);
+
+  function onIncrement(id, count) {
     const index = cartItems.findIndex((item) => item.id === id);
-    if( index === -1 ){
-      const {name,count,price}=item;
-      cartItems.push({ name, count, price, id });
-    }
-    else if (count !== 0){
-      cartItems[index].count = count+1;
+    if (index === -1) {
+      const item = grabItemInfo(id);
+      const { name, price } = item;
+      cartItems.push({ name, count: count + 1, price, id });
+    } else if (count !== 0) {
+      cartItems[index].count = count + 1;
     }
     updateCartItems([...cartItems]);
   }
-  function decCount(id,count) {
+
+  function onDecrement(id, count) {
     const index = cartItems.findIndex((item) => item.id === id);
-    if( count>1 ){
-      cartItems[index].count = count-1;
-    }else{
+    if (count > 1) {
+      cartItems[index].count = count - 1;
+    } else {
       cartItems.splice(index, 1);
     }
     updateCartItems([...cartItems]);
@@ -53,10 +54,6 @@ export const CartProvider = ({ children }) => {
       return item.id === id;
     });
     return item;
-  }
-
-  function removeItem(id) {
-    setCartItems((prevList) => prevList.filter((item) => item.id !== id));
   }
 
   function calculateTotal() {
@@ -73,8 +70,8 @@ export const CartProvider = ({ children }) => {
         numberOfItems,
         clearCart,
         removeItem,
-        incCount,
-        decCount,
+        onIncrement,
+        onDecrement,
         grabItemInfo,
         calculateTotal,
       }}
