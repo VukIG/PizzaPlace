@@ -1,5 +1,4 @@
 import AmountButton from './AmountButton';
-import { useCart } from './CartContext';
 
 function RandomItem({ data }) {
   const { name, description, id, price, imageUrl } = data;
