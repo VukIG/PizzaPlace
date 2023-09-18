@@ -1,30 +1,15 @@
-import { PiPlusBold } from "react-icons/pi";
-import { AiOutlineMinus } from "react-icons/ai";
-import Button from "./Button";
-import { useState } from "react";
+import { PiPlusBold } from 'react-icons/pi';
+import { AiOutlineMinus } from 'react-icons/ai';
+import Button from './Button';
 
-function Amount({ amount, onChange, className = "" }) {
-  const [count, setCount] = useState(amount);
-
-  function incCount(e) {
-    e.preventDefault();
-    setCount((count) => count + 1);
-    onChange(count + 1);
-  }
-
-  function decCount(e) {
-    e.preventDefault();
-    setCount((count) => count - 1);
-    onChange(count - 1);
-  }
-
+function Amount({ amount, onIncrement, onDecrement, className = '' }) {
   return (
-    <div className="flex justify-center align-middle gap-2 items-center">
-      <Button className="rounded-full w-12 h-12 " onClick={decCount}>
+    <div className={`flex justify-center align-middle gap-2 items-center ${className}`}>
+      <Button className="rounded-full w-12 h-12" onClick={onDecrement}>
         <AiOutlineMinus />
       </Button>
-      <span>{count}</span>
-      <Button className="rounded-full w-12 h-12 " onClick={incCount}>
+      <span>{amount}</span>
+      <Button className="rounded-full w-12 h-12" onClick={onIncrement}>
         <PiPlusBold />
       </Button>
     </div>

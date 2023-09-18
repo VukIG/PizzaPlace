@@ -1,28 +1,29 @@
-import { useState } from "react";
-import Amount from "./Amount";
-import Button from "./Button";
-import { FaPlus } from "react-icons/fa";
+// AmountButton.jsx
+import { FaPlus } from 'react-icons/fa';
+import { useCart } from './CartContext';
+import Amount from './Amount';
+import Button from './Button';
+function AmountButton({ id }) {
+  const { cartItems, onIncrement, onDecrement } = useCart();
+  const itemInCart = cartItems.find((item) => item.id === id);
+  const amount = itemInCart ? itemInCart.count : 0;
 
-function AmountButton() {
-  const [count, setCount] = useState(0);
-
-  function changeCount(e) {
+  function incCount(e) {
     e.preventDefault();
-    setCount((count) => count + 1);
+    onIncrement(id);
   }
+
+  function decCount(e) {
+    e.preventDefault();
+    onDecrement(id);
+  }
+
   return (
     <div className="mr-5">
-      {count > 0 ? (
-        <Amount
-          amount={count}
-          onChange={(count) => {
-            if (count == 0) {
-              setCount(0);
-            }
-          }}
-        />
+      {amount > 0 ? (
+        <Amount amount={amount} onIncrement={incCount} onDecrement={decCount} />
       ) : (
-        <Button onClick={changeCount}>
+        <Button onClick={incCount}>
           <div className="flex gap-3 align-middle justify-center items-center">
             <span>Add to cart</span>
             <FaPlus />
