@@ -10,12 +10,12 @@ function AmountButton({ id }) {
 
   function incCount(e) {
     e.preventDefault();
-    onIncrement(id, amount);
+    onIncrement(id);
   }
 
   function decCount(e) {
     e.preventDefault();
-    onDecrement(id, amount);
+    onDecrement(id);
   }
 
   return (

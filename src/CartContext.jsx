@@ -27,22 +27,22 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
   }
 
-  function onIncrement(id, count) {
+  function onIncrement(id) {
     const index = cartItems.findIndex((item) => item.id === id);
     if (index === -1) {
       const item = grabItemInfo(id);
       const { name, price } = item;
-      cartItems.push({ name, count: count + 1, price, id });
-    } else if (count !== 0) {
-      cartItems[index].count = count + 1;
+      cartItems.push({ name, count: 1, price, id });
+    } else if (cartItems[index].count !== 0) {
+      cartItems[index].count = cartItems[index].count + 1;
     }
     updateCartItems([...cartItems]);
   }
 
-  function onDecrement(id, count) {
+  function onDecrement(id) {
     const index = cartItems.findIndex((item) => item.id === id);
-    if (count > 1) {
-      cartItems[index].count = count - 1;
+    if (cartItems[index].count > 1) {
+      cartItems[index].count = cartItems[index].count - 1;
     } else {
       cartItems.splice(index, 1);
     }
