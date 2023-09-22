@@ -2,11 +2,11 @@ const initialState = {
   cartItems: JSON.parse(localStorage.getItem('items')) || [],
 };
 
-const cartReducer = (state = initialState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_CART_ITEMS':
       return { ...state, cartItems: action.payload };
-
+    
     case 'REMOVE_ITEM':
       const updatedCart = state.cartItems.filter((item) => item.id !== action.payload);
       return { ...state, cartItems: updatedCart };
@@ -33,10 +33,16 @@ const cartReducer = (state = initialState, action) => {
         state.cartItems.splice(decIndex, 1);
       }
       return { ...state, cartItems: [...state.cartItems] };
+    
+      case 'NUMBER_OF_ITEMS':
+        return state.cartItems != undefined ? state.cartItems.reduce((sum, item) => sum + item.count, 0) : 0;
+      
+      case 'CALCULATE_TOTAL':
+        return state.cartItems != undefined ? state.cartItems.reduce((sum, item) => sum + item.count * item.price, 0) : 0;
 
     default:
       return state;
   }
 };
 
-export default cartReducer;
+export default reducers;

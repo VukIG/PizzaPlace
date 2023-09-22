@@ -1,13 +1,15 @@
-import Logo from '../src/logo.svg';
-import Button from './Button';
-import Nav from './Nav';
-import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useCart } from './CartContext';
+import { FaShoppingCart } from 'react-icons/fa';
+import Logo from '../src/logo.svg'; 
+import Nav from './Nav';
+import Button from './Button';
+import { useSelector } from 'react-redux'; // Removed useDispatch
+import { numberOfItems } from './app/actions';
 
 function Header() {
-  const { numberOfItems } = useCart();
-  let number = numberOfItems();
+  // Use useSelector to access the Redux state
+  const itemNum = useSelector(state => numberOfItems(state)); // Assuming numberOfItems returns the item count
+
   return (
     <>
       <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">
@@ -17,9 +19,9 @@ function Header() {
         </div>
         <div>
           <div className="flex gap-3 justify-center items-center align-middle">
-            {number ? (
+            {itemNum !== 0 ? (
               <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
-                <div className="relative top-[-60%]">{number}</div>
+                <div className="relative top-[-60%]">{itemNum}</div>
               </div>
             ) : (
               <div className=""></div>

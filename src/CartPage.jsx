@@ -1,9 +1,10 @@
+import { clearCart } from './app/actions';
+import { useSelector, useDispatch} from 'react-redux';
 import CartItems from './CartItems';
 import EmptyCart from './EmptyCart';
-import { useCart } from './CartContext';
 function CardPage() {
-  const { cartItems, clearCart } = useCart();
-
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cartItems);
   return (
     <div className="p-5 h-screen">
       <div className="pt-5">
@@ -13,7 +14,7 @@ function CardPage() {
         <CartItems
           items={cartItems}
           onChange={() => {
-            clearCart();
+            dispatch(clearCart());
           }}
         />
       ) : (
@@ -22,5 +23,6 @@ function CardPage() {
     </div>
   );
 }
+
 
 export default CardPage;

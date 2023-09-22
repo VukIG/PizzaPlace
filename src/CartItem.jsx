@@ -1,19 +1,18 @@
 import Amount from './Amount';
 import Button from './Button';
-import { useCart } from './CartContext';
-
+import { incrementItem, decrementItem, removeItem } from './app/actions';
+import { useDispatch } from 'react-redux';
 function CartItem({ item }) {
   const { name, price, id, count } = item;
-  const { onIncrement, onDecrement } = useCart();
-  const { removeItem } = useCart();
+  const dispatch=useDispatch();
   function incCount(e) {
     e.preventDefault();
-    onIncrement(id, count);
+    dispatch(incrementItem(id));
   }
 
   function decCount(e) {
     e.preventDefault();
-    onDecrement(id, count);
+    dispatch(decrementItem(id));
   }
   return (
     <div className="flex justify-between py-5 border-b border-black items-center">
@@ -29,13 +28,13 @@ function CartItem({ item }) {
           onDecrement={decCount}
           amount={count}
           onRemove={() => {
-            removeItem(id);
+            dispatch(removeItem(id));
           }}
         />
         <Button
           className="h-12"
           onClick={() => {
-            removeItem(id);
+            dispatch(removeItem(id));
           }}
         >
           Remove

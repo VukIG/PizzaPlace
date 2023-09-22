@@ -1,21 +1,23 @@
 // AmountButton.jsx
 import { FaPlus } from 'react-icons/fa';
-import { useCart } from './CartContext';
 import Amount from './Amount';
 import Button from './Button';
+import { incrementItem,decrementItem } from './app/actions';
+import { useSelector , useDispatch} from 'react-redux';
+
 function AmountButton({ id }) {
-  const { cartItems, onIncrement, onDecrement } = useCart();
+  const cartItems = useSelector((state)=>state.cartItems);
   const itemInCart = cartItems.find((item) => item.id === id);
   const amount = itemInCart ? itemInCart.count : 0;
-
+  const dispatch = useDispatch();
   function incCount(e) {
     e.preventDefault();
-    onIncrement(id);
+    dispatch(incrementItem(id));
   }
 
   function decCount(e) {
     e.preventDefault();
-    onDecrement(id);
+    dispatch(decrementItem(id));
   }
 
   return (
