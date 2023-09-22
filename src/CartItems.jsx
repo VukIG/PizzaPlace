@@ -1,9 +1,9 @@
 import Button from './Button';
 import CartItem from './CartItem';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { calculateTotal } from './app/actions';
 function CartItems({ onChange }) {
-  const cartItems=useSelector((state)=>state.cartItems);
+  const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
   return (
     <div className="w-full h-[80vh]">

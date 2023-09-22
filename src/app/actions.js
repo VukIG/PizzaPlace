@@ -1,8 +1,3 @@
-export const updateCartItems = (newCartItems) => ({
-  type: 'UPDATE_CART_ITEMS',
-  payload: newCartItems,
-});
-
 export const removeItem = (id) => ({
   type: 'REMOVE_ITEM',
   payload: id,

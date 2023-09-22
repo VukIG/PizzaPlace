@@ -4,7 +4,7 @@ import { incrementItem, decrementItem, removeItem } from './app/actions';
 import { useDispatch } from 'react-redux';
 function CartItem({ item }) {
   const { name, price, id, count } = item;
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   function incCount(e) {
     e.preventDefault();
     dispatch(incrementItem(id));

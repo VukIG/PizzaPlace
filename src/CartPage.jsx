@@ -1,5 +1,5 @@
 import { clearCart } from './app/actions';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CartItems from './CartItems';
 import EmptyCart from './EmptyCart';
 function CardPage() {
@@ -23,6 +23,5 @@ function CardPage() {
     </div>
   );
 }
-
 
 export default CardPage;
