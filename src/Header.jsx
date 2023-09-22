@@ -3,12 +3,16 @@ import { FaShoppingCart } from 'react-icons/fa';
 import Logo from '../src/logo.svg';
 import Nav from './Nav';
 import Button from './Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import {numberOfItems } from './app/actions';
+import { useEffect } from 'react';
 function Header() {
   const dispatch = useDispatch();
-  
-  const itemNum = dispatch(numberOfItems());
+  const cartItems = useSelector((state)=>state.cartItems);
+  let itemNum = useSelector((state)=>state.totalItems);
+  useEffect(()=>{
+    dispatch(numberOfItems());
+  },[cartItems])
   return (
     <>
       <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">

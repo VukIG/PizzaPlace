@@ -52,13 +52,19 @@ const reducers = (state = initialState, action) => {
       return state;
 
     case 'NUMBER_OF_ITEMS':
-      const totalItems = state.cartItems.reduce((sum, item) => sum + item.count, 0);
-      console.log(totalItems)
-      return totalItems;
+      let totalItems = 0
+      if (state.cartItems.length>0) {
+        totalItems = state.cartItems.reduce((sum, item) => sum + item.count, 0);
+      }
+      return { ...state, totalItems };
+      
 
     case 'CALCULATE_TOTAL':
-      const totalPrice = state.cartItems.reduce((sum, item) => sum + item.count * item.price, 0);
-      return totalPrice;
+      let totalPrice = 0; 
+      if (state.cartItems.length > 0) {
+        totalPrice = state.cartItems.reduce((sum, item) => sum + item.count * item.price, 0).toFixed(2);
+      }
+      return { ...state, totalPrice };
 
     default:
       return state;
