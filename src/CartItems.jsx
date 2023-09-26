@@ -1,9 +1,11 @@
 import Button from './Button';
 import CartItem from './CartItem';
 import { useSelector } from 'react-redux';
+import {selectItems,selectTotalPrice } from './store/cartSlice';
 function CartItems({ onChange }) {
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  let totalPrice = useSelector((state)=>state.cart.totalPrice);
+  const cartItems = useSelector(selectItems);
+  console.log(cartItems);
+  let totalPrice = useSelector(selectTotalPrice);
   return (
     <div className="w-full h-[80vh]">
       {cartItems.map((item) => (

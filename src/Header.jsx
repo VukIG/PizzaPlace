@@ -4,10 +4,10 @@ import Logo from '../src/logo.svg';
 import Nav from './Nav';
 import Button from './Button';
 import { useSelector } from 'react-redux';
-
+import { selectTotalItems } from './store/cartSlice'
 function Header() {
-  let itemNum = useSelector((state)=>state.cart.totalItems);
-  
+  let itemNum = useSelector(selectTotalItems);
+  console.log(itemNum);
   return (
     <>
       <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">
@@ -17,7 +17,7 @@ function Header() {
         </div>
         <div>
           <div className="flex gap-3 justify-center items-center align-middle">
-            {itemNum !== 0 ? (
+            {itemNum.length !== 0 ? (
               <div className="text-xl bg-orange-200 text-orange-400 rounded-full p-3 h-9 ">
                 <div className="relative top-[-60%]">{itemNum}</div>
               </div>

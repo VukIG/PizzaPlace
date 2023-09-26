@@ -1,10 +1,10 @@
-import { clearCart } from './store/cartSlice';
+import { clearCart,selectItems } from './store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import CartItems from './CartItems';
 import EmptyCart from './EmptyCart';
 function CardPage() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector(selectItems);
   return (
     <div className="p-5 h-screen">
       <div className="pt-5">
