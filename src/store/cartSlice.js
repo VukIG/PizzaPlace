@@ -21,6 +21,8 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       localStorage.setItem('items', JSON.stringify([]));
       state.cartItems = [];
+      state.totalItems= 0;
+      state.totalPrice= 0;
     },
     incrementItem: (state, action) => {
       const incIndex = state.cartItems.findIndex((item) => item.id === action.payload);
