@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { selectTotalItems } from './store/cartSlice'
 function Header() {
   let itemNum = useSelector(selectTotalItems);
-  console.log(itemNum)
   return (
     <>
       <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">

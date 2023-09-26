@@ -4,7 +4,7 @@ import Amount from './Amount';
 import Button from './Button';
 import { incrementItem, decrementItem } from './store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import {selectItems } from './store/cartSlice';
+import { selectItems } from './store/cartSlice';
 
 function AmountButton({ id }) {
   const cartItems = useSelector(selectItems);

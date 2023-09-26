@@ -1,4 +1,4 @@
-import { clearCart,selectItems } from './store/cartSlice';
+import { clearCart, selectItems } from './store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import CartItems from './CartItems';
 import EmptyCart from './EmptyCart';

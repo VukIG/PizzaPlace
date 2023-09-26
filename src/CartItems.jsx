@@ -1,7 +1,7 @@
 import Button from './Button';
 import CartItem from './CartItem';
 import { useSelector } from 'react-redux';
-import {selectItems,selectTotalPrice } from './store/cartSlice';
+import { selectItems, selectTotalPrice } from './store/cartSlice';
 function CartItems({ onChange }) {
   const cartItems = useSelector(selectItems);
   let totalPrice = useSelector(selectTotalPrice);
