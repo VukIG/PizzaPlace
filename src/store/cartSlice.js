@@ -3,8 +3,6 @@ import data from '../mockData';
 
 const initialState = {
   items: JSON.parse(localStorage.getItem('items')) || [],
-  totalItems: 0,
-  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
