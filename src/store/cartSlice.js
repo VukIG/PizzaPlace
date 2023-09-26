@@ -59,18 +59,6 @@ const cartSlice = createSlice({
       state.totalItems = state.cartItems.reduce((sum, item) => sum + item.count, 0);
 
     },
-    numberOfItems: (state) => {
-      if (state.cartItems.length > 0) {
-        state.totalItems = state.cartItems.reduce((sum, item) => sum + item.count, 0);
-      }
-    },
-    calculateTotal: (state) => {
-      if (state.cartItems.length > 0) {
-        state.totalPrice = state.cartItems.reduce((sum, item) => sum + item.count * item.price, 0).toFixed(2);
-      } else{
-        state.totalItems = 0;
-      }
-    },
   },
 });
 
