@@ -1,10 +1,10 @@
 import Button from './Button';
 import CartItem from './CartItem';
-import { useSelector, useDispatch} from 'react-redux';
-import { calculateTotal } from './app/actions';
+import { useSelector } from 'react-redux';
+import { selectItems, selectTotalPrice } from './store/cartSlice';
 function CartItems({ onChange }) {
-  const cartItems=useSelector((state)=>state.cartItems);
-  const dispatch = useDispatch();
+  const cartItems = useSelector(selectItems);
+  let totalPrice = useSelector(selectTotalPrice);
   return (
     <div className="w-full h-[80vh]">
       {cartItems.map((item) => (
@@ -20,7 +20,7 @@ function CartItems({ onChange }) {
         </div>
         <div className="flex font-bold text-3xl gap-2">
           <h1>TOTAL:</h1>
-          <h1>${dispatch(calculateTotal())}</h1>
+          <h1>${totalPrice}</h1>
         </div>
       </div>
     </div>

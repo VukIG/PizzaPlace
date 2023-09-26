@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-import Logo from '../src/logo.svg'; 
+import Logo from '../src/logo.svg';
 import Nav from './Nav';
 import Button from './Button';
-import { useSelector } from 'react-redux'; // Removed useDispatch
-import { numberOfItems } from './app/actions';
-
+import { useSelector } from 'react-redux';
+import { selectTotalItems } from './store/cartSlice'
 function Header() {
-  // Use useSelector to access the Redux state
-  const itemNum = useSelector(state => numberOfItems(state)); // Assuming numberOfItems returns the item count
-
+  let itemNum = useSelector(selectTotalItems);
   return (
     <>
       <div className="flex px-[15px] py-[10px] bg-stone-800 justify-between items-center">

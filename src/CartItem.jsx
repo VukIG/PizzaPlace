@@ -1,10 +1,10 @@
 import Amount from './Amount';
 import Button from './Button';
-import { incrementItem, decrementItem, removeItem } from './app/actions';
+import { incrementItem, decrementItem, removeItem } from './store/cartSlice';
 import { useDispatch } from 'react-redux';
 function CartItem({ item }) {
   const { name, price, id, count } = item;
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   function incCount(e) {
     e.preventDefault();
     dispatch(incrementItem(id));
