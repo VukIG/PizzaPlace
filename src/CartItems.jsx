@@ -1,15 +1,9 @@
 import Button from './Button';
 import CartItem from './CartItem';
-import { useSelector, useDispatch } from 'react-redux';
-import { calculateTotal } from './app/actions';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 function CartItems({ onChange }) {
-  const cartItems = useSelector((state) => state.cartItems);
-  const dispatch = useDispatch();
-  let totalPrice = useSelector((state)=>state.totalPrice);
-  useEffect(()=>{
-    dispatch(calculateTotal());
-  },[cartItems])
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  let totalPrice = useSelector((state)=>state.cart.totalPrice);
   return (
     <div className="w-full h-[80vh]">
       {cartItems.map((item) => (

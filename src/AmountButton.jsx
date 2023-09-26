@@ -2,11 +2,11 @@
 import { FaPlus } from 'react-icons/fa';
 import Amount from './Amount';
 import Button from './Button';
-import { incrementItem, decrementItem } from './app/actions';
+import { incrementItem, decrementItem } from './store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function AmountButton({ id }) {
-  const cartItems = useSelector((state) => state.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const itemInCart = cartItems.find((item) => item.id === id);
   const amount = itemInCart ? itemInCart.count : 0;
   const dispatch = useDispatch();
