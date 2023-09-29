@@ -4,7 +4,7 @@ import Logo from '../src/logo.svg';
 import Nav from './Nav';
 import Button from './Button';
 import { useSelector } from 'react-redux';
-import { selectTotalItems } from './store/cartSlice'
+import { selectTotalItems } from './store/cartSlice';
 function Header() {
   let itemNum = useSelector(selectTotalItems);
   return (
