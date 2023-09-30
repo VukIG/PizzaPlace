@@ -14,6 +14,10 @@ const cartSlice = createSlice({
       localStorage.setItem('items', JSON.stringify(updatedCartRemove));
       state.items = updatedCartRemove;
     },
+    addItem: (state, action) => {
+      console.log(state, action);
+      data.push({});
+    },
     clearCart: (state) => {
       localStorage.setItem('items', JSON.stringify([]));
       state.items = [];
@@ -50,7 +54,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { removeItem, clearCart, incrementItem, decrementItem } = cartSlice.actions;
+export const { removeItem, clearCart, incrementItem, decrementItem, addItem } = cartSlice.actions;
 
 export const selectItems = (state) => state.cart.items;
 export const selectTotalItems = createSelector([selectItems], (items) =>

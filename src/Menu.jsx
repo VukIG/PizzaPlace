@@ -12,7 +12,7 @@ function Menu() {
   }
   return (
     <div className="w-full flex flex-col justify-start h-full bg-slate-100 p-5 mb-5 absolute">
-      {active ? <AddProduct onClose={changeModal} /> : <div className=""></div>}
+      {active && <AddProduct onClose={changeModal} />}
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-4xl  font-bold">Discover menu</h1>
         <Button className="flex gap-3 align-middle justify-center items-center" onClick={changeModal}>

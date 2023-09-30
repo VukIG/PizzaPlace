@@ -143,4 +143,6 @@ const data = [
   },
 ];
 
+export const length = () => data.length;
+
 export default data;

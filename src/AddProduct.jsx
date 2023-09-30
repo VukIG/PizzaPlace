@@ -1,14 +1,22 @@
+import { length } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
+import { addItem, selectItems } from './store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AddProduct({ onClose }) {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectItems);
+  const id = length() + 1;
+  console.log(id);
   const [product, setProduct] = useState({
     name: '',
     description: '',
     price: '',
     toppings: [],
-    count : 0,
+    count: 0,
+    id: id,
   });
 
   function handleInputChange(event) {
@@ -17,14 +25,17 @@ function AddProduct({ onClose }) {
   }
 
   function handleNewProduct(event) {
+    dispatch(addItem(product));
     event.preventDefault();
     console.log(product);
   }
 
   return (
-    <div className="w-screen h-screen absolute shadow flex flex-col align-middle items-center justify-center top-[-70px]">
-      <div className="w-1/2 h-[85vh] shadow bg-slate-100 rounded-xl">
-        <Button onClick={onClose} className="relative left-[93%] top-4 rounded-full py-4">
+    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center z-50">
+      <div className="absolute w-full h-full bg-slate-700 opacity-40" />
+
+      <div className="w-1/2 h-[85vh] shadow bg-slate-100 rounded-xl relative">
+        <Button onClick={onClose} className="absolute top-4 right-4 rounded-full py-4">
           <AiOutlineClose />
         </Button>
         <form className="flex flex-col align-middle justify-center m-10" onSubmit={handleNewProduct}>
