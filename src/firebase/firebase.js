@@ -1,5 +1,4 @@
-import data from '../mockData';
-import toppingsOptions from '../mockData';
+
 import firebase from 'firebase/app';
 import 'firebase/database';
 
