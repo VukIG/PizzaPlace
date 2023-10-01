@@ -17,8 +17,11 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       console.log(action);
       const { name, description, price, toppings, image, id } = action.payload;
-      const toppingsString = toppings.split("");
-      
+      let transformToppings = [];
+      transformToppings = toppings.map((item) => {
+        return { id: item.value, name: item.label };
+      });
+      console.log(toppings);
       // Convert the Base64 string to a Blob
       const byteCharacters = atob(image.split(',')[1]);
       const byteNumbers = new Array(byteCharacters.length);
@@ -34,8 +37,19 @@ const cartSlice = createSlice({
       // You can use `imageUrl` to display the image or do other operations
       // Don't forget to release the URL when it's no longer needed
       // URL.revokeObjectURL(imageUrl);
-
-      data.push({ name: name, description: description, price: price, toppings: toppingsString, imageUrl: imageUrl, id: id });
+      let newProduct = {
+        name: name,
+        description: description,
+        price: price,
+        toppings: transformToppings,
+        imageUrl: imageUrl,
+        id: id,
+        count: 0
+      }
+      data.push(newProduct);
+      const updatedCart = [...state.items,newProduct];
+      state.items = updatedCart;
+      localStorage.setItem('items',JSON.stringify(updatedCart))
     },
     clearCart: (state) => {
       localStorage.setItem('items', JSON.stringify([]));

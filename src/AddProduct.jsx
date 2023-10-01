@@ -1,23 +1,29 @@
 import { length } from './mockData';
+import { toppingsOptions } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
-import { addItem, selectItems } from './store/cartSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from './store/cartSlice';
+import { useDispatch } from 'react-redux';
+import Input from './Input';
+import Select from 'react-select';
 
 function AddProduct({ onClose }) {
   const dispatch = useDispatch();
-  const cartItems = useSelector(selectItems);
   const id = length() + 1;
-  console.log(id);
+  const [selectedToppings, setSelectedToppings] = useState([]);
   const [product, setProduct] = useState({
     name: '',
     description: '',
     price: '',
     toppings: [],
     image: '',
-    count: 0,
     id: id,
+  });
+
+  const toppingsLookup = {};
+  toppingsOptions.forEach((topping) => {
+    toppingsLookup[topping.id] = { value: topping.id, label: topping.name };
   });
 
   function handleInputChange(event) {
@@ -32,13 +38,20 @@ function AddProduct({ onClose }) {
     reader.onload = function () {
       setProduct({ ...product, image: reader.result });
     };
-
     reader.readAsDataURL(file);
+  }
+
+  function handleToppingsChange(selectedOptions) {
+    const selectedToppingValues = selectedOptions.map((option) => option.value);
+    setSelectedToppings(selectedToppingValues);
   }
 
   function handleNewProduct(event) {
     event.preventDefault();
-    dispatch(addItem(product));
+    const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
+
+    setProduct({ ...product, toppings: selectedToppingObjects });
+    dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
   }
 
   return (
@@ -50,44 +63,39 @@ function AddProduct({ onClose }) {
           <AiOutlineClose />
         </Button>
         <form className="flex flex-col align-middle justify-center m-10" onSubmit={handleNewProduct}>
-          <h1 className="text-4xl bold">Product name:</h1>
-          <input
-            className="h-12 py-7 px-3 my-4 text-xl"
-            placeholder="Enter product name..."
-            type="text"
-            name="name"
+          <Input
+            heading={'Product name:'}
+            placeholder={'Enter Product name...'}
+            type={'text'}
+            name={'name'}
             value={product.name}
             onChange={handleInputChange}
-            required
           />
-          <h1 className="text-4xl mt-3 bold">Product description:</h1>
-          <input
-            className="h-12 py-7 px-3 my-4 text-xl"
-            placeholder="Enter product description..."
-            type="text"
-            name="description"
+          <Input
+            heading={'Product description:'}
+            placeholder={'Enter product description...'}
+            type={'text'}
+            name={'description'}
             value={product.description}
             onChange={handleInputChange}
-            required
           />
-          <h1 className="text-4xl mt-3 bold">Price:</h1>
-          <input
-            className="h-12 py-7 px-3 my-4 text-xl"
-            placeholder="Enter product price"
-            type="number"
-            name="price"
+          <Input
+            heading={'Price:'}
+            placeholder={'Enter product price...'}
+            type={'number'}
+            name={'price'}
             value={product.price}
             onChange={handleInputChange}
-            required
           />
-          <h1 className="text-4xl mt-3 bold">Toppings:</h1>
-          <input
-            className="h-12 py-7 px-3 my-4 text-xl"
-            placeholder="Enter a list of toppings"
-            type="text"
+          <h1 className="text-4xl bold">Toppings:</h1>
+          <Select
+            className="h-12 py-7 px-3 my-4 text-xl w-full"
+            placeholder="Select toppings.."
+            value={selectedToppings.map((toppingId) => toppingsLookup[toppingId])}
             name="toppings"
-            value={product.toppings}
-            onChange={handleInputChange}
+            onChange={handleToppingsChange}
+            options={Object.values(toppingsLookup)}
+            isMulti
           />
           <h1 className="text-4xl my-3 bold">Image</h1>
           <label
@@ -97,6 +105,7 @@ function AddProduct({ onClose }) {
             Upload a file
           </label>
           <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
+
           <Button className="w-3/12 flex justify-center relative left-3/4" type="submit">
             Add a new Product
           </Button>
