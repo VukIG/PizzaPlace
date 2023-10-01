@@ -143,6 +143,34 @@ const data = [
   },
 ];
 
-export const length = () => data.length;
+export const toppingsOptions = [
+  { id: 1, name: 'Mozzarella' },
+  { id: 2, name: 'Tomato' },
+  { id: 3, name: 'Fresh Basil' },
+  { id: 4, name: 'Pepperoni' },
+  { id: 5, name: 'Sausage' },
+  { id: 6, name: 'Bacon' },
+  { id: 7, name: 'Feta Cheese' },
+  { id: 8, name: 'Black Olives' },
+  { id: 9, name: 'Sun-Dried Tomatoes' },
+  { id: 10, name: 'Red Onion' },
+  { id: 11, name: 'BBQ Sauce' },
+  { id: 12, name: 'Grilled Chicken' },
+  { id: 13, name: 'Jalapenos' },
+  { id: 14, name: 'Red Bell Peppers' },
+  { id: 15, name: 'Cheddar' },
+  { id: 16, name: 'Gouda' },
+  { id: 17, name: 'Parmesan' },
+  { id: 18, name: 'Pesto Sauce' },
+  { id: 19, name: 'Artichoke Hearts' },
+  { id: 20, name: 'Pine Nuts' },
+  { id: 21, name: 'Balsamic Glaze' },
+  { id: 22, name: 'Ham' },
+  { id: 23, name: 'Pineapple' },
+  { id: 24, name: 'Truffle Oil' },
+  { id: 25, name: 'Ricotta Cheese' },
+  { id: 26, name: 'Arugula' },
+];
 
+export const length = () => data.length;
 export default data;
