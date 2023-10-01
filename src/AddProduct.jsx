@@ -18,7 +18,6 @@ function AddProduct({ onClose }) {
     price: '',
     toppings: [],
     image: '',
-    count: 0,
     id: id,
   });
 
