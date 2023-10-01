@@ -15,6 +15,7 @@ function AddProduct({ onClose }) {
     description: '',
     price: '',
     toppings: [],
+    image: '',
     count: 0,
     id: id,
   });
@@ -24,10 +25,20 @@ function AddProduct({ onClose }) {
     setProduct({ ...product, [name]: value });
   }
 
+  function transformFile(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      setProduct({ ...product, image: reader.result });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
   function handleNewProduct(event) {
-    dispatch(addItem(product));
     event.preventDefault();
-    console.log(product);
+    dispatch(addItem(product));
   }
 
   return (
@@ -63,7 +74,7 @@ function AddProduct({ onClose }) {
           <input
             className="h-12 py-7 px-3 my-4 text-xl"
             placeholder="Enter product price"
-            type="text"
+            type="number"
             name="price"
             value={product.price}
             onChange={handleInputChange}
@@ -85,7 +96,7 @@ function AddProduct({ onClose }) {
           >
             Upload a file
           </label>
-          <input id="file" className="hidden" accept="image/*" type="file" />
+          <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
           <Button className="w-3/12 flex justify-center relative left-3/4" type="submit">
             Add a new Product
           </Button>
