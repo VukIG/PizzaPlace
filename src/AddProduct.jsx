@@ -140,10 +140,23 @@ function AddProduct({ onClose }) {
           <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
 
           <div className="mt-4 flex relative bottom-[-25px] justify-between ">
-            <Button className="w-1/6 flex justify-center" type="submit">
+            <Button onClick={handleNewProduct} className="w-1/6 flex justify-center" type="submit">
               Save 
             </Button>
-            <Button className="w-1/6 flex justify-center bg-white border hover:text-white border-orange-400 text-orange-400 " type="submit">
+            <Button
+              className="w-1/6 flex justify-center bg-white border hover:text-white border-orange-400 text-orange-400 " 
+              type="submit"
+              onClick={()=>{
+                setProduct({
+                  name: '',
+                  description: '',
+                  price: '',
+                  toppings: [],
+                  image: '',
+                  id: id,
+                })
+              }}
+            >
               Cancel
             </Button>
           </div>
