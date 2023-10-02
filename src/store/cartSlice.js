@@ -44,12 +44,12 @@ const cartSlice = createSlice({
         toppings: transformToppings,
         imageUrl: imageUrl,
         id: id,
-        count: 0
-      }
+        count: 0,
+      };
       data.push(newProduct);
-      const updatedCart = [...state.items,newProduct];
+      const updatedCart = [...state.items, newProduct];
       state.items = updatedCart;
-      localStorage.setItem('items',JSON.stringify(updatedCart))
+      localStorage.setItem('items', JSON.stringify(updatedCart));
     },
     clearCart: (state) => {
       localStorage.setItem('items', JSON.stringify([]));

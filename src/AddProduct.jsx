@@ -2,11 +2,11 @@ import { length } from './mockData';
 import { toppingsOptions } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
-import { BsFillImageFill } from 'react-icons/bs'
+import { BsFillImageFill } from 'react-icons/bs';
 import { useState } from 'react';
 import { addItem } from './store/cartSlice';
 import { useDispatch } from 'react-redux';
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
 
@@ -14,7 +14,7 @@ function AddProduct({ onClose }) {
   const dispatch = useDispatch();
   const id = length() + 1;
   const [selectedToppings, setSelectedToppings] = useState([]);
-  const [imageName, setImageName] = useState(''); 
+  const [imageName, setImageName] = useState('');
   const [product, setProduct] = useState({
     name: '',
     description: '',
@@ -59,14 +59,14 @@ function AddProduct({ onClose }) {
   }
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center z-50" >
+    <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center z-50">
       <div className="absolute w-full h-full bg-slate-700 opacity-40" />
 
       <div className="w-1/2 top-[-30px] shadow bg-slate-100 rounded-xl relative">
         <div className="flex mx-10 mt-10 justify-between">
-          <h1 className='text-3xl font-semibold'>Add Product</h1>
+          <h1 className="text-3xl font-semibold">Add Product</h1>
           <Button onClick={onClose} className="rounded-full py-4">
-            <AiOutlineClose className='text-xl font-bold' />
+            <AiOutlineClose className="text-xl font-bold" />
           </Button>
         </div>
         <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleNewProduct}>
@@ -105,48 +105,45 @@ function AddProduct({ onClose }) {
             isMulti
           />
           <h1 className="text-xl my-4 ">Image:</h1>
-          {
-            product.image ? (
-              <div className="flex flex-col justify-start">
-                  <div className="flex justify-start w-[100px] text-black items-center gap-3">
-                  <img src={product.image} alt="Image Preview" className="" />
-                  <span className="text-xl">{imageName}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <label
-                    htmlFor="file"
-                    className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
-                  >
-                  <BsFillImageFill className="text-xl mr-2" />
-                    <span className="text-xl">Upload an image</span>
-                  </label>
-                  <Button className='text-xl py-2 flex gap-1'>
-                    <FaTrash className='text-xl' />
-                    <span>Remove an image</span> 
-                    
-                  </Button>
-                </div>  
+          {product.image ? (
+            <div className="flex flex-col justify-start">
+              <div className="flex justify-start w-[100px] text-black items-center gap-3">
+                <img src={product.image} alt="Image Preview" className="" />
+                <span className="text-xl">{imageName}</span>
               </div>
-            ) : ( 
+              <div className="flex items-center gap-3">
                 <label
                   htmlFor="file"
                   className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
                 >
-                <BsFillImageFill className="text-xl mr-2" />
+                  <BsFillImageFill className="text-xl mr-2" />
                   <span className="text-xl">Upload an image</span>
                 </label>
-              )
-          }
+                <Button className="text-xl py-2 flex gap-1">
+                  <FaTrash className="text-xl" />
+                  <span>Remove an image</span>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <label
+              htmlFor="file"
+              className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
+            >
+              <BsFillImageFill className="text-xl mr-2" />
+              <span className="text-xl">Upload an image</span>
+            </label>
+          )}
           <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
 
           <div className="mt-4 flex relative bottom-[-25px] justify-between ">
             <Button onClick={handleNewProduct} className="w-1/6 flex justify-center" type="submit">
-              Save 
+              Save
             </Button>
             <Button
-              className="w-1/6 flex justify-center bg-white border hover:text-white border-orange-400 text-orange-400 " 
+              className="w-1/6 flex justify-center bg-white border hover:text-white border-orange-400 text-orange-400 "
               type="submit"
-              onClick={()=>{
+              onClick={() => {
                 setProduct({
                   name: '',
                   description: '',
@@ -154,7 +151,7 @@ function AddProduct({ onClose }) {
                   toppings: [],
                   image: '',
                   id: id,
-                })
+                });
               }}
             >
               Cancel
