@@ -64,7 +64,7 @@ function AddProduct({ onClose }) {
 
       <div className="w-1/2 h-[85vh] shadow bg-slate-100 rounded-xl relative">
         <div className="flex mx-10 mt-10 justify-between">
-          <h1 className='text-5xl font-semibold'>Add Product</h1>
+          <h1 className='text-3xl font-semibold'>Add Product</h1>
           <Button onClick={onClose} className="rounded-full py-4">
             <AiOutlineClose className='text-3xl font-bold' />
           </Button>
@@ -94,7 +94,7 @@ function AddProduct({ onClose }) {
             value={product.price}
             onChange={handleInputChange}
           />
-          <h1 className="text-3xl ">Toppings:</h1>
+          <h1 className="text-xl ">Toppings:</h1>
           <Select
             className="h-12 py-4 mb-4 text-xl w-full"
             placeholder="Select toppings.."
@@ -104,7 +104,7 @@ function AddProduct({ onClose }) {
             options={Object.values(toppingsLookup)}
             isMulti
           />
-          <h1 className="text-3xl my-4 ">Image:</h1>
+          <h1 className="text-xl my-4 ">Image:</h1>
           {
             product.image ? (
               <div className="flex flex-col justify-start">
