@@ -66,7 +66,7 @@ function AddProduct({ onClose }) {
         <div className="flex mx-10 mt-10 justify-between">
           <h1 className='text-3xl font-semibold'>Add Product</h1>
           <Button onClick={onClose} className="rounded-full py-4">
-            <AiOutlineClose className='text-3xl font-bold' />
+            <AiOutlineClose className='text-xl font-bold' />
           </Button>
         </div>
         <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleNewProduct}>
