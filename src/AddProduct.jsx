@@ -62,7 +62,7 @@ function AddProduct({ onClose }) {
     <div className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center z-50">
       <div className="absolute w-full h-full bg-slate-700 opacity-40" />
 
-      <div className="w-1/2 h-[85vh] shadow bg-slate-100 rounded-xl relative">
+      <div className="w-1/2 h-[80vh] top-[-30px] shadow bg-slate-100 rounded-xl relative">
         <div className="flex mx-10 mt-10 justify-between">
           <h1 className='text-3xl font-semibold'>Add Product</h1>
           <Button onClick={onClose} className="rounded-full py-4">
@@ -139,7 +139,7 @@ function AddProduct({ onClose }) {
           }
           <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
 
-          <div className="mt-2 flex justify-between ">
+          <div className="mt-4 flex relative bottom-[-25px] justify-between ">
             <Button className="w-1/6 flex justify-center" type="submit">
               Save 
             </Button>
