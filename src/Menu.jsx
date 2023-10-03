@@ -9,8 +9,7 @@ import { createPortal } from 'react-dom';
 
 function Menu() {
   const [active, setActive] = useState(false);
-  function changeModal(e) {
-    e.preventDefault();
+  function changeModal() {
     setActive((prev) => !prev);
   }
   return (

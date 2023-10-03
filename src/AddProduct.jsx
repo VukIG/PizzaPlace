@@ -9,12 +9,16 @@ import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
+import { render } from 'react-dom';
 
 function AddProduct({ onClose }) {
   const dispatch = useDispatch();
   const id = length() + 1;
   const [selectedToppings, setSelectedToppings] = useState([]);
-  const [imageName, setImageName] = useState('');
+  const [image,setImage] = useState({
+    name: '',
+    data:'',
+  })
   const [product, setProduct] = useState({
     name: '',
     description: '',
@@ -40,7 +44,10 @@ function AddProduct({ onClose }) {
 
     reader.onload = function () {
       setProduct({ ...product, image: reader.result });
-      setImageName(file.name);
+      setImage({
+        name: file.name,
+        data: render.result,
+      });
     };
     reader.readAsDataURL(file);
   }
@@ -53,9 +60,9 @@ function AddProduct({ onClose }) {
   function handleNewProduct(event) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-
-    setProduct({ ...product, toppings: selectedToppingObjects });
     dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
+    onClose();
+    setProduct({...product, id:id+1})
   }
 
   return (
@@ -109,7 +116,7 @@ function AddProduct({ onClose }) {
             <div className="flex flex-col justify-start">
               <div className="flex justify-start w-[100px] text-black items-center gap-3">
                 <img src={product.image} alt="Image Preview" className="" />
-                <span className="text-xl">{imageName}</span>
+                <span className="text-xl">{image.name}</span>
               </div>
               <div className="flex items-center gap-3">
                 <label
@@ -119,7 +126,15 @@ function AddProduct({ onClose }) {
                   <BsFillImageFill className="text-xl mr-2" />
                   <span className="text-xl">Upload an image</span>
                 </label>
-                <Button className="text-xl py-2 flex gap-1">
+                <Button className="text-xl py-2 flex gap-1" onClick={(e)=>{
+                  e.preventDefault();
+                  setImage({
+                    name:'',
+                    data:''
+                  });
+                  setProduct({ ...product, image: '' });
+                  console.log(product.image);
+                }}>
                   <FaTrash className="text-xl" />
                   <span>Remove an image</span>
                 </Button>
