@@ -21,7 +21,6 @@ const cartSlice = createSlice({
       transformToppings = toppings.map((item) => {
         return { id: item.value, name: item.label };
       });
-      console.log(toppings);
       // Convert the Base64 string to a Blob
       const byteCharacters = atob(image.split(',')[1]);
       const byteNumbers = new Array(byteCharacters.length);
@@ -47,9 +46,6 @@ const cartSlice = createSlice({
         count: 0,
       };
       data.push(newProduct);
-      const updatedCart = [...state.items, newProduct];
-      state.items = updatedCart;
-      localStorage.setItem('items', JSON.stringify(updatedCart));
     },
     clearCart: (state) => {
       localStorage.setItem('items', JSON.stringify([]));
