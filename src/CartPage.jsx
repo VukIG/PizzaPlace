@@ -5,7 +5,6 @@ import EmptyCart from './EmptyCart';
 function CardPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItems);
-  console.log(cartItems);
   return (
     <div className="p-5 h-screen">
       <div className="pt-5">

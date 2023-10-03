@@ -15,7 +15,6 @@ const cartSlice = createSlice({
       state.items = updatedCartRemove;
     },
     addItem: (state, action) => {
-      console.log(action);
       const { name, description, price, toppings, image, id } = action.payload;
       let transformToppings = [];
       transformToppings = toppings.map((item) => {
