@@ -173,4 +173,12 @@ export const toppingsOptions = [
 ];
 
 export const length = () => data.length;
+
+const toppingsLookup = toppingsOptions.reduce((acc, topping) => {
+  acc[topping.id] = { value: topping.id, label: topping.name };
+  return acc;
+}, {});
+
+export {toppingsLookup}
+
 export default data;

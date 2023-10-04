@@ -1,16 +1,14 @@
 import { length } from './mockData';
-import { toppingsOptions } from './mockData';
+import { toppingsLookup } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { addItem } from './store/cartSlice';
 import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
-
-const toppingsLookup = {};
 
 function AddProduct({ onClose }) {
   const dispatch = useDispatch();
@@ -20,6 +18,7 @@ function AddProduct({ onClose }) {
     name: '',
     data: '',
   });
+  const imageRef = useRef(null);
   const [product, setProduct] = useState({
     name: '',
     description: '',
@@ -29,9 +28,6 @@ function AddProduct({ onClose }) {
     id: id,
   });
 
-  toppingsOptions.forEach((topping) => {
-    toppingsLookup[topping.id] = { value: topping.id, label: topping.name };
-  });
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -41,7 +37,7 @@ function AddProduct({ onClose }) {
   function transformFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
-
+    console.log(event);
     reader.onload = function () {
       setProduct({ ...product, image: reader.result });
       setImage({
@@ -132,6 +128,7 @@ function AddProduct({ onClose }) {
                     data: '',
                   });
                   setProduct({ ...product, image: '' });
+                  imageRef.current.value="";
                 }}
               >
                 <FaTrash className="text-xl" />
@@ -148,7 +145,7 @@ function AddProduct({ onClose }) {
             <span className="text-xl">Upload an image</span>
           </label>
         )}
-        <input id="file" className="hidden" accept="image/*" type="file" onChange={transformFile} />
+        <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
 
         <div className="mt-4 flex relative bottom-[-25px] justify-between ">
           <Button onClick={handleNewProduct} className="w-1/6 flex justify-center" type="submit">
@@ -157,16 +154,7 @@ function AddProduct({ onClose }) {
           <Button
             className="w-1/6 flex justify-center bg-white border hover:text-white border-orange-400 text-orange-400 "
             type="submit"
-            onClick={() => {
-              setProduct({
-                name: '',
-                description: '',
-                price: '',
-                toppings: [],
-                image: '',
-                id: id,
-              });
-            }}
+            onClick={onClose}
           >
             Cancel
           </Button>
