@@ -4,13 +4,14 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState,useRef } from 'react';
-import { addItem } from './store/cartSlice';
+import { addItem } from './store/menuSlice';
 import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
 
 function AddProduct({ onClose }) {
+  console.log(addItem);
   const dispatch = useDispatch();
   const id = length() + 1;
   const [selectedToppings, setSelectedToppings] = useState([]);

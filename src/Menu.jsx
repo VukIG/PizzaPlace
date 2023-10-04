@@ -1,6 +1,6 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
-import data from './mockData';
+import { menuData } from './store/menuSlice';
 import { PiPlusBold } from 'react-icons/pi';
 import { useState } from 'react';
 import AddModal from './AddModal';
@@ -19,7 +19,7 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {data.map((element) => {
+      {menuData.map((element) => {
         return <MenuItem key={element.id} data={element} />;
       })}
     </div>
