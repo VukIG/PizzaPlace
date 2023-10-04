@@ -1,11 +1,12 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
-import { menuData } from './store/menuSlice';
 import { PiPlusBold } from 'react-icons/pi';
 import { useState } from 'react';
 import AddModal from './AddModal';
-
+import { menuData } from './store/menuSlice';
+import { useSelector } from 'react-redux';
 function Menu() {
+  const data = useSelector(menuData);
   const [active, setActive] = useState(false);
   function changeModal() {
     setActive((prev) => !prev);
@@ -19,7 +20,7 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {menuData.map((element) => {
+      {data.map((element) => {
         return <MenuItem key={element.id} data={element} />;
       })}
     </div>
