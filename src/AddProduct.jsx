@@ -36,7 +36,6 @@ function AddProduct({ onClose }) {
   function transformFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
-    console.log(event);
     reader.onload = function () {
       setProduct({ ...product, image: reader.result });
       setImage({

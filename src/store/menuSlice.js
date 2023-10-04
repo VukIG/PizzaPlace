@@ -40,7 +40,6 @@ const menuSlice = createSlice({
         count: 0,
       };
       state.data = [...state.data, newProduct];
-      console.log(state.data);
     },
   },
 });
