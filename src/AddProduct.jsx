@@ -94,7 +94,7 @@ function AddProduct({ onClose }) {
           value={product.price}
           onChange={handleInputChange}
         />
-        <h1 className="text-xl ">Toppings:</h1>
+        <label htmlFor='toppings' className="text-xl ">Toppings:</label>
         <Select
           className="h-12 py-4 mb-4 text-xl w-full"
           placeholder="Select toppings.."
