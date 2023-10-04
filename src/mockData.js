@@ -179,6 +179,6 @@ const toppingsLookup = toppingsOptions.reduce((acc, topping) => {
   return acc;
 }, {});
 
-export {toppingsLookup}
+export { toppingsLookup };
 
 export default data;

@@ -3,7 +3,7 @@ import { toppingsLookup } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
-import { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import { addItem } from './store/menuSlice';
 import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
@@ -11,7 +11,6 @@ import Input from './Input';
 import Select from 'react-select';
 
 function AddProduct({ onClose }) {
-  console.log(addItem);
   const dispatch = useDispatch();
   const id = length() + 1;
   const [selectedToppings, setSelectedToppings] = useState([]);
@@ -28,7 +27,6 @@ function AddProduct({ onClose }) {
     image: '',
     id: id,
   });
-
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -95,7 +93,9 @@ function AddProduct({ onClose }) {
           value={product.price}
           onChange={handleInputChange}
         />
-        <label htmlFor='toppings' className="text-xl ">Toppings:</label>
+        <label htmlFor="toppings" className="text-xl ">
+          Toppings:
+        </label>
         <Select
           className="h-12 py-4 mb-4 text-xl w-full"
           placeholder="Select toppings.."
@@ -129,7 +129,7 @@ function AddProduct({ onClose }) {
                     data: '',
                   });
                   setProduct({ ...product, image: '' });
-                  imageRef.current.value="";
+                  imageRef.current.value = '';
                 }}
               >
                 <FaTrash className="text-xl" />
