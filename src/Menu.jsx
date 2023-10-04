@@ -12,7 +12,7 @@ function Menu() {
     setActive((prev) => !prev);
   }
   return (
-    <div className="w-full flex flex-col justify-start h-full bg-stone-100 p-5 mb-5 absolute">
+    <div className="w-full flex flex-col justify-start  bg-stone-100 p-5 mb-5 absolute">
       <AddModal onChange={changeModal} active={active} />
       <div className="flex justify-between items-center mb-10">
         <h1 className="text-4xl  font-bold">Discover menu</h1>
