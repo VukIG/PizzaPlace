@@ -9,8 +9,11 @@ import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 function AddProduct({ onClose }) {
+  const animatedComponents = makeAnimated();
+
   const dispatch = useDispatch();
   const id = length() + 1;
   const [selectedToppings, setSelectedToppings] = useState([]);
@@ -100,6 +103,7 @@ function AddProduct({ onClose }) {
           placeholder="Select toppings.."
           value={selectedToppings.map((toppingId) => toppingsLookup[toppingId])}
           name="toppings"
+          components={animatedComponents}
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
           isMulti

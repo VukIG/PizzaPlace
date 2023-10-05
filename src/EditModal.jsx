@@ -7,11 +7,13 @@ import Button from './Button';
 import Select from 'react-select';
 import { useState, useRef } from 'react';
 import { toppingsLookup } from './mockData';
+import makeAnimated from 'react-select/animated';
 
 function EditModal({ onClose, data }) {
+  const animatedComponents = makeAnimated();
   const imageRef = useRef(null);
   const dispatch = useDispatch();
-  const { name, description, id, price,toppings } = data;
+  const { name, description, id, price, toppings } = data;
   const [product, setProduct] = useState({
     name: name,
     description: description,
@@ -20,9 +22,7 @@ function EditModal({ onClose, data }) {
     image: '',
     id: id,
   });
-  const [selectedToppings, setSelectedToppings] = useState(
-    toppings.map((topping)=>toppingsLookup[topping.id])
-  );
+  const [selectedToppings, setSelectedToppings] = useState(toppings.map((topping) => toppingsLookup[topping.id]));
   function handleInputChange(event) {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
@@ -72,11 +72,13 @@ function EditModal({ onClose, data }) {
         </label>
         <Select
           className="h-12 py-4 mb-4 text-xl w-full"
-          value={selectedToppings}
+          defaultValue={selectedToppings}
           name="toppings"
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
           isMulti
+          components={animatedComponents}
+          key={data.id}
         />
         <Button
           className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle"

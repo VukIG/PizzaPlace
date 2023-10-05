@@ -23,10 +23,10 @@ const menuSlice = createSlice({
         byteNumbers[i] = byteCharacters.charCodeAt(i);
       }
       const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: 'image/png' }); 
+      const blob = new Blob([byteArray], { type: 'image/png' });
 
       const imageUrl = URL.createObjectURL(blob);
-      
+
       let newProduct = {
         name: name,
         description: description,
@@ -38,8 +38,8 @@ const menuSlice = createSlice({
       };
       state.data = [...state.data, newProduct];
     },
-    editItem: (state,action) => {
-      console.log(state,action);
+    editItem: (state, action) => {
+      console.log(state, action);
       const { name, description, price, toppings, image, id } = action.payload;
       let transformToppings = [];
       transformToppings = toppings.map((item) => {
@@ -52,10 +52,10 @@ const menuSlice = createSlice({
         byteNumbers[i] = byteCharacters.charCodeAt(i);
       }
       const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: 'image/png' }); 
+      const blob = new Blob([byteArray], { type: 'image/png' });
 
       const imageUrl = URL.createObjectURL(blob);
-      
+
       let newProduct = {
         name: name,
         description: description,
@@ -67,9 +67,9 @@ const menuSlice = createSlice({
       };
       const updatedProducts = state.data.filter((item) => item.id !== id);
       state.editedProduct = newProduct;
-      state.data = [...updatedProducts,newProduct];
+      state.data = [...updatedProducts, newProduct];
       console.log(state.data);
-    }
+    },
   },
 });
 export const { addItem, editItem } = menuSlice.actions;

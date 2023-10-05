@@ -18,18 +18,14 @@ function AddModal({ active, edit, onChange, data }) {
             <div className="absolute w-full h-full bg-slate-700 opacity-40" />
             <AnimatePresence>
               <motion.div
-                  className="modal"
-                  variants={modalVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  key="modal"
-                >
-                {active ? (
-                  <AddProduct onClose={onChange} />
-                ) : (
-                  <EditModal onClose={onChange} data={data} />
-                )}
+                className="modal"
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                key="modal"
+              >
+                {active ? <AddProduct onClose={onChange} /> : <EditModal onClose={onChange} data={data} />}
               </motion.div>
             </AnimatePresence>
           </div>,
