@@ -1,5 +1,5 @@
 import AmountButton from './AmountButton';
-
+import { FiEdit } from 'react-icons/fi';
 function MenuDetailsMain({ data }) {
   const { name, description, id, price, imageUrl, toppings } = data;
 
@@ -8,7 +8,10 @@ function MenuDetailsMain({ data }) {
       <img className="rounded m-5 h-80 object-cover w-full" src={imageUrl} />
       <div className="flex flex-col justify-center w-full ">
         <div className="flex flex-col justify-start ">
-          <h1 className="text-4xl font-bold pb-3">{name}</h1>
+          <div className="flex gap-3 items-center align-middle font-bold pb-3">
+            <h1 className="text-4xl">{name}</h1>
+            <FiEdit className='text-slate-500 text-xl cursor-pointer hover:text-black duration-75'/>
+          </div>
           <p>{description}</p>
           <div className="mt-7">
             <h1 className="font-bold">Topings:</h1>
