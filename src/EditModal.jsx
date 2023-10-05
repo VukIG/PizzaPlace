@@ -7,13 +7,11 @@ import Button from './Button';
 import Select from 'react-select';
 import { useState, useRef } from 'react';
 import { toppingsLookup } from './mockData';
-import makeAnimated from 'react-select/animated';
 
 function EditModal({ onClose, data }) {
-  const animatedComponents = makeAnimated();
   const imageRef = useRef(null);
   const dispatch = useDispatch();
-  const { name, description, id, price, toppings } = data;
+  const { name, description, id, price, toppings,imageUrl } = data;
   const [product, setProduct] = useState({
     name: name,
     description: description,
@@ -42,10 +40,17 @@ function EditModal({ onClose, data }) {
     setSelectedToppings(selectedToppingValues);
   }
 
-  function handleNewProduct(event) {
+  function handleChangedProduct(event) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-    dispatch(editItem({ ...product, toppings: selectedToppingObjects }));
+    let catchUndefined = selectedToppingObjects.some((item) => item === undefined);
+    console.log(product.image)
+    if (!product.image) 
+      dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+    if (catchUndefined) 
+      dispatch(editItem({ ...product, toppings: selectedToppings }));
+    else
+      dispatch(editItem({ ...product, toppings: selectedToppingObjects }));
     onClose();
     setProduct({ ...product, id: id });
   }
@@ -57,7 +62,7 @@ function EditModal({ onClose, data }) {
           <AiOutlineClose className="text-xl font-bold" />
         </Button>
       </div>
-      <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleNewProduct}>
+      <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleChangedProduct}>
         <Input heading={'Name:'} type={'text'} name={'name'} value={product.name} onChange={handleInputChange} />
         <Input
           heading={'Description:'}
@@ -71,13 +76,12 @@ function EditModal({ onClose, data }) {
           Toppings:
         </label>
         <Select
-          className="h-12 py-4 mb-4 text-xl w-full"
+          className=" py-4 mb-4 text-xl w-full"
           defaultValue={selectedToppings}
           name="toppings"
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
           isMulti
-          components={animatedComponents}
           key={data.id}
         />
         <Button
@@ -92,7 +96,7 @@ function EditModal({ onClose, data }) {
         <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
 
         <div className="mt-4 flex relative bottom-[-25px] justify-between ">
-          <Button onClick={handleNewProduct} className="w-1/6 flex justify-center" type="submit">
+          <Button onClick={handleChangedProduct} className="w-1/6 flex justify-center" type="submit">
             Save
           </Button>
           <Button
