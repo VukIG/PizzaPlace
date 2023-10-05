@@ -1,5 +1,6 @@
 import RandomItem from './RandomItem';
-import data from './mockData';
+import { useSelector } from 'react-redux';
+import { menuData } from './store/menuSlice';
 
 function shuffleArray(data, id) {
   let newData = data.filter((item) => item.id != id);
@@ -9,7 +10,9 @@ function shuffleArray(data, id) {
   }
   return newData;
 }
+
 function RandomList(id) {
+  const data = useSelector(menuData);
   function threeHeaders() {
     const randomList = shuffleArray(data, id);
     let randomItems = [];

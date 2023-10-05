@@ -11,16 +11,18 @@ import { toppingsLookup } from './mockData';
 function EditModal({ onClose, data }) {
   const imageRef = useRef(null);
   const dispatch = useDispatch();
-  const { name, description, id, price } = data;
+  const { name, description, id, price,toppings } = data;
   const [product, setProduct] = useState({
     name: name,
     description: description,
     price: price,
-    toppings: [],
+    toppings: toppings,
     image: '',
     id: id,
   });
-  const [selectedToppings, setSelectedToppings] = useState([]);
+  const [selectedToppings, setSelectedToppings] = useState(
+    toppings.map((topping)=>toppingsLookup[topping.id])
+  );
   function handleInputChange(event) {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
@@ -70,7 +72,7 @@ function EditModal({ onClose, data }) {
         </label>
         <Select
           className="h-12 py-4 mb-4 text-xl w-full"
-          value={selectedToppings.map((toppingId) => toppingsLookup[toppingId])}
+          value={selectedToppings}
           name="toppings"
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
