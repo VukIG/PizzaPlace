@@ -4,6 +4,7 @@ import Menu from './Menu';
 import AppLayout from './ui/AppLayout';
 import MenuDetails from './MenuDetails';
 import CartPage from './CartPage';
+import NotFound from './NotFound';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/menu/details/:id" element={<MenuDetails />} />
           <Route path="/menu/card" element={<CartPage />} />
         </Route>
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

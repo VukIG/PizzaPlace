@@ -1,9 +1,25 @@
 import MenuItem from './MenuItem';
-import data from './mockData';
+import Button from './Button';
+import { PiPlusBold } from 'react-icons/pi';
+import { useState } from 'react';
+import AddModal from './AddModal';
+import { menuData } from './store/menuSlice';
+import { useSelector } from 'react-redux';
 function Menu() {
+  const data = useSelector(menuData);
+  const [active, setActive] = useState(false);
+  function changeModal() {
+    setActive((prev) => !prev);
+  }
   return (
-    <div className="w-full flex flex-col justify-start h-full bg-slate-200 p-5 mb-5">
-      <h1 className="text-4xl mb-10 font-bold">Discover menu</h1>
+    <div className="w-full flex flex-col justify-start  bg-stone-100 p-5 mb-5 absolute">
+      <AddModal onChange={changeModal} active={active} />
+      <div className="flex justify-between items-center mb-10">
+        <h1 className="text-4xl  font-bold">Discover menu</h1>
+        <Button className="flex gap-3 align-middle justify-center items-center" onClick={changeModal}>
+          <span>Add a product</span> <PiPlusBold />
+        </Button>
+      </div>
       {data.map((element) => {
         return <MenuItem key={element.id} data={element} />;
       })}
