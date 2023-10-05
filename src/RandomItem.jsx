@@ -16,7 +16,7 @@ function RandomItem({ data }) {
 
   return (
     <>
-      <AddModal onChange={changeModal} edit={edit} data={data} />
+      <AddModal onChange={changeModal} edit={edit} data={trueData} />
       <div className="flex gap-5 bg-white flex-col p-5 w-full rounded">
         <img className="w-full object-cover rounded h-72" src={imageUrl} alt="" />
         <div className="py-3">
