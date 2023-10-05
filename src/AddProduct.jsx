@@ -112,15 +112,15 @@ function AddProduct({ onClose }) {
           </div>
           <div className="flex items-center gap-3">
             <input type="file" accept="image/*" style={{ display: 'none' }} ref={imageRef} onChange={transformFile} />
-            <button
-              className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
+            <Button
+              className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle"
               onClick={() => {
-                imageRef.current.click(); // Trigger the file input click event
+                imageRef.current.click(); 
               }}
             >
               <BsFillImageFill className="text-xl mr-2" />
               <span className="text-xl">Upload an image</span>
-            </button>
+            </Button>
             {product.image && (
               <Button
                 className="text-xl py-2 flex gap-1"
