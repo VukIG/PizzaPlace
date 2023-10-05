@@ -17,8 +17,7 @@ function AddModal({ active, edit, onChange, data }) {
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
             <div className="absolute w-full h-full bg-slate-700 opacity-40" />
             <AnimatePresence>
-              {active ? (
-                <motion.div
+              <motion.div
                   className="modal"
                   variants={modalVariants}
                   initial="hidden"
@@ -26,20 +25,12 @@ function AddModal({ active, edit, onChange, data }) {
                   exit="exit"
                   key="modal"
                 >
+                {active ? (
                   <AddProduct onClose={onChange} />
-                </motion.div>
-              ) : (
-                <motion.div
-                  className="modal"
-                  variants={modalVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  key="modal"
-                >
+                ) : (
                   <EditModal onClose={onChange} data={data} />
-                </motion.div>
-              )}
+                )}
+              </motion.div>
             </AnimatePresence>
           </div>,
           document.body
