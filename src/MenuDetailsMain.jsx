@@ -10,7 +10,7 @@ function MenuDetailsMain({ data }) {
         <div className="flex flex-col justify-start ">
           <div className="flex gap-3 items-center align-middle font-bold pb-3">
             <h1 className="text-4xl">{name}</h1>
-            <FiEdit className='text-slate-500 text-xl cursor-pointer hover:text-black duration-75'/>
+            <FiEdit className="text-slate-500 text-xl cursor-pointer hover:text-black duration-75" />
           </div>
           <p>{description}</p>
           <div className="mt-7">

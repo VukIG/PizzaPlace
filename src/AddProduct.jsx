@@ -115,7 +115,7 @@ function AddProduct({ onClose }) {
             <Button
               className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle"
               onClick={() => {
-                imageRef.current.click(); 
+                imageRef.current.click();
               }}
             >
               <BsFillImageFill className="text-xl mr-2" />
