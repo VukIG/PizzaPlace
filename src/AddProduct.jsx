@@ -106,49 +106,40 @@ function AddProduct({ onClose }) {
         />
         <h1 className="text-xl my-4 ">Image:</h1>
         <div className="flex flex-col justify-start">
-  <div className="flex justify-start w-[100px] text-black items-center gap-3">
-    {product.image && (
-      <img src={product.image} alt="Image Preview" className="" />
-    )}
-    {product.image && <span className="text-xl">{image.name}</span>}
-  </div>
-  <div className="flex items-center gap-3">
-    <input
-      type="file"
-      accept="image/*"
-      style={{ display: 'none' }}
-      ref={imageRef}
-      onChange={transformFile}
-    />
-    <button
-      className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
-      onClick={() => {
-        imageRef.current.click(); // Trigger the file input click event
-      }}
-    >
-      <BsFillImageFill className="text-xl mr-2" />
-      <span className="text-xl">Upload an image</span>
-    </button>
-    {product.image && (
-      <Button
-        className="text-xl py-2 flex gap-1"
-        onClick={(e) => {
-          e.preventDefault();
-          setImage({
-            name: '',
-            data: '',
-          });
-          setProduct({ ...product, image: '' });
-          imageRef.current.value = '';
-        }}
-      >
-        <FaTrash className="text-xl" />
-        <span>Remove an image</span>
-      </Button>
-    )}
-  </div>
-</div>
-
+          <div className="flex justify-start w-[100px] text-black items-center gap-3">
+            {product.image && <img src={product.image} alt="Image Preview" className="" />}
+            {product.image && <span className="text-xl">{image.name}</span>}
+          </div>
+          <div className="flex items-center gap-3">
+            <input type="file" accept="image/*" style={{ display: 'none' }} ref={imageRef} onChange={transformFile} />
+            <button
+              className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle cursor-pointer rounded bg-orange-400 hover:bg-orange-500 duration-75 text-white"
+              onClick={() => {
+                imageRef.current.click(); // Trigger the file input click event
+              }}
+            >
+              <BsFillImageFill className="text-xl mr-2" />
+              <span className="text-xl">Upload an image</span>
+            </button>
+            {product.image && (
+              <Button
+                className="text-xl py-2 flex gap-1"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setImage({
+                    name: '',
+                    data: '',
+                  });
+                  setProduct({ ...product, image: '' });
+                  imageRef.current.value = '';
+                }}
+              >
+                <FaTrash className="text-xl" />
+                <span>Remove an image</span>
+              </Button>
+            )}
+          </div>
+        </div>
 
         <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
 
