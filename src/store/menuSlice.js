@@ -47,11 +47,8 @@ export const { addItem } = menuSlice.actions;
 export const menuData = (state) => state.menu.data;
 
 export const selectMenuItemById = () =>
-  createSelector(
-    [menuData, (_,id) => id],
-    (menuData, id) => {
-      return menuData.find((item) => item.id === parseInt(id));
-    }
- );
+  createSelector([menuData, (_, id) => id], (menuData, id) => {
+    return menuData.find((item) => item.id === parseInt(id));
+  });
 
 export default menuSlice.reducer;
