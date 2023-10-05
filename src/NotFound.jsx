@@ -11,7 +11,9 @@ function NotFound() {
             <span>Oops!</span>
           </h6>
 
-          <p className="mb-4 text-center text-gray-500 md:text-lg">The page you{"'"}re looking for doesn{"'"}t exist.</p>
+          <p className="mb-4 text-center text-gray-500 md:text-lg">
+            The page you{"'"}re looking for doesn{"'"}t exist.
+          </p>
 
           <Link to="/">
             <Button>Go home</Button>
