@@ -1,14 +1,12 @@
 import { useParams } from 'react-router-dom';
 import RandomList from './RandomList';
 import MenuDetailsMain from './MenuDetailsMain';
-import { menuData } from './store/menuSlice';
+import { selectMenuItemById } from './store/menuSlice';
 import { useSelector } from 'react-redux';
 function MenuDetails() {
   const { id } = useParams();
-  const data = useSelector(menuData);
-  console.log(data);
-
-  const menuItem = data.find((item) => item.id === parseInt(id));
+  const selectMenuItem = selectMenuItemById();
+  const menuItem = useSelector((state) => selectMenuItem(state, id));
   return (
     <div className="w-full bg-stone-100 p-6">
       <MenuDetailsMain data={menuItem} />
