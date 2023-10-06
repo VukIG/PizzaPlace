@@ -77,7 +77,7 @@ const menuSlice = createSlice({
       let imageUrl;
       isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
 
-      let newProduct = {
+      state.editedProduct = {
         name: name,
         description: description,
         price: price,
@@ -86,9 +86,22 @@ const menuSlice = createSlice({
         id: id,
         count: 0,
       };
-      const updatedProducts = state.data.filter((item) => item.id !== id);
-      state.editedProduct = newProduct;
-      state.data = [...updatedProducts, newProduct];
+      const updatedData = state.data.map((item)=>{
+        if (item.id == id) {
+          return{
+            ...item,
+            name: name,
+            description: description,
+            price: price,
+            toppings: transformToppings,
+            imageUrl: imageUrl,
+            id: id,
+          }
+        }
+        return item;
+      })
+      state.data = updatedData;
+      console.log(state.data);
     },
   },
 });
