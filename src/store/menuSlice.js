@@ -1,15 +1,13 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import data from '../mockData';
-import { toppingsOptions } from '../mockData'
+import { toppingsOptions } from '../mockData';
 const initialState = {
   data: data,
   editedProduct: '',
 };
 
 function findToppingsById(idList) {
-  const selectedToppings = toppingsOptions.filter((topping) =>
-    idList.includes(topping.id)
-  );
+  const selectedToppings = toppingsOptions.filter((topping) => idList.includes(topping.id));
   return selectedToppings;
 }
 
@@ -28,20 +26,19 @@ function transformImage(image) {
 
 function transformAttributes(toppings) {
   let newArray = [];
-  newArray=toppings.map((topping) => {
-    return {id: topping.value, name: topping.label}
+  newArray = toppings.map((topping) => {
+    return { id: topping.value, name: topping.label };
   });
   return newArray;
 }
 
-const isValidUrl = urlString=> {
-  try { 
-    return Boolean(new URL(urlString)); 
+const isValidUrl = (urlString) => {
+  try {
+    return Boolean(new URL(urlString));
+  } catch (e) {
+    return false;
   }
-  catch(e){ 
-    return false; 
-  }
-}
+};
 
 const menuSlice = createSlice({
   name: 'menu',
@@ -49,12 +46,14 @@ const menuSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
-      
+
       let transformToppings = [];
-      typeof toppings[0] == 'number' ?  transformToppings = findToppingsById(toppings) : transformToppings = toppings;
+      typeof toppings[0] == 'number'
+        ? (transformToppings = findToppingsById(toppings))
+        : (transformToppings = toppings);
 
       // Convert the Base64 string to a Blob
-      let imageUrl
+      let imageUrl;
       isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
 
       let newProduct = {
@@ -69,13 +68,13 @@ const menuSlice = createSlice({
       state.data = [...state.data, newProduct];
     },
     editItem: (state, action) => {
-      console.log(state, action);
       const { name, description, price, toppings, image, id } = action.payload;
       let transformToppings = [];
-      typeof toppings[0] == 'number' ?  transformToppings = findToppingsById(toppings) : transformToppings = transformAttributes(toppings);
-      console.log(transformToppings)
+      typeof toppings[0] == 'number'
+        ? (transformToppings = findToppingsById(toppings))
+        : (transformToppings = transformAttributes(toppings));
       // Convert the Base64 string to a Blob
-      let imageUrl
+      let imageUrl;
       isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
 
       let newProduct = {
@@ -90,7 +89,6 @@ const menuSlice = createSlice({
       const updatedProducts = state.data.filter((item) => item.id !== id);
       state.editedProduct = newProduct;
       state.data = [...updatedProducts, newProduct];
-      console.log(state.data);
     },
   },
 });

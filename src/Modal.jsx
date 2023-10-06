@@ -13,7 +13,6 @@ function Modal({ onClose, data }) {
   const products = useSelector(menuData);
   const edit = data ? true : false;
   const dispatch = useDispatch();
-  console.log(data);
   const [selectedToppings, setSelectedToppings] = useState(
     edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []
   );
@@ -49,6 +48,7 @@ function Modal({ onClose, data }) {
   }
 
   function transformFile(event) {
+    console.log('nada');
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = function () {
@@ -129,7 +129,8 @@ function Modal({ onClose, data }) {
             <input type="file" accept="image/*" style={{ display: 'none' }} ref={imageRef} onChange={transformFile} />
             <Button
               className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 imageRef.current.click();
               }}
             >
