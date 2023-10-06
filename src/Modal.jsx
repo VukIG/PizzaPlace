@@ -3,8 +3,8 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem,editItem,menuData } from './store/menuSlice';
-import { useDispatch,useSelector } from 'react-redux';
+import { addItem, editItem, menuData } from './store/menuSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
@@ -14,30 +14,34 @@ function Modal({ onClose, data }) {
   const edit = data ? true : false;
   const dispatch = useDispatch();
   console.log(data);
-  const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []);
+  const [selectedToppings, setSelectedToppings] = useState(
+    edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []
+  );
   let id = products.length + 1;
   const [image, setImage] = useState({
     name: '',
     data: '',
   });
   const imageRef = useRef(null);
-  const [product, setProduct] = useState( edit ? 
-    { 
-      name: data.name,
-      description: data.description,
-      price: data.price,
-      toppings: data.toppings,
-      image: data.imageUrl,
-      id: data.id,
-    }
-    : { 
-    name: '',
-    description: '',
-    price: '',
-    toppings: [],
-    image: '',
-    id: id,
-  });
+  const [product, setProduct] = useState(
+    edit
+      ? {
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          toppings: data.toppings,
+          image: data.imageUrl,
+          id: data.id,
+        }
+      : {
+          name: '',
+          description: '',
+          price: '',
+          toppings: [],
+          image: '',
+          id: id,
+        }
+  );
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -64,20 +68,17 @@ function Modal({ onClose, data }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-    edit ?
-      dispatch(editItem({ ...product, toppings: selectedToppingObjects }))
-    : 
-      dispatch(addItem({ ...product,id: id + 1, toppings: selectedToppingObjects }));
-      setProduct({ ...product, id: id + 1 });
+    edit
+      ? dispatch(editItem({ ...product, toppings: selectedToppings }))
+      : dispatch(addItem({ ...product, id: id + 1, toppings: selectedToppings }));
+    setProduct({ ...product, id: id + 1 });
     onClose();
-    
   }
 
   return (
     <div className="p-4 w-[50vw] top-[-2em] shadow bg-slate-100 rounded-xl relative">
       <div className="flex mx-10 mt-10 justify-between">
-        <h1 className="text-3xl font-semibold">{data ? 'Edit Product' : 'Add Product' }</h1>
+        <h1 className="text-3xl font-semibold">{data ? 'Edit Product' : 'Add Product'}</h1>
         <Button onClick={onClose} className="rounded-full py-4">
           <AiOutlineClose className="text-xl font-bold" />
         </Button>
@@ -117,7 +118,6 @@ function Modal({ onClose, data }) {
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
           isMulti
-          
         />
         <h1 className="text-xl my-4 ">Image:</h1>
         <div className="flex flex-col justify-start">
