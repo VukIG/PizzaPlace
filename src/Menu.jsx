@@ -1,13 +1,27 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
 import { PiPlusBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddModal from './AddModal';
-import { menuData } from './store/menuSlice';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { fetchData } from './store/menuSlice';
+
 function Menu() {
-  const data = useSelector(menuData);
+  const data = useSelector(state => state.menu.data);
+  const dispatch = useDispatch()
   const [active, setActive] = useState(false);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    // Assuming that fetchData is dispatched somewhere to fetch data.
+    dispatch(fetchData())
+      .then(() => {
+        setLoading(false); // Data fetching is complete
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false); // Data fetching failed
+      });
+  }, []);
   function changeModal() {
     setActive((prev) => !prev);
   }
@@ -20,7 +34,7 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {data.map((element) => {
+      {loading ? <p>Loading...</p> : data.map((element) => {
         return <MenuItem key={element.id} data={element} />;
       })}
     </div>

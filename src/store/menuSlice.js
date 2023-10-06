@@ -1,8 +1,7 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import data from '../mockData';
-
+import { createSelector, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 const initialState = {
-  data: data,
+  data: '',
   editedProduct: '',
 };
 
@@ -10,6 +9,18 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
+    fetchData: (state, action) => {
+      const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
+      axios.get(`${firebaseDatabaseURL}`)
+      .then((response)=>{
+        const dataArray = Object.values(response.data);
+        return {...state, data: dataArray};
+      })
+      .catch((error)=>{
+        console.log(error);
+        return state;
+      })
+    },
     addItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
       let transformToppings = [];
@@ -71,7 +82,35 @@ const menuSlice = createSlice({
       console.log(state.data);
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
 });
+
+export const fetchData = createAsyncThunk('menu/fetchData', async () => {
+  try {
+    const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
+    const response = await axios.get(firebaseDatabaseURL);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+});
+
+
 export const { addItem, editItem } = menuSlice.actions;
 export const menuData = (state) => state.menu.data;
 export const editedProduct = (state) => state.menu.editedProduct;
