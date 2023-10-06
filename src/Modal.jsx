@@ -1,21 +1,21 @@
-import { length } from './mockData';
 import { toppingsLookup } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem } from './store/menuSlice';
-import { useDispatch } from 'react-redux';
+import { addItem,editItem,menuData } from './store/menuSlice';
+import { useDispatch,useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
 
 function Modal({ onClose, data }) {
+  const products = useSelector(menuData);
   const edit = data ? true : false;
   const dispatch = useDispatch();
   console.log(data);
   const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []);
-  let id = length() + 1;
+  let id = products.length + 1;
   const [image, setImage] = useState({
     name: '',
     data: '',
@@ -65,9 +65,13 @@ function Modal({ onClose, data }) {
   function handleSubmit(event) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-    dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
+    edit ?
+      dispatch(editItem({ ...product, toppings: selectedToppingObjects }))
+    : 
+      dispatch(addItem({ ...product,id: id + 1, toppings: selectedToppingObjects }));
+      setProduct({ ...product, id: id + 1 });
     onClose();
-    setProduct({ ...product, id: id + 1 });
+    
   }
 
   return (

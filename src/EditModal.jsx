@@ -1,14 +1,16 @@
 import Input from './Input';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
-import { editItem } from './store/menuSlice';
+import { useDispatch,useSelector } from 'react-redux';
+import { editItem, menuData } from './store/menuSlice';
 import Button from './Button';
 import Select from 'react-select';
 import { useState, useRef } from 'react';
 import { toppingsLookup } from './mockData';
 
 function EditModal({ onClose, data }) {
+  const products = useSelector(menuData);
+  console.log(product);
   const imageRef = useRef(null);
   const dispatch = useDispatch();
   const { name, description, id, price, toppings,imageUrl } = data;
