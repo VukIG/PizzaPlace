@@ -8,12 +8,11 @@ export const fetchData = async () => {
 };
 
 export const modifyItem = async (id, updatedData) => {
-    const response = await axios.patch(`${firebaseDatabaseURL}/${id}.json`, updatedData);
-    return response.data;
+  const response = await axios.patch(`${firebaseDatabaseURL}/${id}.json`, updatedData);
+  return response.data;
 };
 
-export const deleteItem = async (id) => {
-    const response = await axios.delete(`${firebaseDatabaseURL}/${id}.json`);
-    return response.data;
+export const addItem = async (id, newItem) => {
+  const response = await axios.post(`${firebaseDatabaseURL}/${id}.json`, newItem);
+  return response.data;
 };
-
