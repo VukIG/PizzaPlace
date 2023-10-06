@@ -3,7 +3,6 @@ import data from '../mockData';
 import { toppingsOptions } from '../mockData';
 const initialState = {
   data: data,
-  editedProduct: '',
 };
 
 function findToppingsById(idList) {
@@ -76,16 +75,6 @@ const menuSlice = createSlice({
       // Convert the Base64 string to a Blob
       let imageUrl;
       isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
-
-      state.editedProduct = {
-        name: name,
-        description: description,
-        price: price,
-        toppings: transformToppings,
-        imageUrl: imageUrl,
-        id: id,
-        count: 0,
-      };
       const updatedData = state.data.map((item)=>{
         if (item.id == id) {
           return{
@@ -107,7 +96,6 @@ const menuSlice = createSlice({
 });
 export const { addItem, editItem } = menuSlice.actions;
 export const menuData = (state) => state.menu.data;
-export const editedProduct = (state) => state.menu.editedProduct;
 export const selectMenuItemById = () =>
   createSelector([menuData, (_, id) => id], (menuData, id) => {
     return menuData.find((item) => item.id === parseInt(id));
