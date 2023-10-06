@@ -1,26 +1,15 @@
 import { createSelector, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchData, modifyItem, deleteItem} from '../services/products.services'
 import axios from 'axios';
 const initialState = {
-  data: '',
+  data: fetchData(),
   editedProduct: '',
 };
 
 const menuSlice = createSlice({
   name: 'menu',
   initialState,
-  reducers: {
-    fetchData: (state, action) => {
-      const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
-      axios.get(`${firebaseDatabaseURL}`)
-      .then((response)=>{
-        const dataArray = Object.values(response.data);
-        return {...state, data: dataArray};
-      })
-      .catch((error)=>{
-        console.log(error);
-        return state;
-      })
-    },
+  reducers: { 
     addItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
       let transformToppings = [];
@@ -79,6 +68,7 @@ const menuSlice = createSlice({
       const updatedProducts = state.data.filter((item) => item.id !== id);
       state.editedProduct = newProduct;
       state.data = [...updatedProducts, newProduct];
+      modifyItem(id, newProduct)
       console.log(state.data);
     },
   },
