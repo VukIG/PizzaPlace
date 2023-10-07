@@ -1,22 +1,17 @@
 import AmountButton from './AmountButton';
 import { FiEdit } from 'react-icons/fi';
-import { useSelector } from 'react-redux';
-import { editedProduct } from './store/menuSlice';
 import { useState } from 'react';
 import AddModal from './AddModal';
-function MenuDetailsMain({ data }) {
-  const sliceData = useSelector(editedProduct);
-  let trueData = sliceData && sliceData.id == data.id ? sliceData : data;
-  const { name, description, id, price, imageUrl, toppings } = trueData;
 
+function MenuDetailsMain({ data }) {
+  const { name, description, id, price, imageUrl, toppings } = data;
   const [edit, setEdit] = useState(false);
   function changeModal() {
     setEdit((prev) => !prev);
   }
-
   return (
     <>
-      <AddModal onChange={changeModal} edit={edit} data={trueData} />
+      <AddModal onChange={changeModal} edit={edit} data={data} />
       <div className="flex rounded gap-12 bg-white justify-center items-center">
         <img className="rounded m-5 h-80 object-cover w-full" src={imageUrl} />
         <div className="flex flex-col justify-center w-full ">

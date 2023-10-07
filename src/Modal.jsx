@@ -1,35 +1,46 @@
-import { length } from './mockData';
 import { toppingsLookup } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem, asyncAdd } from './store/menuSlice';
-import { useDispatch } from 'react-redux';
+import { addItem, editItem, menuData, asyncAdd } from './store/menuSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
 
-function AddProduct({ onClose }) {
-  const animatedComponents = makeAnimated();
-
+function Modal({ onClose, data }) {
+  const products = useSelector(menuData);
+  const edit = data ? true : false;
   const dispatch = useDispatch();
-  const id = length() + 1;
-  const [selectedToppings, setSelectedToppings] = useState([]);
+  const [selectedToppings, setSelectedToppings] = useState(
+    edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []
+  );
+  let id = products.length + 1;
   const [image, setImage] = useState({
     name: '',
     data: '',
   });
   const imageRef = useRef(null);
-  const [product, setProduct] = useState({
-    name: '',
-    description: '',
-    price: '',
-    toppings: [],
-    image: '',
-    id: id,
-  });
+  const [product, setProduct] = useState(
+    edit
+      ? {
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          toppings: data.toppings,
+          image: data.imageUrl,
+          id: data.id,
+        }
+      : {
+          name: '',
+          description: '',
+          price: '',
+          toppings: [],
+          image: '',
+          id: id,
+        }
+  );
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -54,24 +65,31 @@ function AddProduct({ onClose }) {
     setSelectedToppings(selectedToppingValues);
   }
 
-  function handleNewProduct(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-    dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
-    dispatch(asyncAdd({ ...product, toppings: selectedToppingObjects }));
     onClose();
-    setProduct({ ...product, id: id + 1 });
+    if (edit) {
+      dispatch(editItem({ ...product, toppings: selectedToppings }));
+      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
+    }
+    else{
+      dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
+      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
+    }
+    // wtf setProduct({ ...product, id: id + 1 });
+    onClose();
   }
 
   return (
     <div className="p-4 w-[50vw] top-[-2em] shadow bg-slate-100 rounded-xl relative">
       <div className="flex mx-10 mt-10 justify-between">
-        <h1 className="text-3xl font-semibold">Add Product</h1>
+        <h1 className="text-3xl font-semibold">{data ? 'Edit Product' : 'Add Product'}</h1>
         <Button onClick={onClose} className="rounded-full py-4">
           <AiOutlineClose className="text-xl font-bold" />
         </Button>
       </div>
-      <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleNewProduct}>
+      <form className="flex flex-col align-middle justify-center mx-10 mb-10" onSubmit={handleSubmit}>
         <Input
           heading={'Name:'}
           placeholder={'Enter Product name...'}
@@ -100,11 +118,9 @@ function AddProduct({ onClose }) {
           Toppings:
         </label>
         <Select
-          className="h-12 py-4 mb-4 text-xl w-full"
-          placeholder="Select toppings.."
-          value={selectedToppings.map((toppingId) => toppingsLookup[toppingId])}
+          className=" py-4 mb-4 text-xl w-full"
+          defaultValue={selectedToppings}
           name="toppings"
-          components={animatedComponents}
           onChange={handleToppingsChange}
           options={Object.values(toppingsLookup)}
           isMulti
@@ -119,7 +135,8 @@ function AddProduct({ onClose }) {
             <input type="file" accept="image/*" style={{ display: 'none' }} ref={imageRef} onChange={transformFile} />
             <Button
               className="h-11 my-3 w-[220px] text-center flex justify-center items-center align-middle"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 imageRef.current.click();
               }}
             >
@@ -149,7 +166,7 @@ function AddProduct({ onClose }) {
         <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
 
         <div className="mt-4 flex relative bottom-[-25px] justify-between ">
-          <Button onClick={handleNewProduct} className="w-1/6 flex justify-center" type="submit">
+          <Button onClick={handleSubmit} className="w-1/6 flex justify-center" type="submit">
             Save
           </Button>
           <Button
@@ -165,4 +182,4 @@ function AddProduct({ onClose }) {
   );
 }
 
-export default AddProduct;
+export default Modal;

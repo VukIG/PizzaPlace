@@ -2,12 +2,8 @@ import { useState } from 'react';
 import AmountButton from './AmountButton';
 import { FiEdit } from 'react-icons/fi';
 import AddModal from './AddModal';
-import { useSelector } from 'react-redux';
-import { editedProduct } from './store/menuSlice';
 function RandomItem({ data }) {
-  const sliceData = useSelector(editedProduct);
-  let trueData = sliceData && sliceData.id == data.id ? sliceData : data;
-  const { name, description, id, price, imageUrl } = trueData;
+  const { name, description, id, price, imageUrl } = data;
 
   const [edit, setEdit] = useState(false);
   function changeModal() {
@@ -16,7 +12,7 @@ function RandomItem({ data }) {
 
   return (
     <>
-      <AddModal onChange={changeModal} edit={edit} data={trueData} />
+      <AddModal onChange={changeModal} edit={edit} data={data} />
       <div className="flex gap-5 bg-white flex-col p-5 w-full rounded">
         <img className="w-full object-cover rounded h-72" src={imageUrl} alt="" />
         <div className="py-3">

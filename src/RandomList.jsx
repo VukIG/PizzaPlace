@@ -2,19 +2,19 @@ import RandomItem from './RandomItem';
 import { useSelector } from 'react-redux';
 import { menuData } from './store/menuSlice';
 
-function shuffleArray(data, id) {
-  let newData = data.filter((item) => item.id != id);
-  for (let i = newData.length - 1; i > 0; i--) {
+function shuffleArray(data) {
+  for (let i = data.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newData[i], newData[j]] = [newData[j], newData[i]];
+    [data[i], data[j]] = [data[j], data[i]];
   }
-  return newData;
+  return data;
 }
 
 function RandomList(id) {
   const data = useSelector(menuData);
+  let newData = data.filter((item) => item.id != id);
   function threeHeaders() {
-    const randomList = shuffleArray(data, id);
+    const randomList = shuffleArray(newData);
     let randomItems = [];
     for (let i = 0; i < 3; i++) {
       randomItems.push(randomList[i]);

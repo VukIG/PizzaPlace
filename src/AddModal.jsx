@@ -1,8 +1,6 @@
-import AddProduct from './AddProduct';
 import { createPortal } from 'react-dom';
-import EditModal from './EditModal';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import Modal from './Modal';
 function AddModal({ active, edit, onChange, data }) {
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -25,7 +23,7 @@ function AddModal({ active, edit, onChange, data }) {
                 exit="exit"
                 key="modal"
               >
-                {active ? <AddProduct onClose={onChange} /> : <EditModal onClose={onChange} data={data} />}
+                <Modal onClose={onChange} data={data} />
               </motion.div>
             </AnimatePresence>
           </div>,
