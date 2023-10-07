@@ -3,7 +3,7 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem, editItem, menuData } from './store/menuSlice';
+import { addItem, editItem, menuData, asyncAdd } from './store/menuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
@@ -67,10 +67,17 @@ function Modal({ onClose, data }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    edit
-      ? dispatch(editItem({ ...product, toppings: selectedToppings }))
-      : dispatch(addItem({ ...product, id: id + 1, toppings: selectedToppings }));
-    setProduct({ ...product, id: id + 1 });
+    const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
+    onClose();
+    if (edit) {
+      dispatch(editItem({ ...product, toppings: selectedToppings }));
+      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
+    }
+    else{
+      dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
+      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
+    }
+    // wtf setProduct({ ...product, id: id + 1 });
     onClose();
   }
 
