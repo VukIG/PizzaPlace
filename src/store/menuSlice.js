@@ -75,9 +75,9 @@ const menuSlice = createSlice({
       // Convert the Base64 string to a Blob
       let imageUrl;
       isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
-      const updatedData = state.data.map((item)=>{
+      const updatedData = state.data.map((item) => {
         if (item.id == id) {
-          return{
+          return {
             ...item,
             name: name,
             description: description,
@@ -85,12 +85,11 @@ const menuSlice = createSlice({
             toppings: transformToppings,
             imageUrl: imageUrl,
             id: id,
-          }
+          };
         }
         return item;
-      })
+      });
       state.data = updatedData;
-      console.log(state.data);
     },
   },
 });

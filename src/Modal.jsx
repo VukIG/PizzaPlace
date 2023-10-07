@@ -48,7 +48,6 @@ function Modal({ onClose, data }) {
   }
 
   function transformFile(event) {
-    console.log('nada');
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = function () {
