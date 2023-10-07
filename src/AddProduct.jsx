@@ -4,7 +4,7 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem } from './store/menuSlice';
+import { addItem, asyncAdd } from './store/menuSlice';
 import { useDispatch } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
@@ -58,6 +58,7 @@ function AddProduct({ onClose }) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
     dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
+    dispatch(asyncAdd({ ...product, toppings: selectedToppingObjects }));
     onClose();
     setProduct({ ...product, id: id + 1 });
   }

@@ -1,12 +1,17 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
 import { PiPlusBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AddModal from './AddModal';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncFetch } from './store/menuSlice';
 function Menu() {
-  const data = useSelector((state) => state.menu.data);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.menu.pizzas);
+  console.log(data);
+  useEffect(() => {
+    dispatch(asyncFetch());
+  }, [dispatch]);
   const [active, setActive] = useState(false);
   function changeModal() {
     setActive((prev) => !prev);

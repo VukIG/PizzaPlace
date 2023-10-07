@@ -1,5 +1,7 @@
-import { database as firebase } from '../firebase/firebase'; // Import Firebase
+import { database } from '../firebase/firebase'; // Import Firebase
 import 'firebase/database'; // Import the Firebase Realtime Database module
+import { ref, set } from 'firebase/database';
+
 
 const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
 
@@ -16,7 +18,8 @@ export const fetchData = async () => {
 
 export const modifyItem = async (id, updatedData) => {
   try {
-    await firebase.database().ref(`${id}`).update(updatedData);
+    const itemRef = ref(database, `pizzas/${id}`);
+    await set(itemRef, updatedData);
     return updatedData;
   } catch (error) {
     console.error('Error:', error);
@@ -24,9 +27,10 @@ export const modifyItem = async (id, updatedData) => {
   }
 };
 
-export const addItemToBase = async (id, newItem) => {
+export const addItemToBase = async (newItem) => {
   try {
-    await firebase.database().ref(`${id}`).set(newItem);
+    const itemRef = ref(database, `pizzas/${newItem.id}`);
+    await set(itemRef, newItem);
     return newItem;
   } catch (error) {
     console.error('Error:', error);
