@@ -1,8 +1,9 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { fetchData, modifyItem, addItem } from '../services/products.services';
+import { createSelector, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchData, modifyItem, addItemToBase } from '../services/products.services';
 import { toppingsOptions } from '../mockData';
+import axios from 'axios';
 const initialState = {
-  data: fetchData(),
+  data: [],
 };
 
 function findToppingsById(idList) {
@@ -65,6 +66,7 @@ const menuSlice = createSlice({
         count: 0,
       };
       state.data = [...state.data, newProduct];
+      addItemToBase(id, newProduct);
     },
     editItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
@@ -100,39 +102,18 @@ const menuSlice = createSlice({
       });
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchData.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchData.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-});
+  extraReducers:{
 
-export const fetchData = createAsyncThunk('menu/fetchData', async () => {
-  try {
-    const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
-    const response = await axios.get(firebaseDatabaseURL);
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
   }
 });
+
+export const asyncFunctions = createAsyncThunk()
 
 export const { addItem, editItem } = menuSlice.actions;
 export const menuData = (state) => state.menu.data;
 export const selectMenuItemById = () =>
   createSelector([menuData, (_, id) => id], (menuData, id) => {
     return menuData.find((item) => item.id === parseInt(id));
-  });
+});
 
 export default menuSlice.reducer;

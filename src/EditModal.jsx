@@ -11,7 +11,7 @@ import { toppingsLookup } from './mockData';
 function EditModal({ onClose, data }) {
   const imageRef = useRef(null);
   const dispatch = useDispatch();
-  const { name, description, id, price, toppings,imageUrl } = data;
+  const { name, description, id, price, toppings, imageUrl } = data;
   const [product, setProduct] = useState({
     name: name,
     description: description,
@@ -44,13 +44,10 @@ function EditModal({ onClose, data }) {
     event.preventDefault();
     const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
     let catchUndefined = selectedToppingObjects.some((item) => item === undefined);
-    console.log(product.image)
-    if (!product.image) 
-      dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
-    if (catchUndefined) 
-      dispatch(editItem({ ...product, toppings: selectedToppings }));
-    else
-      dispatch(editItem({ ...product, toppings: selectedToppingObjects }));
+    console.log(product.image);
+    if (!product.image) dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+    if (catchUndefined) dispatch(editItem({ ...product, toppings: selectedToppings }));
+    else dispatch(editItem({ ...product, toppings: selectedToppingObjects }));
     onClose();
     setProduct({ ...product, id: id });
   }
