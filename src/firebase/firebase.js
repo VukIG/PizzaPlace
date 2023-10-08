@@ -10,6 +10,7 @@ const firebaseConfig = {
   messagingSenderId: '955547441592',
   appId: '1:955547441592:web:d0e0976a14b75dd391574d',
   measurementId: 'G-G8CB6DJGX8',
+  databaseURL: 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
 // Initialize Firebase

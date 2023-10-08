@@ -27,8 +27,9 @@ export const modifyItem = async (id, updatedData) => {
 };
 
 export const addItemToBase = async (newItem) => {
+  let id = newItem.id - 1;
   try {
-    const itemRef = ref(database, `pizzas/${newItem.id}`);
+    const itemRef = ref(database, `pizzas/${id}`);
     await set(itemRef, newItem);
     return newItem;
   } catch (error) {

@@ -93,7 +93,6 @@ function Modal({ onClose, data }) {
       dispatch(addItem({ ...product, toppings: selectedToppings }));
       dispatch(asyncAdd({ ...product, toppings: selectedToppings }));
     }
-    // wtf setProduct({ ...product, id: id + 1 });
     onClose();
   }
 

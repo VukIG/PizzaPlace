@@ -121,12 +121,8 @@ export const asyncAdd = createAsyncThunk('menu/addItemToBase', async (newItem) =
 export const { addItem, editItem } = menuSlice.actions;
 export const menuData = (state) => state.menu.pizzas;
 export const menuToppings = (state) => state.menu.toppings;
-export const selectMenuItemById = createSelector(
-  [menuData, (_, id) => id],
-  (menuData, id) => {
-    return menuData.find((item) => item.id === parseInt(id));
-  }
-);
-
+export const selectMenuItemById = createSelector([menuData, (_, id) => id], (menuData, id) => {
+  return menuData.find((item) => item.id === parseInt(id));
+});
 
 export default menuSlice.reducer;
