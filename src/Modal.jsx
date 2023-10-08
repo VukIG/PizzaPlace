@@ -62,18 +62,34 @@ function Modal({ onClose, data }) {
     setProduct({ ...product, [name]: value });
   }
 
+  const isValidUrl = (urlString) => {
+    try {
+      return Boolean(new URL(urlString));
+    } catch (e) {
+      return false;
+    }
+  };
+
   function transformFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function () {
-      setProduct({ ...product, image: reader.result });
-      setImage({
-        name: file.name,
-        data: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
+    return new Promise((resolve, reject) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function () {
+        const imageData = reader.result; // Get the result from the reader
+        setProduct({ ...product, image: imageData });
+        setImage({
+          name: file.name,
+          data: imageData,
+        });
+        resolve(imageData); // Resolve the promise with the image data
+      };
+      reader.onerror = function (error) {
+        reject(error); // Reject the promise if there's an error
+      };
+      reader.readAsDataURL(file);
+    });
   }
+  
 
   function handleToppingsChange(selectedOptions) {
     const selectedToppings = selectedOptions.map((option) => ({
@@ -83,18 +99,26 @@ function Modal({ onClose, data }) {
     setSelectedToppings(selectedToppings);
   }
 
-  function handleSubmit(event) {
+      
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(selectedToppings);
-    if (edit) {
-      dispatch(editItem({ ...product, toppings: selectedToppings }));
-      dispatch(asyncModify({ ...product, toppings: selectedToppings }));
-    } else {
-      dispatch(addItem({ ...product, toppings: selectedToppings }));
-      dispatch(asyncAdd({ ...product, toppings: selectedToppings }));
+    let imageUrl;
+    try {
+      const imageData = await transformFile(event);
+      isValidUrl(imageData) ? (imageUrl = imageData) : (imageUrl = transformImage(imageData));
+      if (edit) {
+        dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+        dispatch(asyncModify({ ...product, image: imageUrl, toppings: selectedToppings }));
+      } else {
+        dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+        dispatch(asyncAdd({ ...product, image: imageUrl, toppings: selectedToppings }));
+      }
+      onClose();
+    } catch (error) {
+      console.error('Error reading file:', error);
     }
-    onClose();
-  }
+  }    
 
   return (
     <div className="p-4 w-[50vw] top-[-2em] shadow bg-slate-100 rounded-xl relative">

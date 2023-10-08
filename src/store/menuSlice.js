@@ -8,27 +8,6 @@ const initialState = {
   error: null,
 };
 
-function transformImage(image) {
-  const byteCharacters = atob(image.split(',')[1]);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: 'image/png' });
-
-  const imageUrl = URL.createObjectURL(blob);
-  return imageUrl;
-}
-
-const isValidUrl = (urlString) => {
-  try {
-    return Boolean(new URL(urlString));
-  } catch (e) {
-    return false;
-  }
-};
-
 const menuSlice = createSlice({
   name: 'menu',
   initialState,
@@ -36,15 +15,12 @@ const menuSlice = createSlice({
     addItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
       // Convert the Base64 string to a Blob
-      let imageUrl;
-      isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
-
       let newProduct = {
         name: name,
         description: description,
         price: price,
         toppings: toppings,
-        imageUrl: imageUrl,
+        imageUrl: image,
         id: id,
         count: 0,
       };
@@ -53,8 +29,6 @@ const menuSlice = createSlice({
     editItem: (state, action) => {
       const { name, description, price, toppings, image, id } = action.payload;
       // Convert the Base64 string to a Blob
-      let imageUrl;
-      isValidUrl(image) ? (imageUrl = image) : (imageUrl = transformImage(image));
       const updatedData = state.pizzas.map((item) => {
         if (item.id == id) {
           return {
@@ -63,21 +37,13 @@ const menuSlice = createSlice({
             description: description,
             price: price,
             toppings: toppings,
-            imageUrl: imageUrl,
+            imageUrl: image,
             id: id,
           };
         }
         return item;
       });
       state.pizzas = updatedData;
-      modifyItem(id, {
-        name: name,
-        description: description,
-        price: price,
-        toppings: toppings,
-        imageUrl: imageUrl,
-        id: id,
-      });
     },
   },
   extraReducers: (builder) => {
@@ -102,8 +68,9 @@ const menuSlice = createSlice({
       );
   },
 });
-
-export const asyncFetch = createAsyncThunk('menu/fetchData', async () => {
+// ne treba da fetchuje ovoliko puta treba da modifikuje proizvode u stejtu sa reduxom
+// ili da sve vreme sa servera salje i prima podatke, sto ce znatno usporiti aplikaciju
+export const asyncFetch = createAsyncThunk('menu/fetchData', async (state) => {
   const response = await fetchData();
   return response;
 });
