@@ -62,34 +62,40 @@ function Modal({ onClose, data }) {
     setProduct({ ...product, [name]: value });
   }
 
-  const isValidUrl = (urlString) => {
-    try {
-      return Boolean(new URL(urlString));
-    } catch (e) {
-      return false;
-    }
-  };
-
   function transformFile(event) {
     return new Promise((resolve, reject) => {
       const file = event.target.files[0];
       const reader = new FileReader();
+
       reader.onload = function () {
-        const imageData = reader.result; // Get the result from the reader
-        setProduct({ ...product, image: imageData });
-        setImage({
-          name: file.name,
-          data: imageData,
-        });
-        resolve(imageData); // Resolve the promise with the image data
+        const imageData = reader.result;
+        let finalImageData= base64ToUrl(imageData) 
+        resolve(finalImageData); 
       };
+
       reader.onerror = function (error) {
         reject(error); // Reject the promise if there's an error
       };
-      reader.readAsDataURL(file);
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        reject(new Error('No file selected')); // Handle the case where no file is selected
+      }
     });
   }
-  
+
+  function base64ToUrl(base64Image) {
+    const byteCharacters = atob(base64Image.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'image/png' });
+    const imageUrl = URL.createObjectURL(blob);
+    return imageUrl;
+  }
 
   function handleToppingsChange(selectedOptions) {
     const selectedToppings = selectedOptions.map((option) => ({
@@ -99,26 +105,18 @@ function Modal({ onClose, data }) {
     setSelectedToppings(selectedToppings);
   }
 
-      
-
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    let imageUrl;
-    try {
-      const imageData = await transformFile(event);
-      isValidUrl(imageData) ? (imageUrl = imageData) : (imageUrl = transformImage(imageData));
-      if (edit) {
-        dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
-        dispatch(asyncModify({ ...product, image: imageUrl, toppings: selectedToppings }));
-      } else {
-        dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
-        dispatch(asyncAdd({ ...product, image: imageUrl, toppings: selectedToppings }));
-      }
-      onClose();
-    } catch (error) {
-      console.error('Error reading file:', error);
+    let imageUrl = image.data;
+    if (edit) {
+      dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+      dispatch(asyncModify({ ...product, image: imageUrl, toppings: selectedToppings }));
+    } else {
+      dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+      dispatch(asyncAdd({ ...product, image: imageUrl, toppings: selectedToppings }));
     }
-  }    
+    onClose();
+  }
 
   return (
     <div className="p-4 w-[50vw] top-[-2em] shadow bg-slate-100 rounded-xl relative">
@@ -207,7 +205,25 @@ function Modal({ onClose, data }) {
           </div>
         </div>
 
-        <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
+        <input
+          id="file"
+          className="hidden"
+          accept="image/*"
+          type="file"
+          ref={imageRef}
+          onChange={(event) => {
+            transformFile(event)
+              .then((imageData) => {
+                setImage({
+                  name: event.target.files[0].name,
+                  data: imageData,
+                });
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          }}
+        />
 
         <div className="mt-4 flex relative bottom-[-25px] justify-between ">
           <Button onClick={handleSubmit} className="w-1/6 flex justify-center" type="submit">
