@@ -1,22 +1,37 @@
-import { toppingsLookup } from './mockData';
 import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem, editItem, menuData, asyncAdd } from './store/menuSlice';
+import { addItem, editItem, menuData, asyncAdd, asyncModify, menuToppings } from './store/menuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
 import Select from 'react-select';
 
 function Modal({ onClose, data }) {
-  const products = useSelector(menuData);
   const edit = data ? true : false;
+
+  const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings : []);
+  const products = useSelector(menuData);
+
+  const optionsOfToppings = useSelector(menuToppings);
+
+  const selectOptions = optionsOfToppings.map((topping) => ({
+    value: topping.id,
+    label: topping.name,
+  }));
+
+  const defaultValues = selectedToppings.map((option) => ({
+    value: option.id,
+    label: option.name,
+  }));
+
   const dispatch = useDispatch();
-  const [selectedToppings, setSelectedToppings] = useState(
-    edit ? data.toppings.map((topping) => toppingsLookup[topping.id]) : []
-  );
+
+  console.log(selectedToppings);
+
   let id = products.length + 1;
+
   const [image, setImage] = useState({
     name: '',
     data: '',
@@ -61,21 +76,22 @@ function Modal({ onClose, data }) {
   }
 
   function handleToppingsChange(selectedOptions) {
-    const selectedToppingValues = selectedOptions.map((option) => option.value);
-    setSelectedToppings(selectedToppingValues);
+    const selectedToppings = selectedOptions.map((option) => ({
+      id: option.value,
+      name: option.label,
+    }));
+    setSelectedToppings(selectedToppings);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    const selectedToppingObjects = selectedToppings.map((toppingId) => toppingsLookup[toppingId]);
-    onClose();
+    console.log(selectedToppings);
     if (edit) {
       dispatch(editItem({ ...product, toppings: selectedToppings }));
-      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
-    }
-    else{
-      dispatch(addItem({ ...product, toppings: selectedToppingObjects }));
-      dispatch(asyncAdd({ ...product, id: id + 1, toppings: selectedToppings }));
+      dispatch(asyncModify({ ...product, toppings: selectedToppings }));
+    } else {
+      dispatch(addItem({ ...product, toppings: selectedToppings }));
+      dispatch(asyncAdd({ ...product, toppings: selectedToppings }));
     }
     // wtf setProduct({ ...product, id: id + 1 });
     onClose();
@@ -97,6 +113,7 @@ function Modal({ onClose, data }) {
           name={'name'}
           value={product.name}
           onChange={handleInputChange}
+          required
         />
         <Input
           heading={'Description:'}
@@ -105,6 +122,7 @@ function Modal({ onClose, data }) {
           name={'description'}
           value={product.description}
           onChange={handleInputChange}
+          required
         />
         <Input
           heading={'Price:'}
@@ -113,18 +131,21 @@ function Modal({ onClose, data }) {
           name={'price'}
           value={product.price}
           onChange={handleInputChange}
+          required
         />
         <label htmlFor="toppings" className="text-xl ">
           Toppings:
         </label>
         <Select
           className=" py-4 mb-4 text-xl w-full"
-          defaultValue={selectedToppings}
+          defaultValue={defaultValues}
           name="toppings"
           onChange={handleToppingsChange}
-          options={Object.values(toppingsLookup)}
+          options={selectOptions}
           isMulti
+          key={id}
         />
+
         <h1 className="text-xl my-4 ">Image:</h1>
         <div className="flex flex-col justify-start">
           <div className="flex justify-start w-[100px] text-black items-center gap-3">

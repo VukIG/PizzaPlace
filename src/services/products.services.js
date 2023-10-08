@@ -2,7 +2,6 @@ import { database } from '../firebase/firebase'; // Import Firebase
 import 'firebase/database'; // Import the Firebase Realtime Database module
 import { ref, set } from 'firebase/database';
 
-
 const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
 
 export const fetchData = async () => {

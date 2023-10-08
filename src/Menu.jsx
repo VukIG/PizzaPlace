@@ -25,11 +25,9 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {
-        data.map((element) => {
-          return <MenuItem key={element.id} data={element} />;
-        })
-      }
+      {data.map((element) => {
+        return <MenuItem key={element.id} data={element} />;
+      })}
     </div>
   );
 }
