@@ -5,8 +5,7 @@ import { selectMenuItemById } from './store/menuSlice';
 import { useSelector } from 'react-redux';
 function MenuDetails() {
   const { id } = useParams();
-  const selectMenuItem = selectMenuItemById();
-  const menuItem = useSelector((state) => selectMenuItem(state, id));
+  const menuItem = useSelector((state) => selectMenuItemById(state, id));
   return (
     <div className="w-full bg-stone-100 p-6">
       <MenuDetailsMain data={menuItem} />
