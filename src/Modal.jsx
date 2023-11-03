@@ -44,7 +44,7 @@ function Modal({ onClose, data }) {
           description: data.description,
           price: data.price,
           toppings: data.toppings,
-          image: data.imageUrl,
+          imageUrl: data.imageUrl,
           id: data.id,
         }
       : {
@@ -69,8 +69,8 @@ function Modal({ onClose, data }) {
 
       reader.onload = function () {
         const imageData = reader.result;
-        let finalImageData= base64ToUrl(imageData) 
-        resolve(finalImageData); 
+        let finalImageData = base64ToUrl(imageData);
+        resolve(finalImageData);
       };
 
       reader.onerror = function (error) {

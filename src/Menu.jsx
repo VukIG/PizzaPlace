@@ -5,17 +5,20 @@ import { useState, useEffect } from 'react';
 import AddModal from './AddModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncFetch } from './store/menuSlice';
+
 function Menu() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.menu.pizzas);
-  console.log(data);
+  const [active, setActive] = useState(false);
+
   useEffect(() => {
     dispatch(asyncFetch());
   }, [dispatch]);
-  const [active, setActive] = useState(false);
+
   function changeModal() {
     setActive((prev) => !prev);
   }
+
   return (
     <div className="w-full flex flex-col justify-start  bg-stone-100 p-5 mb-5 absolute">
       <AddModal onChange={changeModal} active={active} />
