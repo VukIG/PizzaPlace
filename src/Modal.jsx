@@ -2,7 +2,8 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem, editItem, menuData, asyncAdd, asyncModify, menuToppings } from './store/menuSlice';
+import { addItem, editItem, menuData, menuToppings } from './store/menuSlice';
+import { useChangeItemMutation, useAddItemMutation } from './services/products.services';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
@@ -10,6 +11,11 @@ import Select from 'react-select';
 
 function Modal({ onClose, data }) {
   const edit = data ? true : false;
+
+  const [isSent, setIsSent] = useState(false);
+
+  const { mutate: addItemMutation } = useAddItemMutation(); // RTK Query mutation hook for adding items
+  const { mutate: editItemMutation } = useAddItemMutation(); // RTK Query mutation hook for adding items
 
   const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings : []);
   const products = useSelector(menuData);
@@ -109,11 +115,31 @@ function Modal({ onClose, data }) {
     event.preventDefault();
     let imageUrl = image.data;
     if (edit) {
-      dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
-      dispatch(asyncModify({ ...product, image: imageUrl, toppings: selectedToppings }));
+      useChangeItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+        .then((response) => {
+          if (response.success) {
+            setIsSent(true);
+            dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setIsSent(false);
+          }, 5000);
+        });
     } else {
-      dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
-      dispatch(asyncAdd({ ...product, image: imageUrl, toppings: selectedToppings }));
+      useAddItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+        .then((response) => {
+          if (response.success) {
+            setIsSent(true);
+            dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setIsSent(false);
+          }, 5000);
+        });
     }
     onClose();
   }
@@ -237,6 +263,7 @@ function Modal({ onClose, data }) {
             Cancel
           </Button>
         </div>
+        <div className="">{isSent && <h1 className="text-green text-xl p-2">Data sent successfully!</h1>}</div>
       </form>
     </div>
   );

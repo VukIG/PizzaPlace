@@ -1,38 +1,36 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const firebaseDatabaseURL = 'https://your-firebase-database-url.firebaseio.com';
+const firebase_url = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/api/pizzas';
 
-// Function to fetch items
-export const useFetchItems = () => {
-  return useQuery('items', async () => {
-    const response = await axios.get(`${firebaseDatabaseURL}/items.json`);
-    return response.data;
-  });
-};
+export const productsApi = createApi({
+  reducerPath: 'productsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  endpoints: (builder) => ({
+    getAllItems: builder.query({
+      query: () =>
+        axios.request({
+          method: 'get',
+          url: firebase_url,
+        }),
+    }),
+    changeItem: builder.query({
+      query: (newItem) =>
+        axios.request({
+          method: 'put',
+          url: firebase_url, //potencijalni bug jer put nema index
+          data: newItem,
+        }),
+    }),
+    addItem: builder.mutation({
+      query: (newItem) =>
+        axios.request({
+          method: 'post',
+          url: firebase_url,
+          data: newItem,
+        }),
+    }),
+  }),
+});
 
-// Function to add an item
-export const useAddItem = () => {
-  const queryClient = useQueryClient();
-
-  const addItem = async (newItem) => {
-    const response = await axios.post(`${firebaseDatabaseURL}/items.json`, newItem);
-    queryClient.invalidateQueries('items'); // Invalidate the items query to refetch data
-    return response.data;
-  };
-
-  return useMutation(addItem);
-};
-
-// Function to edit an item
-export const useEditItem = () => {
-  const queryClient = useQueryClient();
-
-  const editItem = async (id, updatedData) => {
-    const response = await axios.put(`${firebaseDatabaseURL}/items/${id}.json`, updatedData);
-    queryClient.invalidateQueries('items'); // Invalidate the items query to refetch data
-    return response.data;
-  };
-
-  return useMutation(editItem);
-};
+export const { useGetAllItemsQuery, useChangeItemMutation, useAddItemMutation } = productsApi;
