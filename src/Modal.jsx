@@ -15,7 +15,7 @@ function Modal({ onClose, data }) {
   const [isSent, setIsSent] = useState(false);
 
   const { mutate: addItemMutation } = useAddItemMutation(); // RTK Query mutation hook for adding items
-  const { mutate: editItemMutation } = useAddItemMutation(); // RTK Query mutation hook for adding items
+  const { mutate: editItemMutation } = useChangeItemMutation(); // RTK Query mutation hook for adding items
 
   const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings : []);
   const products = useSelector(menuData);
