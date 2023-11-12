@@ -115,7 +115,7 @@ function Modal({ onClose, data }) {
     event.preventDefault();
     let imageUrl = image.data;
     if (edit) {
-      useChangeItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+      addItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
         .then((response) => {
           if (response.success) {
             setIsSent(true);
@@ -128,7 +128,7 @@ function Modal({ onClose, data }) {
           }, 5000);
         });
     } else {
-      useAddItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+      editItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
         .then((response) => {
           if (response.success) {
             setIsSent(true);

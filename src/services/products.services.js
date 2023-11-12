@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const firebase_url = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/api/pizzas';
+const firebase_url = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: firebase_url }),
   endpoints: (builder) => ({
     getAllItems: builder.query({
       query: () =>
