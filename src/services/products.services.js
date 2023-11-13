@@ -1,24 +1,24 @@
 import axios from 'axios';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const firebase_url = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
+const base_url = 'http://localhost:2000/';
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: firebase_url }),
+  baseQuery: fetchBaseQuery({ baseUrl: base_url + 'items' }),
   endpoints: (builder) => ({
     getAllItems: builder.query({
       query: () =>
         axios.request({
           method: 'get',
-          url: firebase_url,
+          url: base_url,
         }),
     }),
     changeItem: builder.query({
       query: (newItem) =>
         axios.request({
           method: 'put',
-          url: firebase_url, //potencijalni bug jer put nema index
+          url: base_url, //potencijalni bug jer put nema index
           data: newItem,
         }),
     }),
@@ -26,7 +26,7 @@ export const productsApi = createApi({
       query: (newItem) =>
         axios.request({
           method: 'post',
-          url: firebase_url,
+          url: base_url,
           data: newItem,
         }),
     }),

@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 const CONNECTION_URL = process.env.CONNECTION_URL;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 2000;
 
 app.use(express.json({ limit: '30mb', extended: true }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
