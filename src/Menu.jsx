@@ -4,6 +4,7 @@ import { PiPlusBold } from 'react-icons/pi';
 import { useState } from 'react';
 import AddModal from './AddModal';
 import { useGetAllItemsQuery } from './services/products.services';
+import Loader from './Loader';
 
 function Menu() {
   const [active, setActive] = useState(false);
@@ -23,7 +24,7 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <Loader />}
       {isError && <div>{error.message}</div>}
       {data &&
         data.map((element) => {
