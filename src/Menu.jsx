@@ -5,11 +5,14 @@ import { useState } from 'react';
 import AddModal from './AddModal';
 import { useGetAllItemsQuery } from './services/products.services';
 import Loader from './Loader';
-
+import { useDispatch } from 'react-redux';
+import { addAllItems } from './store/menuSlice';
 function Menu() {
   const [active, setActive] = useState(false);
 
   const { data, error, isError, isLoading } = useGetAllItemsQuery();
+  const dispatch = useDispatch();
+  dispatch(addAllItems(data));
 
   function changeModal() {
     setActive((prev) => !prev);
