@@ -1,38 +1,36 @@
-import { database } from '../firebase/firebase'; // Import Firebase
-import 'firebase/database'; // Import the Firebase Realtime Database module
-import { ref, set } from 'firebase/database';
+import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const firebaseDatabaseURL = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
+const firebase_url = 'https://pizzaplace-a31d7-default-rtdb.europe-west1.firebasedatabase.app/';
 
-export const fetchData = async () => {
-  try {
-    const response = await fetch(`${firebaseDatabaseURL}.json`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-};
+export const productsApi = createApi({
+  reducerPath: 'productsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: firebase_url }),
+  endpoints: (builder) => ({
+    getAllItems: builder.query({
+      query: () =>
+        axios.request({
+          method: 'get',
+          url: firebase_url,
+        }),
+    }),
+    changeItem: builder.query({
+      query: (newItem) =>
+        axios.request({
+          method: 'put',
+          url: firebase_url, //potencijalni bug jer put nema index
+          data: newItem,
+        }),
+    }),
+    addItem: builder.mutation({
+      query: (newItem) =>
+        axios.request({
+          method: 'post',
+          url: firebase_url,
+          data: newItem,
+        }),
+    }),
+  }),
+});
 
-export const modifyItem = async (id, updatedData) => {
-  try {
-    const itemRef = ref(database, `pizzas/${id}`);
-    await set(itemRef, updatedData);
-    return updatedData;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-};
-
-export const addItemToBase = async (newItem) => {
-  try {
-    const itemRef = ref(database, `pizzas/${newItem.id}`);
-    await set(itemRef, newItem);
-    return newItem;
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
-};
+export const { useGetAllItemsQuery, useChangeItemMutation, useAddItemMutation } = productsApi;

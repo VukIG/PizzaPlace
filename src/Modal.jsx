@@ -2,7 +2,8 @@ import Button from './Button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillImageFill } from 'react-icons/bs';
 import { useState, useRef } from 'react';
-import { addItem, editItem, menuData, asyncAdd, asyncModify, menuToppings } from './store/menuSlice';
+import { addItem, editItem, menuData, menuToppings } from './store/menuSlice';
+import { useChangeItemMutation, useAddItemMutation } from './services/products.services';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from 'react-icons/fa';
 import Input from './Input';
@@ -10,6 +11,11 @@ import Select from 'react-select';
 
 function Modal({ onClose, data }) {
   const edit = data ? true : false;
+
+  const [isSent, setIsSent] = useState(false);
+
+  const { mutate: addItemMutation } = useAddItemMutation(); // RTK Query mutation hook for adding items
+  const { mutate: editItemMutation } = useChangeItemMutation(); // RTK Query mutation hook for adding items
 
   const [selectedToppings, setSelectedToppings] = useState(edit ? data.toppings : []);
   const products = useSelector(menuData);
@@ -44,7 +50,7 @@ function Modal({ onClose, data }) {
           description: data.description,
           price: data.price,
           toppings: data.toppings,
-          image: data.imageUrl,
+          imageUrl: data.imageUrl,
           id: data.id,
         }
       : {
@@ -63,16 +69,38 @@ function Modal({ onClose, data }) {
   }
 
   function transformFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function () {
-      setProduct({ ...product, image: reader.result });
-      setImage({
-        name: file.name,
-        data: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
+    return new Promise((resolve, reject) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const imageData = reader.result;
+        let finalImageData = base64ToUrl(imageData);
+        resolve(finalImageData);
+      };
+
+      reader.onerror = function (error) {
+        reject(error); // Reject the promise if there's an error
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        reject(new Error('No file selected')); // Handle the case where no file is selected
+      }
+    });
+  }
+
+  function base64ToUrl(base64Image) {
+    const byteCharacters = atob(base64Image.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'image/png' });
+    const imageUrl = URL.createObjectURL(blob);
+    return imageUrl;
   }
 
   function handleToppingsChange(selectedOptions) {
@@ -85,15 +113,34 @@ function Modal({ onClose, data }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(selectedToppings);
+    let imageUrl = image.data;
     if (edit) {
-      dispatch(editItem({ ...product, toppings: selectedToppings }));
-      dispatch(asyncModify({ ...product, toppings: selectedToppings }));
+      addItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+        .then((response) => {
+          if (response.success) {
+            setIsSent(true);
+            dispatch(editItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setIsSent(false);
+          }, 5000);
+        });
     } else {
-      dispatch(addItem({ ...product, toppings: selectedToppings }));
-      dispatch(asyncAdd({ ...product, toppings: selectedToppings }));
+      editItemMutation({ ...product, image: imageUrl, toppings: selectedToppings })
+        .then((response) => {
+          if (response.success) {
+            setIsSent(true);
+            dispatch(addItem({ ...product, image: imageUrl, toppings: selectedToppings }));
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setIsSent(false);
+          }, 5000);
+        });
     }
-    // wtf setProduct({ ...product, id: id + 1 });
     onClose();
   }
 
@@ -184,7 +231,25 @@ function Modal({ onClose, data }) {
           </div>
         </div>
 
-        <input id="file" className="hidden" accept="image/*" type="file" ref={imageRef} onChange={transformFile} />
+        <input
+          id="file"
+          className="hidden"
+          accept="image/*"
+          type="file"
+          ref={imageRef}
+          onChange={(event) => {
+            transformFile(event)
+              .then((imageData) => {
+                setImage({
+                  name: event.target.files[0].name,
+                  data: imageData,
+                });
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          }}
+        />
 
         <div className="mt-4 flex relative bottom-[-25px] justify-between ">
           <Button onClick={handleSubmit} className="w-1/6 flex justify-center" type="submit">
@@ -198,6 +263,7 @@ function Modal({ onClose, data }) {
             Cancel
           </Button>
         </div>
+        <div className="">{isSent && <h1 className="text-green text-xl p-2">Data sent successfully!</h1>}</div>
       </form>
     </div>
   );
