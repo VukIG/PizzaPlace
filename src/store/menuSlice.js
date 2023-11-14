@@ -14,6 +14,9 @@ const menuSlice = createSlice({
     addAllItems: (state,action) =>{
       state.pizzas = action.payload;
     },
+    addAllToppings: (state,action) =>{
+      state.toppings = action.payload;
+    },
     addItem: (state, action) => {
       state.pizzas = [...state.pizzas, action.payload];
     },

@@ -11,14 +11,14 @@ export const productsApi = createApi({
       query: () =>
         axios.request({
           method: 'get',
-          url: base_url,
+          url: 'items',
         }),
     }),
     changeItem: builder.query({
       query: (newItem) =>
         axios.request({
           method: 'put',
-          url: base_url, //potencijalni bug jer put nema index
+          url: 'items', //potencijalni bug jer put nema index
           data: newItem,
         }),
     }),
@@ -26,7 +26,7 @@ export const productsApi = createApi({
       query: (newItem) =>
         axios.request({
           method: 'post',
-          url: base_url,
+          url: 'items',
           data: newItem,
         }),
     }),
