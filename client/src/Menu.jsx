@@ -1,14 +1,31 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
 import { PiPlusBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import AddModal from './AddModal';
 import { useGetAllItemsQuery } from './services/products.services';
+import { useGetAllToppingsQuery } from './services/toppings.services';
+import Loader from './Loader';
+import { useDispatch } from 'react-redux';
+import { addAllItems, addAllToppings } from './store/menuSlice';
 
 function Menu() {
   const [active, setActive] = useState(false);
 
   const { data, error, isError, isLoading } = useGetAllItemsQuery();
+  const { toppings } = useGetAllToppingsQuery();
+  console.log(typeof useGetAllToppingsQuery)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addAllItems(data));
+    }
+    if (toppings) {
+      dispatch(addAllToppings(toppings));
+    }
+   }, [data, toppings, dispatch]);
+   
 
   function changeModal() {
     setActive((prev) => !prev);
@@ -23,7 +40,7 @@ function Menu() {
           <span>Add a product</span> <PiPlusBold />
         </Button>
       </div>
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <Loader />}
       {isError && <div>{error.message}</div>}
       {data &&
         data.map((element) => {
