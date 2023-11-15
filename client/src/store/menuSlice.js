@@ -28,7 +28,7 @@ const menuSlice = createSlice({
   },
 });
 
-export const { addItem, editItem, addAllItems } = menuSlice.actions;
+export const { addItem, editItem, addAllItems, addAllToppings } = menuSlice.actions;
 export const menuData = (state) => state.menu.pizzas;
 export const menuToppings = (state) => state.menu.toppings;
 export const selectMenuItemById = createSelector([menuData, (_, id) => id], (menuData, id) => {

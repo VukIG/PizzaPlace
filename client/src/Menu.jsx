@@ -1,22 +1,31 @@
 import MenuItem from './MenuItem';
 import Button from './Button';
 import { PiPlusBold } from 'react-icons/pi';
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import AddModal from './AddModal';
 import { useGetAllItemsQuery } from './services/products.services';
 import { useGetAllToppingsQuery } from './services/toppings.services';
-
 import Loader from './Loader';
 import { useDispatch } from 'react-redux';
-import { addAllItems } from './store/menuSlice';
+import { addAllItems, addAllToppings } from './store/menuSlice';
+
 function Menu() {
   const [active, setActive] = useState(false);
 
   const { data, error, isError, isLoading } = useGetAllItemsQuery();
   const { toppings } = useGetAllToppingsQuery();
-  console.log(toppings);
+  console.log(typeof useGetAllToppingsQuery)
   const dispatch = useDispatch();
-  dispatch(addAllItems(data));
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addAllItems(data));
+    }
+    if (toppings) {
+      dispatch(addAllToppings(toppings));
+    }
+   }, [data, toppings, dispatch]);
+   
 
   function changeModal() {
     setActive((prev) => !prev);
