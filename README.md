@@ -29,6 +29,9 @@ PizzaPlace is a MERN stack web application with a primary focus on React and is 
   - React with Vite: ![React Logo](images/react-logo.png)
   - TailwindCSS: ![TailwindCSS Logo](images/tailwindcss-logo.png)
   - Redux Toolkit: ![Redux Toolkit Logo](images/redux-toolkit-logo.png)
+- **Backend:**
+  - Express: ![React Logo](images/react-logo.png)
+  - Node with Nodemon: ![TailwindCSS Logo](images/tailwindcss-logo.png)
 
 ## Backend APIs
 
