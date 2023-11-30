@@ -1,8 +1,5 @@
-// items.js (controller)
-
 import Pizzas from "../models/itemsSchema.mjs";
 
-// Example in controllers/items.mjs
 export const getAllItems = async (req, res) => {
   try {
     const items = await Pizzas.find();
@@ -20,7 +17,7 @@ export const changeItem = async (req, res) => {
   const { newItemData } = req.body;
 
   try {
-    const updatedItem = await Items.findByIdAndUpdate(itemId, newItemData, { new: true });
+    const updatedItem = await Pizzas.findByIdAndUpdate(itemId, newItemData, { new: true });
     res.status(200).json(updatedItem);
   } catch (error) {
     console.error(error);
@@ -31,7 +28,7 @@ export const changeItem = async (req, res) => {
 export const addItem = async (req, res) => {
   const newItemData = req.body; //pazi na undefined
   try {
-    const newItem = await Items.create(newItemData);
+    const newItem = await Pizzas.create(newItemData);
     res.status(201).json(newItem);
   } catch (error) {
     console.error(error);
