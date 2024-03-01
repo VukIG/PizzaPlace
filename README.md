@@ -31,7 +31,9 @@ PizzaPlace is a MERN stack web application with a primary focus on React and is 
   - Redux Toolkit:
 - **Backend:**
   - Java with Spring Boot:
-
+- **Database**
+  - SQL with MySQL
+  - 
 ## Backend APIs
 
 All backend APIs are accessible starting with `http://localhost:2000/`.
